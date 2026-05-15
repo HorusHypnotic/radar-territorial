@@ -5,6 +5,7 @@ import { GrowthChart } from "@/components/radar/GrowthChart";
 import { AlertFeed } from "@/components/radar/AlertFeed";
 import { StatCard } from "@/components/radar/StatCard";
 import { SupplyHeat } from "@/components/radar/SupplyHeat";
+import { InstallButton } from "@/components/radar/InstallButton";
 
 export const Route = createFileRoute("/")({
   component: Dashboard,
