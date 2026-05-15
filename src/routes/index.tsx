@@ -1,26 +1,314 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { TerritorialMap } from "@/components/radar/TerritorialMap";
+import { ScoreTerritorial } from "@/components/radar/ScoreTerritorial";
+import { GrowthChart } from "@/components/radar/GrowthChart";
+import { AlertFeed } from "@/components/radar/AlertFeed";
+import { StatCard } from "@/components/radar/StatCard";
+import { SupplyHeat } from "@/components/radar/SupplyHeat";
 
 export const Route = createFileRoute("/")({
-  component: Index,
+  component: Dashboard,
 });
 
-// IMPORTANT: Replace this placeholder. For sites with multiple pages (About, Services, Contact, etc.),
-// create separate route files (about.tsx, services.tsx, contact.tsx) — don't put all pages in this file.
-function PlaceholderIndex() {
+function Card({
+  children,
+  className = "",
+  span = "",
+  label,
+}: {
+  children: React.ReactNode;
+  className?: string;
+  span?: string;
+  label?: string;
+}) {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
+    <section
+      className={`relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-elevated ${span} ${className}`}
     >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+      {label && (
+        <div className="absolute right-4 top-4 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+          {label}
+        </div>
+      )}
+      {children}
+    </section>
+  );
+}
+
+function Dashboard() {
+  return (
+    <div className="min-h-screen bg-background text-foreground">
+      {/* Top bar */}
+      <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-8">
+            <div className="flex items-center gap-2.5">
+              <div className="relative h-7 w-7">
+                <div className="absolute inset-0 rounded-full border border-ember/60" />
+                <div className="absolute inset-1 rounded-full border border-ember/40" />
+                <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember animate-pulse-dot" />
+              </div>
+              <div className="leading-none">
+                <div className="font-display text-xl">Radar Urbano</div>
+                <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                  inteligência territorial
+                </div>
+              </div>
+            </div>
+            <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+              <a className="text-foreground" href="#">Panorama</a>
+              <a href="#">Obras</a>
+              <a href="#">Licenciamento</a>
+              <a href="#">Econômico</a>
+              <a href="#">Territorial</a>
+            </nav>
+          </div>
+          <div className="flex items-center gap-3">
+            <div className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted-foreground md:flex">
+              <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse-dot" />
+              Goiânia · GO
+              <span className="text-border">|</span>
+              <span className="font-mono">v0.1 · MVP</span>
+            </div>
+            <button className="rounded-full bg-ember-gradient px-4 py-1.5 text-sm font-medium text-primary-foreground shadow-glow transition hover:brightness-110">
+              Acesso operacional
+            </button>
+          </div>
+        </div>
+      </header>
+
+      {/* Hero strip */}
+      <section className="border-b border-border">
+        <div className="mx-auto max-w-[1440px] px-6 py-10">
+          <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+            <div className="max-w-3xl">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+                <span className="h-1 w-1 rounded-full bg-ember" />
+                sistema de observabilidade territorial
+              </div>
+              <h1 className="font-display text-5xl leading-[1.05] text-foreground md:text-6xl">
+                Interprete o movimento da <em className="text-ember">construção civil</em><br />
+                antes que ele se torne óbvio para o mercado.
+              </h1>
+              <p className="mt-5 max-w-xl text-base text-muted-foreground">
+                O Radar Urbano cruza diários oficiais, alvarás, ARTs, licitações e sinais econômicos
+                em uma única leitura territorial — ética, auditável e juridicamente defensável.
+              </p>
+            </div>
+            <div className="flex gap-6 font-mono text-xs text-muted-foreground">
+              <Pill k="fontes" v="142" />
+              <Pill k="bairros" v="86" />
+              <Pill k="eventos/24h" v="1.284" />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Bento grid */}
+      <main className="mx-auto max-w-[1440px] px-6 py-8">
+        <div className="grid grid-cols-12 gap-4 auto-rows-[minmax(0,_140px)]">
+          {/* Map — large hero */}
+          <Card span="col-span-12 lg:col-span-8 row-span-4" label="Radar territorial">
+            <div className="mb-3 flex items-baseline justify-between pr-32">
+              <h3 className="font-display text-2xl">Mapa vivo · Goiânia</h3>
+              <p className="text-xs text-muted-foreground">8 sinais ativos no momento</p>
+            </div>
+            <div className="h-[calc(100%-2.5rem)]">
+              <TerritorialMap />
+            </div>
+          </Card>
+
+          {/* Stats column */}
+          <Card span="col-span-6 lg:col-span-4 row-span-1" label="24h">
+            <StatCard label="Obras ativas" value="1.847" sub="+62 últimas 24h" trend="up" />
+          </Card>
+          <Card span="col-span-6 lg:col-span-4 row-span-1" label="07d">
+            <StatCard label="Volume estimado" value="R$ 412M" sub="+18% semana" trend="up" />
+          </Card>
+          <Card span="col-span-12 lg:col-span-4 row-span-2" label="12m">
+            <GrowthChart />
+          </Card>
+
+          {/* Score */}
+          <Card span="col-span-12 lg:col-span-5 row-span-3" label="Score">
+            <ScoreTerritorial />
+          </Card>
+
+          {/* Alerts */}
+          <Card span="col-span-12 lg:col-span-7 row-span-3" label="Feed">
+            <AlertFeed />
+          </Card>
+
+          {/* Supply heat */}
+          <Card span="col-span-12 lg:col-span-7 row-span-2" label="Mercado">
+            <SupplyHeat />
+          </Card>
+
+          {/* Compliance card */}
+          <Card span="col-span-12 lg:col-span-5 row-span-2" label="Governança">
+            <div className="flex h-full flex-col">
+              <h3 className="font-display text-2xl">Conformidade & trilha</h3>
+              <p className="mt-1 text-xs text-muted-foreground">
+                Apenas dados públicos, observáveis e legalmente coletáveis.
+              </p>
+              <ul className="mt-4 space-y-2.5 text-sm">
+                {[
+                  ["LGPD", "Sem perfilamento pessoal · sem dados sensíveis"],
+                  ["Auditoria", "Logs append-only · origem rastreável por evento"],
+                  ["Acesso", "RBAC · MFA · separação de ambientes"],
+                  ["Coleta", "APIs públicas · diários oficiais · transparência"],
+                ].map(([k, v]) => (
+                  <li key={k} className="flex items-start gap-3 border-t border-border/60 pt-2.5 first:border-0 first:pt-0">
+                    <span className="mt-0.5 inline-flex w-20 shrink-0 font-mono text-[10px] uppercase tracking-wider text-ember">
+                      {k}
+                    </span>
+                    <span className="text-muted-foreground">{v}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </Card>
+        </div>
+
+        {/* Modules strip */}
+        <section className="mt-12">
+          <div className="mb-6 flex items-baseline justify-between">
+            <h2 className="font-display text-3xl">Módulos do sistema</h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              04 radares ativos · 01 em roadmap
+            </span>
+          </div>
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+            {MODULES.map((m, i) => (
+              <div key={m.title} className="group bg-card p-6 transition hover:bg-surface-elevated">
+                <div className="mb-6 flex items-center justify-between">
+                  <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">
+                    0{i + 1}
+                  </span>
+                  <span className="text-ember opacity-0 transition group-hover:opacity-100">→</span>
+                </div>
+                <h3 className="font-display text-2xl leading-tight">{m.title}</h3>
+                <p className="mt-3 text-sm text-muted-foreground">{m.desc}</p>
+                <ul className="mt-5 space-y-1 text-xs text-muted-foreground">
+                  {m.bullets.map((b) => (
+                    <li key={b} className="flex gap-2">
+                      <span className="text-ember">·</span>{b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Roadmap */}
+        <section className="mt-12">
+          <div className="mb-6 flex items-baseline justify-between">
+            <h2 className="font-display text-3xl">Roadmap</h2>
+            <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              4 fases
+            </span>
+          </div>
+          <div className="relative grid grid-cols-1 gap-4 md:grid-cols-4">
+            {ROADMAP.map((p, i) => (
+              <div key={p.phase} className="relative rounded-xl border border-border bg-card p-5">
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-muted-foreground">
+                    {p.phase}
+                  </span>
+                  <span
+                    className={`rounded-full px-2 py-0.5 text-[10px] uppercase tracking-wider ${
+                      p.status === "ativo"
+                        ? "bg-ember text-primary-foreground"
+                        : p.status === "em curso"
+                          ? "border border-ember/60 text-ember"
+                          : "border border-border text-muted-foreground"
+                    }`}
+                  >
+                    {p.status}
+                  </span>
+                </div>
+                <h3 className="font-display text-xl">{p.title}</h3>
+                <p className="mt-2 text-xs text-muted-foreground">{p.desc}</p>
+                <div className="mt-4 font-mono text-[10px] text-muted-foreground">
+                  {String(i + 1).padStart(2, "0")} / 04
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* Footer */}
+        <footer className="mt-16 border-t border-border pt-8 pb-12">
+          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+            <div className="max-w-md">
+              <div className="font-display text-2xl">
+                Ver uma obra <em className="text-muted-foreground">vs.</em> entender para onde a cidade vai.
+              </div>
+              <p className="mt-2 text-xs text-muted-foreground">
+                Radar Urbano · sistema de observabilidade territorial aplicado à construção civil.
+              </p>
+            </div>
+            <div className="grid grid-cols-3 gap-8 text-xs">
+              {[
+                ["Plataforma", ["Obras", "Licenciamento", "Econômico", "Territorial"]],
+                ["Governança", ["LGPD", "Auditoria", "Trilha de origem", "Termos de uso"]],
+                ["Empresa", ["Sobre", "Clientes", "Contato", "Imprensa"]],
+              ].map(([t, items]) => (
+                <div key={t as string}>
+                  <div className="mb-3 font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+                    {t}
+                  </div>
+                  <ul className="space-y-1.5 text-foreground/80">
+                    {(items as string[]).map((i) => (
+                      <li key={i}><a href="#" className="hover:text-ember">{i}</a></li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
+            </div>
+          </div>
+        </footer>
+      </main>
     </div>
   );
 }
 
-function Index() {
-  return <PlaceholderIndex />;
+function Pill({ k, v }: { k: string; v: string }) {
+  return (
+    <div className="flex flex-col">
+      <span className="text-[10px] uppercase tracking-[0.18em]">{k}</span>
+      <span className="font-display text-2xl text-foreground">{v}</span>
+    </div>
+  );
 }
+
+const MODULES = [
+  {
+    title: "Radar de obras",
+    desc: "Mapeamento de obras privadas, públicas, ampliações, galpões e loteamentos.",
+    bullets: ["mapa interativo", "timeline", "responsável técnico", "documentação vinculada"],
+  },
+  {
+    title: "Radar de licenciamento",
+    desc: "Alvarás, habite-se, regularizações e aprovações em ciclo formal.",
+    bullets: ["início de ciclos", "regularizações em massa", "crescimento formal"],
+  },
+  {
+    title: "Radar econômico",
+    desc: "Cruza fornecedores, concreto, aço, drywall e locações comerciais.",
+    bullets: ["aquecimento por região", "ticket médio", "consumo de insumos"],
+  },
+  {
+    title: "Radar territorial",
+    desc: "Vetores de expansão urbana, corredores e zonas em verticalização.",
+    bullets: ["polos industriais", "áreas saturadas", "bairros emergentes"],
+  },
+];
+
+const ROADMAP = [
+  { phase: "Fase 01", title: "MVP", desc: "Mapa, diário oficial, alvarás e habite-se.", status: "ativo" },
+  { phase: "Fase 02", title: "Inteligência territorial", desc: "Score urbano, heatmap e alertas operacionais.", status: "em curso" },
+  { phase: "Fase 03", title: "IA operacional", desc: "Previsão de crescimento e detecção automática de padrões.", status: "previsto" },
+  { phase: "Fase 04", title: "Escala regional", desc: "Múltiplas cidades, comparativos e benchmarking urbano.", status: "previsto" },
+];
