@@ -41,22 +41,22 @@ function Dashboard() {
     <div className="min-h-screen bg-background text-foreground">
       {/* Top bar */}
       <header className="sticky top-0 z-20 border-b border-border bg-background/80 backdrop-blur">
-        <div className="mx-auto flex max-w-[1440px] items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-8">
-            <div className="flex items-center gap-2.5">
-              <div className="relative h-7 w-7">
+        <div className="mx-auto flex max-w-[1440px] items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-4">
+          <div className="flex min-w-0 items-center gap-4 lg:gap-8">
+            <div className="flex min-w-0 items-center gap-2.5">
+              <div className="relative h-7 w-7 shrink-0">
                 <div className="absolute inset-0 rounded-full border border-ember/60" />
                 <div className="absolute inset-1 rounded-full border border-ember/40" />
                 <div className="absolute left-1/2 top-1/2 h-1.5 w-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-ember animate-pulse-dot" />
               </div>
-              <div className="leading-none">
-                <div className="font-display text-xl">Radar Urbano</div>
-                <div className="text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
+              <div className="min-w-0 leading-none">
+                <div className="truncate font-display text-lg sm:text-xl">Radar Urbano</div>
+                <div className="hidden text-[10px] uppercase tracking-[0.18em] text-muted-foreground sm:block">
                   inteligência territorial
                 </div>
               </div>
             </div>
-            <nav className="hidden items-center gap-6 text-sm text-muted-foreground md:flex">
+            <nav className="hidden items-center gap-6 text-sm text-muted-foreground lg:flex">
               <a className="text-foreground" href="#">Panorama</a>
               <a href="#">Obras</a>
               <a href="#">Licenciamento</a>
@@ -64,15 +64,17 @@ function Dashboard() {
               <a href="#">Territorial</a>
             </nav>
           </div>
-          <div className="flex items-center gap-3">
-            <div className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted-foreground md:flex">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-3">
+            <div className="hidden items-center gap-2 rounded-full border border-border bg-surface px-3 py-1.5 text-xs text-muted-foreground xl:flex">
               <span className="h-1.5 w-1.5 rounded-full bg-ember animate-pulse-dot" />
               Goiânia · GO
               <span className="text-border">|</span>
               <span className="font-mono">v0.1 · MVP</span>
             </div>
-            <button className="rounded-full bg-ember-gradient px-4 py-1.5 text-sm font-medium text-primary-foreground shadow-glow transition hover:brightness-110">
-              Acesso operacional
+            <InstallButton />
+            <button className="whitespace-nowrap rounded-full bg-ember-gradient px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-glow transition hover:brightness-110 sm:px-4 sm:text-sm">
+              <span className="hidden sm:inline">Acesso operacional</span>
+              <span className="sm:hidden">Acessar</span>
             </button>
           </div>
         </div>
@@ -80,23 +82,25 @@ function Dashboard() {
 
       {/* Hero strip */}
       <section className="border-b border-border">
-        <div className="mx-auto max-w-[1440px] px-6 py-10">
-          <div className="flex flex-col items-start justify-between gap-6 lg:flex-row lg:items-end">
+        <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-6 sm:py-10">
+          <div className="flex flex-col items-start justify-between gap-8 lg:flex-row lg:items-end">
             <div className="max-w-3xl">
-              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[11px] uppercase tracking-[0.18em] text-muted-foreground">
+              <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 text-[10px] uppercase tracking-[0.16em] text-muted-foreground sm:text-[11px] sm:tracking-[0.18em]">
                 <span className="h-1 w-1 rounded-full bg-ember" />
-                sistema de observabilidade territorial
+                <span className="hidden sm:inline">sistema de observabilidade territorial</span>
+                <span className="sm:hidden">observabilidade territorial</span>
               </div>
-              <h1 className="font-display text-5xl leading-[1.05] text-foreground md:text-6xl">
-                Interprete o movimento da <em className="text-ember">construção civil</em><br />
+              <h1 className="font-display text-[2.25rem] leading-[1.05] text-foreground sm:text-5xl md:text-6xl">
+                Interprete o movimento da <em className="text-ember">construção civil</em>{" "}
+                <span className="hidden md:inline"><br /></span>
                 antes que ele se torne óbvio para o mercado.
               </h1>
-              <p className="mt-5 max-w-xl text-base text-muted-foreground">
+              <p className="mt-5 max-w-xl text-sm text-muted-foreground sm:text-base">
                 O Radar Urbano cruza diários oficiais, alvarás, ARTs, licitações e sinais econômicos
                 em uma única leitura territorial — ética, auditável e juridicamente defensável.
               </p>
             </div>
-            <div className="flex gap-6 font-mono text-xs text-muted-foreground">
+            <div className="grid w-full grid-cols-3 gap-4 font-mono text-xs text-muted-foreground sm:flex sm:w-auto sm:gap-6">
               <Pill k="fontes" v="142" />
               <Pill k="bairros" v="86" />
               <Pill k="eventos/24h" v="1.284" />
@@ -106,47 +110,47 @@ function Dashboard() {
       </section>
 
       {/* Bento grid */}
-      <main className="mx-auto max-w-[1440px] px-6 py-8">
-        <div className="grid grid-cols-12 gap-4 auto-rows-[minmax(0,_140px)]">
+      <main className="mx-auto max-w-[1440px] px-4 py-6 sm:px-6 sm:py-8">
+        <div className="grid grid-cols-12 gap-3 sm:gap-4 lg:auto-rows-[minmax(0,_140px)]">
           {/* Map — large hero */}
-          <Card span="col-span-12 lg:col-span-8 row-span-4" label="Radar territorial">
-            <div className="mb-3 flex items-baseline justify-between pr-32">
-              <h3 className="font-display text-2xl">Mapa vivo · Goiânia</h3>
-              <p className="text-xs text-muted-foreground">8 sinais ativos no momento</p>
+          <Card span="col-span-12 lg:col-span-8 lg:row-span-4 min-h-[360px] sm:min-h-[420px] lg:min-h-0" label="Radar territorial">
+            <div className="mb-3 flex flex-wrap items-baseline justify-between gap-x-4 pr-24 sm:pr-32">
+              <h3 className="font-display text-xl sm:text-2xl">Mapa vivo · Goiânia</h3>
+              <p className="text-[11px] text-muted-foreground sm:text-xs">8 sinais ativos</p>
             </div>
-            <div className="h-[calc(100%-2.5rem)]">
+            <div className="h-[calc(100%-2.5rem)] min-h-[280px]">
               <TerritorialMap />
             </div>
           </Card>
 
           {/* Stats column */}
-          <Card span="col-span-6 lg:col-span-4 row-span-1" label="24h">
+          <Card span="col-span-6 lg:col-span-4 lg:row-span-1 min-h-[140px]" label="24h">
             <StatCard label="Obras ativas" value="1.847" sub="+62 últimas 24h" trend="up" />
           </Card>
-          <Card span="col-span-6 lg:col-span-4 row-span-1" label="07d">
+          <Card span="col-span-6 lg:col-span-4 lg:row-span-1 min-h-[140px]" label="07d">
             <StatCard label="Volume estimado" value="R$ 412M" sub="+18% semana" trend="up" />
           </Card>
-          <Card span="col-span-12 lg:col-span-4 row-span-2" label="12m">
+          <Card span="col-span-12 lg:col-span-4 lg:row-span-2 min-h-[260px]" label="12m">
             <GrowthChart />
           </Card>
 
           {/* Score */}
-          <Card span="col-span-12 lg:col-span-5 row-span-3" label="Score">
+          <Card span="col-span-12 lg:col-span-5 lg:row-span-3 min-h-[360px]" label="Score">
             <ScoreTerritorial />
           </Card>
 
           {/* Alerts */}
-          <Card span="col-span-12 lg:col-span-7 row-span-3" label="Feed">
+          <Card span="col-span-12 lg:col-span-7 lg:row-span-3 min-h-[360px]" label="Feed">
             <AlertFeed />
           </Card>
 
           {/* Supply heat */}
-          <Card span="col-span-12 lg:col-span-7 row-span-2" label="Mercado">
+          <Card span="col-span-12 lg:col-span-7 lg:row-span-2 min-h-[260px]" label="Mercado">
             <SupplyHeat />
           </Card>
 
           {/* Compliance card */}
-          <Card span="col-span-12 lg:col-span-5 row-span-2" label="Governança">
+          <Card span="col-span-12 lg:col-span-5 lg:row-span-2 min-h-[260px]" label="Governança">
             <div className="flex h-full flex-col">
               <h3 className="font-display text-2xl">Conformidade & trilha</h3>
               <p className="mt-1 text-xs text-muted-foreground">
