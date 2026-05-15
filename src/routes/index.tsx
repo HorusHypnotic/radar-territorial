@@ -176,25 +176,25 @@ function Dashboard() {
         </div>
 
         {/* Modules strip */}
-        <section className="mt-12">
-          <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="font-display text-3xl">Módulos do sistema</h2>
+        <section className="mt-10 sm:mt-12">
+          <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2 sm:mb-6">
+            <h2 className="font-display text-2xl sm:text-3xl">Módulos do sistema</h2>
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               04 radares ativos · 01 em roadmap
             </span>
           </div>
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-2xl border border-border bg-border sm:grid-cols-2 lg:grid-cols-4">
             {MODULES.map((m, i) => (
-              <div key={m.title} className="group bg-card p-6 transition hover:bg-surface-elevated">
-                <div className="mb-6 flex items-center justify-between">
+              <div key={m.title} className="group bg-card p-5 transition hover:bg-surface-elevated sm:p-6">
+                <div className="mb-5 flex items-center justify-between sm:mb-6">
                   <span className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground">
                     0{i + 1}
                   </span>
                   <span className="text-ember opacity-0 transition group-hover:opacity-100">→</span>
                 </div>
-                <h3 className="font-display text-2xl leading-tight">{m.title}</h3>
+                <h3 className="font-display text-xl leading-tight sm:text-2xl">{m.title}</h3>
                 <p className="mt-3 text-sm text-muted-foreground">{m.desc}</p>
-                <ul className="mt-5 space-y-1 text-xs text-muted-foreground">
+                <ul className="mt-4 space-y-1 text-xs text-muted-foreground sm:mt-5">
                   {m.bullets.map((b) => (
                     <li key={b} className="flex gap-2">
                       <span className="text-ember">·</span>{b}
@@ -207,14 +207,14 @@ function Dashboard() {
         </section>
 
         {/* Roadmap */}
-        <section className="mt-12">
-          <div className="mb-6 flex items-baseline justify-between">
-            <h2 className="font-display text-3xl">Roadmap</h2>
+        <section className="mt-10 sm:mt-12">
+          <div className="mb-5 flex flex-wrap items-baseline justify-between gap-2 sm:mb-6">
+            <h2 className="font-display text-2xl sm:text-3xl">Roadmap</h2>
             <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-muted-foreground">
               4 fases
             </span>
           </div>
-          <div className="relative grid grid-cols-1 gap-4 md:grid-cols-4">
+          <div className="relative grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-4">
             {ROADMAP.map((p, i) => (
               <div key={p.phase} className="relative rounded-xl border border-border bg-card p-5">
                 <div className="mb-3 flex items-center justify-between">
@@ -244,17 +244,17 @@ function Dashboard() {
         </section>
 
         {/* Footer */}
-        <footer className="mt-16 border-t border-border pt-8 pb-12">
-          <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <footer className="mt-12 border-t border-border pb-12 pt-8 sm:mt-16">
+          <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
             <div className="max-w-md">
-              <div className="font-display text-2xl">
+              <div className="font-display text-xl sm:text-2xl">
                 Ver uma obra <em className="text-muted-foreground">vs.</em> entender para onde a cidade vai.
               </div>
               <p className="mt-2 text-xs text-muted-foreground">
                 Radar Urbano · sistema de observabilidade territorial aplicado à construção civil.
               </p>
             </div>
-            <div className="grid grid-cols-3 gap-8 text-xs">
+            <div className="grid w-full grid-cols-2 gap-6 text-xs sm:grid-cols-3 sm:gap-8 md:w-auto">
               {[
                 ["Plataforma", ["Obras", "Licenciamento", "Econômico", "Territorial"]],
                 ["Governança", ["LGPD", "Auditoria", "Trilha de origem", "Termos de uso"]],
