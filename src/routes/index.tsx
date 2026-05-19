@@ -40,6 +40,13 @@ function Card({
 }
 
 function Dashboard() {
+  const fetchSnapshot = useServerFn(getDashboardSnapshot);
+  const { data: snap } = useQuery({
+    queryKey: ["dashboard-snapshot"],
+    queryFn: () => fetchSnapshot(),
+    refetchInterval: 60_000,
+  });
+  const live = snap?.stats;
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* Top bar */}
