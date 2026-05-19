@@ -1,4 +1,6 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
+import { useServerFn } from "@tanstack/react-start";
+import { useQuery } from "@tanstack/react-query";
 import { TerritorialMap } from "@/components/radar/TerritorialMap";
 import { ScoreTerritorial } from "@/components/radar/ScoreTerritorial";
 import { GrowthChart } from "@/components/radar/GrowthChart";
@@ -6,6 +8,7 @@ import { AlertFeed } from "@/components/radar/AlertFeed";
 import { StatCard } from "@/components/radar/StatCard";
 import { SupplyHeat } from "@/components/radar/SupplyHeat";
 import { InstallButton } from "@/components/radar/InstallButton";
+import { getDashboardSnapshot } from "@/lib/radar.functions";
 
 export const Route = createFileRoute("/")({
   component: Dashboard,
