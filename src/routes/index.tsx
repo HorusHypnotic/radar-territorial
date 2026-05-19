@@ -82,10 +82,10 @@ function Dashboard() {
               <span className="font-mono">v0.1 · MVP</span>
             </div>
             <InstallButton />
-            <button className="whitespace-nowrap rounded-full bg-ember-gradient px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-glow transition hover:brightness-110 sm:px-4 sm:text-sm">
+            <Link to="/operador" className="whitespace-nowrap rounded-full bg-ember-gradient px-3 py-1.5 text-xs font-medium text-primary-foreground shadow-glow transition hover:brightness-110 sm:px-4 sm:text-sm">
               <span className="hidden sm:inline">Acesso operacional</span>
               <span className="sm:hidden">Acessar</span>
-            </button>
+            </Link>
           </div>
         </div>
       </header>
@@ -111,9 +111,9 @@ function Dashboard() {
               </p>
             </div>
             <div className="grid w-full grid-cols-3 gap-4 font-mono text-xs text-muted-foreground sm:flex sm:w-auto sm:gap-6">
-              <Pill k="fontes" v="142" />
-              <Pill k="bairros" v="86" />
-              <Pill k="eventos/24h" v="1.284" />
+              <Pill k="fontes" v={live ? String(live.sourcesCount) : "—"} />
+              <Pill k="bairros" v={live ? String(live.neighborhoodsCount) : "—"} />
+              <Pill k="eventos/24h" v={live ? String(live.eventsLast24h) : "—"} />
             </div>
           </div>
         </div>
