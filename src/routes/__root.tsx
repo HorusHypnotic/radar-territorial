@@ -1,4 +1,4 @@
-import { QueryClient, QueryClientProvider, useQueryClient } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import {
   Outlet,
   Link,
@@ -7,10 +7,8 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect } from "react";
 
 import appCss from "../styles.css?url";
-import { supabase } from "@/integrations/supabase/client";
 
 function NotFoundComponent() {
   return (
@@ -82,10 +80,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { title: "Radar Urbano — Inteligência Territorial para Construção Civil" },
       { name: "description", content: "Sistema de observabilidade territorial: antecipe crescimento urbano, atividade construtiva e oportunidades de mercado a partir de sinais públicos." },
       { name: "author", content: "Radar Urbano" },
-      { property: "og:title", content: "Radar Urbano — Inteligência Territorial" },
-      { property: "og:description", content: "Interprete o movimento da construção civil antes que ele se torne óbvio para o mercado." },
+      { property: "og:title", content: "Radar Urbano — Inteligência Territorial para Construção Civil" },
+      { property: "og:description", content: "Sistema de observabilidade territorial: antecipe crescimento urbano, atividade construtiva e oportunidades de mercado a partir de sinais públicos." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
+      { name: "twitter:title", content: "Radar Urbano — Inteligência Territorial para Construção Civil" },
+      { name: "twitter:description", content: "Sistema de observabilidade territorial: antecipe crescimento urbano, atividade construtiva e oportunidades de mercado a partir de sinais públicos." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/23081750-f1bc-4aea-b8cb-9dd1360e2bdc/id-preview-2438b490--d732a045-12c3-48cd-8a51-33ac2f52784e.lovable.app-1779180108780.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/23081750-f1bc-4aea-b8cb-9dd1360e2bdc/id-preview-2438b490--d732a045-12c3-48cd-8a51-33ac2f52784e.lovable.app-1779180108780.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
@@ -126,21 +128,7 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <AuthListener />
       <Outlet />
     </QueryClientProvider>
   );
-}
-
-function AuthListener() {
-  const router = useRouter();
-  const queryClient = useQueryClient();
-  useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(() => {
-      router.invalidate();
-      queryClient.invalidateQueries();
-    });
-    return () => subscription.unsubscribe();
-  }, [router, queryClient]);
-  return null;
 }
