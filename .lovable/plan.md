@@ -1,93 +1,103 @@
-# Radar Urbano — do mock à infraestrutura real
 
-Você está certo: o produto não é o dashboard, é o **motor de interpretação territorial**. A sequência abaixo segue exatamente sua ordem (pipeline → automação → IA) e respeita a estratégia semi-automatizada do MVP.
+# Pipeline real de ingestão — MVP em 1 leva
 
-Antes de escrever uma linha de código novo, preciso **ativar o Lovable Cloud** (Postgres + Auth + Storage + Server Functions). É a fundação de tudo abaixo. Sem isso, qualquer "pipeline real" continua sendo mock.
-
----
-
-## Fase 0 — Fundação (ativar agora)
-
-1. Habilitar **Lovable Cloud**.
-2. Criar o schema base (migrations):
-   - `data_sources` — origem, licitude, retenção, responsável, score de confiabilidade
-   - `urban_entities` — obras, empresas, bairros (com PostGIS `geography(Point)`)
-   - `urban_events` — tabela-coração: `event_type`, `bairro`, `severity`, `source_id`, `payload jsonb`, `occurred_at`, `geom`
-   - `permits` (alvarás), `licenses` (habite-se), `technical_records` (ARTs)
-   - `territorial_scores` — histórico por bairro/semana
-   - `governance_logs` — append-only, trilha auditável
-3. RLS em todas: leitura pública só de agregados; escrita só via service role nos jobs.
-4. Habilitar extensão `postgis` para geocoding/heatmap reais.
-
-> Observação: PostGIS roda no Postgres do Cloud. Se algum recurso geoespacial não estiver disponível, caímos para `lat/lng` em colunas numéricas + cálculo em SQL — mesma UX, sem bloqueio.
+Objetivo: um sinal real do Diário Oficial de Goiânia, todo dia, navegando do crawler até virar `urban_event` geocodificado no mapa — passando por uma fila de validação humana. Esse é o "Hello World" do motor que falta.
 
 ---
 
-## Fase 1 — Ingestão semi-automatizada (o MVP forte)
+## Escopo desta entrega
 
-Seguindo sua matriz **Automático × Assistido**:
+**Dentro:**
+- Crawler diário do Diário Oficial do Município de Goiânia
+- Extração estruturada (alvarás, habite-se, licitações, embargos) via Lovable AI
+- Fila de revisão no `/operador` (eventos com `needs_review = true`)
+- Geocoding automático + persistência em `urban_events` / `urban_entities`
+- Dashboard lendo **só** dados reais (sem fallback decorativo)
+- Trilha completa em `governance_logs` (toda extração, edição, aprovação)
 
-**Automático (server functions + cron via pg_cron):**
-- Diário Oficial (Goiânia/GO): fetch → parse heurístico → extração de campos (endereço, tipo, empresa, RT) → `urban_events`.
-- Geocoding: Nominatim como default (gratuito), com chave Mapbox opcional via secret. Cache em `urban_entities.geom`.
-- Normalização de bairro (dicionário + fuzzy match).
-
-**Assistido (UI operacional interna):**
-- Rota `/operador` protegida por auth + role `operator`:
-  - Form de "novo sinal" (concreteira nova, galpão, loteamento, expansão comercial).
-  - Fila de eventos extraídos do Diário com baixa confiança → operador valida/corrige/descarta.
-  - Cada ação grava em `governance_logs`.
-
----
-
-## Fase 2 — Interpretação (substituir cada mock por cálculo real)
-
-Cada card do dashboard atual ganha uma **server function** que lê do Postgres:
-
-| Card | Substituição |
-|---|---|
-| Mapa territorial | `urban_entities` com `geom`, filtros por `event_type` e janela temporal |
-| Score territorial | `score = 3·alvarás + 2·ARTs + 4·licitações + 2·obras + 5·crescimento_comercial` em janela de 7/30 dias, persistido em `territorial_scores` por job semanal |
-| Feed ao vivo | `urban_events ORDER BY occurred_at DESC` + Supabase Realtime |
-| Curva de aquecimento | `count(*) by week_trunc(occurred_at)` últimos 12 períodos |
-| Radar econômico | agregação por categoria de fornecedor (input assistido + sinais automáticos) |
-| Governança | leitura de `data_sources` + `governance_logs` (origem rastreável por evento) |
-
-Stats do topo (`Obras ativas`, `Volume estimado`, `Eventos/24h`, `Fontes`, `Bairros`) viram `count`/`sum` reais.
+**Fora (próximas levas):**
+- CREA-GO / ARTs — exige login + captcha; tratado como **ingestão assistida** (operador cola ART manualmente, parser estrutura). Crawler automático fica para depois.
+- Licitações estaduais / outras prefeituras.
+- Motor de regras (Fase 3) e IA preditiva (Fase 4).
 
 ---
 
-## Fase 3 — Motor de regras (alertas)
+## Arquitetura
 
-- Tabela `alert_rules` (DSL simples em jsonb): condição + janela + severidade.
-- Job a cada 15 min: avalia regras sobre `urban_events` agregados; gera `urban_events` do tipo `alert` (o feed já mostra).
-- Exemplo embutido: *"bairro com +30% eventos e +15% ARTs em 30d"*.
+```text
+pg_cron (06:00 diário)
+    │
+    ▼
+POST /api/public/cron/ingest-diario-goiania     (server route, apikey header)
+    │
+    ├─► Firecrawl scrape do PDF/HTML do dia
+    │
+    ├─► Lovable AI (gemini-2.5-flash) → extrai array tipado:
+    │     [{ tipo, titulo, endereco, empresa, rt, valor?, processo? }]
+    │
+    ├─► Para cada item:
+    │     • dedupe (hash do trecho + data)
+    │     • normaliza bairro (dicionário + fuzzy)
+    │     • geocode (Nominatim) → urban_entities
+    │     • insert urban_events (needs_review = confidence < 0.85)
+    │     • governance_logs (action=auto_extracted)
+    │
+    └─► Retorna { ingested, queued_for_review, errors }
+```
 
----
-
-## Fase 4 — IA operacional (depois, não agora)
-
-- Detecção de padrões e previsão de aquecimento via Lovable AI Gateway sobre as séries de `territorial_scores`.
-- Classificação automática de trechos do Diário Oficial (hoje heurística → depois LLM).
+Fila humana: `/operador` ganha aba **Revisão** listando `urban_events.needs_review = true`. Operador aprova/edita/descarta → cada ação grava em `governance_logs`.
 
 ---
 
 ## Detalhes técnicos
 
-- **Backend**: TanStack `createServerFn` + server routes em `src/routes/api/public/*` para webhooks/cron callers. Sem Edge Functions Supabase.
-- **Jobs agendados**: `pg_cron` no Postgres chamando endpoint público `/api/public/cron/*` com HMAC (segredo `CRON_SECRET`).
-- **Crawler do Diário Oficial**: roda dentro de server function (fetch + parse). Se houver bloqueio anti-bot, plano B é upload manual de PDF/HTML pelo operador.
-- **Geocoding**: provider abstraído (`geocode(address) → {lat,lng,confidence}`); Nominatim default, Mapbox quando `MAPBOX_TOKEN` existir.
-- **Realtime**: `supabase.channel('urban_events').on('postgres_changes', ...)` no `AlertFeed` e atualização incremental do mapa.
-- **Confiabilidade por fonte**: cada `urban_events.source_id` referencia `data_sources.reliability_score` (0–1) — exibido no card e usado como peso no Score.
+**Banco (migration):**
+- `data_sources`: seed `diario-oficial-goiania` (kind=`gazette`, reliability=0.9)
+- `urban_events`: adicionar `dedupe_hash text unique` + `raw_excerpt text` + índice em `(occurred_at desc, needs_review)`
+- `ingestion_runs` (nova): `id, source_id, started_at, finished_at, items_found, items_inserted, items_queued, errors jsonb, status` — visível no card Governança
+
+**Server routes / functions:**
+- `src/routes/api/public/cron/ingest-diario-goiania.ts` — handler do cron, valida `apikey`, dispara o pipeline
+- `src/lib/ingestion/diario-goiania.server.ts` — fetch + parse via Firecrawl
+- `src/lib/ingestion/extract.server.ts` — chamada Lovable AI com schema Zod (formato JSON estruturado)
+- `src/lib/ingestion/normalize.server.ts` — bairro fuzzy match, dedupe hash
+- `src/lib/review.functions.ts` — `listReviewQueue`, `approveEvent`, `rejectEvent`, `editEvent`
+
+**Cron (via `supabase--insert`, não migration):**
+```sql
+select cron.schedule(
+  'ingest-diario-goiania-daily', '0 9 * * *', -- 06:00 BRT
+  $$ select net.http_post(
+    url := 'https://project--d732a045-12c3-48cd-8a51-33ac2f52784e.lovable.app/api/public/cron/ingest-diario-goiania',
+    headers := '{"Content-Type":"application/json","apikey":"<ANON>"}'::jsonb,
+    body := '{}'::jsonb) $$
+);
+```
+
+**Dependências externas:**
+- **Firecrawl** (connector já suportado) — necessário porque o Diário sai como PDF/HTML pesado, com anti-bot. `fetch()` puro do Worker não dá conta.
+- **Lovable AI Gateway** (já habilitado, `LOVABLE_API_KEY` presente) — `google/gemini-2.5-flash` para extração JSON estruturada.
+- **Nominatim** (já em uso, gratuito).
+
+**Frontend:**
+- `/operador` → nova aba `Fila de Revisão` (tabela com trecho original + campos extraídos editáveis + ações)
+- Dashboard `index.tsx` → remove qualquer fallback mockado; estado vazio honesto quando sem dados ("aguardando primeira execução do crawler — próxima às 06:00")
+- Card Governança passa a mostrar última `ingestion_run` (sucesso/erro/itens)
 
 ---
 
-## O que eu preciso de você antes de começar
+## Critério de "pronto"
 
-1. **Confirmação para ativar Lovable Cloud** (passo bloqueante).
-2. **Cidade-piloto**: confirmamos Goiânia/GO? URL do Diário Oficial preferida (Municipal? Estadual? Ambos)?
-3. **Escopo desta primeira entrega**: prefere que eu execute **Fase 0 + Fase 1 (Diário Oficial + geocoding + operador) + Fase 2 (cards lendo do banco)** numa primeira leva, deixando regras/alertas (Fase 3) e IA (Fase 4) para depois? Recomendo fortemente esse recorte — é onde o produto deixa de ser bonito e passa a interpretar de verdade.
-4. **Mapbox token**: tem? Se não, começamos com Nominatim (grátis, rate-limited) e plugamos Mapbox quando quiser.
+1. `pg_cron` rodou e há ≥ 1 registro em `ingestion_runs` com `status=success`
+2. ≥ 1 `urban_events` real (não-seed) no banco, geocodificado, com pin visível no mapa
+3. Fila de revisão funcional: operador consegue aprovar/editar/descartar
+4. Trilha em `governance_logs` para cada ação (auto + humana)
+5. Dashboard exibe contadores reais subindo após cada run
 
-Assim que você confirmar, começo pela Fase 0 + schema + uma primeira ingestão do Diário Oficial ponta-a-ponta — um único evento real navegando do crawler até o pin no mapa. Esse é o "Hello World" do motor.
+---
+
+## O que preciso confirmar antes de implementar
+
+1. **Conectar o Firecrawl** (Connectors → Firecrawl). É bloqueante para o crawler real do Diário. Sem ele, alternativa é cair para upload manual do PDF pelo operador (perde o "automático" do MVP).
+2. **URL do Diário**: posso usar `https://www.goiania.go.gov.br/diariooficial/`? Se você tiver uma URL canônica preferida (estadual, ou um agregador), me diga.
+3. **CREA/ART confirmado fora**: você ok em deixar ARTs para uma leva seguinte com modo assistido (paste do conteúdo), já que o portal CREA-GO exige login?
