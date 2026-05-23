@@ -133,6 +133,53 @@ export type Database = {
           },
         ]
       }
+      ingestion_runs: {
+        Row: {
+          errors: Json
+          finished_at: string | null
+          id: string
+          items_found: number
+          items_inserted: number
+          items_queued: number
+          meta: Json
+          source_id: string | null
+          started_at: string
+          status: string
+        }
+        Insert: {
+          errors?: Json
+          finished_at?: string | null
+          id?: string
+          items_found?: number
+          items_inserted?: number
+          items_queued?: number
+          meta?: Json
+          source_id?: string | null
+          started_at?: string
+          status?: string
+        }
+        Update: {
+          errors?: Json
+          finished_at?: string | null
+          id?: string
+          items_found?: number
+          items_inserted?: number
+          items_queued?: number
+          meta?: Json
+          source_id?: string | null
+          started_at?: string
+          status?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "ingestion_runs_source_id_fkey"
+            columns: ["source_id"]
+            isOneToOne: false
+            referencedRelation: "data_sources"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       licenses: {
         Row: {
           created_at: string
@@ -427,6 +474,7 @@ export type Database = {
           bairro_label: string | null
           confidence: number
           created_at: string
+          dedupe_hash: string | null
           description: string | null
           entity_id: string | null
           event_type: string
@@ -437,6 +485,7 @@ export type Database = {
           neighborhood_id: string | null
           occurred_at: string
           payload: Json
+          raw_excerpt: string | null
           reviewed_at: string | null
           reviewed_by: string | null
           severity: string
@@ -447,6 +496,7 @@ export type Database = {
           bairro_label?: string | null
           confidence?: number
           created_at?: string
+          dedupe_hash?: string | null
           description?: string | null
           entity_id?: string | null
           event_type: string
@@ -457,6 +507,7 @@ export type Database = {
           neighborhood_id?: string | null
           occurred_at?: string
           payload?: Json
+          raw_excerpt?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           severity?: string
@@ -467,6 +518,7 @@ export type Database = {
           bairro_label?: string | null
           confidence?: number
           created_at?: string
+          dedupe_hash?: string | null
           description?: string | null
           entity_id?: string | null
           event_type?: string
@@ -477,6 +529,7 @@ export type Database = {
           neighborhood_id?: string | null
           occurred_at?: string
           payload?: Json
+          raw_excerpt?: string | null
           reviewed_at?: string | null
           reviewed_by?: string | null
           severity?: string
