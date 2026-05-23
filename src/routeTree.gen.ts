@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as OperadorRouteImport } from './routes/operador'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiPublicCronIngestDiarioGoianiaRouteImport } from './routes/api/public/cron/ingest-diario-goiania'
 
 const OperadorRoute = OperadorRouteImport.update({
   id: '/operador',
@@ -28,35 +29,54 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiPublicCronIngestDiarioGoianiaRoute =
+  ApiPublicCronIngestDiarioGoianiaRouteImport.update({
+    id: '/api/public/cron/ingest-diario-goiania',
+    path: '/api/public/cron/ingest-diario-goiania',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/operador': typeof OperadorRoute
+  '/api/public/cron/ingest-diario-goiania': typeof ApiPublicCronIngestDiarioGoianiaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/operador': typeof OperadorRoute
+  '/api/public/cron/ingest-diario-goiania': typeof ApiPublicCronIngestDiarioGoianiaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
   '/operador': typeof OperadorRoute
+  '/api/public/cron/ingest-diario-goiania': typeof ApiPublicCronIngestDiarioGoianiaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/operador'
+  fullPaths:
+    | '/'
+    | '/login'
+    | '/operador'
+    | '/api/public/cron/ingest-diario-goiania'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/operador'
-  id: '__root__' | '/' | '/login' | '/operador'
+  to: '/' | '/login' | '/operador' | '/api/public/cron/ingest-diario-goiania'
+  id:
+    | '__root__'
+    | '/'
+    | '/login'
+    | '/operador'
+    | '/api/public/cron/ingest-diario-goiania'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   LoginRoute: typeof LoginRoute
   OperadorRoute: typeof OperadorRoute
+  ApiPublicCronIngestDiarioGoianiaRoute: typeof ApiPublicCronIngestDiarioGoianiaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -82,6 +102,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/public/cron/ingest-diario-goiania': {
+      id: '/api/public/cron/ingest-diario-goiania'
+      path: '/api/public/cron/ingest-diario-goiania'
+      fullPath: '/api/public/cron/ingest-diario-goiania'
+      preLoaderRoute: typeof ApiPublicCronIngestDiarioGoianiaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -89,7 +116,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   LoginRoute: LoginRoute,
   OperadorRoute: OperadorRoute,
+  ApiPublicCronIngestDiarioGoianiaRoute: ApiPublicCronIngestDiarioGoianiaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
