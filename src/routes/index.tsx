@@ -8,6 +8,7 @@ import { AlertFeed } from "@/components/radar/AlertFeed";
 import { StatCard } from "@/components/radar/StatCard";
 import { SupplyHeat } from "@/components/radar/SupplyHeat";
 import { InstallButton } from "@/components/radar/InstallButton";
+import { GovernanceTelemetry } from "@/components/radar/GovernanceTelemetry";
 import { getDashboardSnapshot } from "@/lib/radar.functions";
 
 export const Route = createFileRoute("/")({
