@@ -4,7 +4,7 @@ import { useQuery } from "@tanstack/react-query";
 import { TerritorialMap } from "@/components/radar/TerritorialMap";
 import { ScoreTerritorial } from "@/components/radar/ScoreTerritorial";
 import { GrowthChart } from "@/components/radar/GrowthChart";
-import { AlertFeed } from "@/components/radar/AlertFeed";
+import { TerritorialFeed } from "@/components/radar/TerritorialFeed";
 import { StatCard } from "@/components/radar/StatCard";
 import { SupplyHeat } from "@/components/radar/SupplyHeat";
 import { InstallButton } from "@/components/radar/InstallButton";
@@ -150,9 +150,9 @@ function Dashboard() {
             <ScoreTerritorial />
           </Card>
 
-          {/* Alerts */}
+          {/* Territorial feed */}
           <Card span="col-span-12 lg:col-span-7 lg:row-span-3 min-h-[360px]" label="Feed">
-            <AlertFeed />
+            <TerritorialFeed />
           </Card>
 
           {/* Supply heat */}
