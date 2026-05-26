@@ -1,70 +1,63 @@
 
-# Governança Operacional — telemetria viva do pipeline
+# Feed territorial vivo
 
-Transformar o card "Conformidade & trilha" (hoje estático, 4 bullets LGPD/Auditoria/Acesso/Coleta) em um painel de **saúde sistêmica** alimentado por `ingestion_runs` + `urban_events`, sem esconder falhas.
+Card novo no dashboard que mostra os últimos sinais urbanos detectados em ordem cronológica reversa, com tipo + bairro + horário. Faz a cidade "respirar" dentro do sistema.
 
-## O que muda visualmente
-
-Mesmo card (col-span-5, 2 row-span), nova hierarquia:
+## O que aparece
 
 ```text
-┌─ Governança Operacional ─────────── Governança ┐
-│                                                │
-│ Última ingestão                                │
-│ 06:00 BRT · Diário Oficial Goiânia             │
-│ ✔ processado · 1.4s                            │
-│                                                │
-│ ── grid 2x2 ──                                 │
-│ Sinais detectados      Confiança média         │
-│ 14                     92%                     │
-│                                                │
-│ Revisão humana         Duplicidades            │
-│ 3 pendentes            0 críticas              │
-│                                                │
-│ ── rodapé ──                                   │
-│ LGPD · Auditoria · Trilha · APIs públicas      │
-│            [ver execuções →]                   │
-└────────────────────────────────────────────────┘
+┌─ Feed territorial ─────────────── ao vivo ┐
+│                                            │
+│ 06:05 · alvará        Setor Bueno      ✦  │
+│ 06:04 · ART           Jardim Goiás        │
+│ 06:02 · licitação     Setor Central       │
+│ 05:58 · alvará        Setor Oeste         │
+│ ...                                        │
+│                                            │
+│ [ver todos →]                              │
+└────────────────────────────────────────────┘
 ```
 
-Quando o último run falhou ou foi parcial, o topo vira:
-- `⚠ Extração parcial · 2 eventos requerem validação manual`
-- `✕ Falha · Firecrawl timeout às 06:00` (com timestamp)
+- 8–10 eventos mais recentes
+- Cada linha: `HH:mm · {tipo legível} · {bairro}`
+- Ícone `✦` sutil em eventos das últimas 2h (sinal de "fresco")
+- Severidade `high` → cor de destaque (ember); demais neutros
+- Refetch a cada 30s
+- Estado vazio honesto: "aguardando primeiros sinais · pipeline armado para 06:00 BRT"
 
-Honestidade sistêmica é regra: nunca mascarar erro, nunca mostrar "OK" falso quando `status != 'success'`.
+## Como os dados saem
 
-## Como os números são calculados
-
-Tudo via uma server function nova, sem tocar em `radar.server.ts` (mantém separação):
-
-`src/lib/governance.functions.ts` → `getGovernanceTelemetry()`
-- **Última run**: `ingestion_runs` ordenado por `started_at desc limit 1`, join com `data_sources` para o nome.
-- **Sinais detectados**: `items_inserted` do último run.
-- **Confiança média**: `avg(confidence)` em `urban_events` criados durante a janela `[started_at, finished_at]` do último run.
-- **Revisão humana**: `count(*)` de `urban_events where needs_review = true`.
-- **Duplicidades**: `errors` jsonb do último run filtrado por `type = 'duplicate'` (já gravamos isso no orquestrador) — fallback `0` se ainda não houver chave.
-- **Latência**: `finished_at - started_at`.
-
-Se não houver nenhuma run ainda → estado honesto "aguardando primeira execução · próxima 06:00 BRT".
+Nova server fn `getTerritorialFeed()` em `src/lib/feed.functions.ts`:
+- `SELECT id, event_type, severity, bairro_label, occurred_at, confidence FROM urban_events ORDER BY occurred_at DESC LIMIT 12`
+- Filtra `needs_review = false` (só sinais validados aparecem no feed público do dashboard; pendentes vivem no `/operador`)
+- Mapeia `event_type` → label PT-BR (`permit` → "alvará", `art` → "ART", `bid` → "licitação", `supply_signal` → "fornecedor", etc.)
+- Retorna DTO simples: `{ items: FeedItem[], generatedAt }`
 
 ## Arquivos
 
-- **Novo** `src/lib/governance.functions.ts` — server fn `getGovernanceTelemetry` com `supabaseAdmin` (snapshot agregado, sem PII, segue padrão de `radar.functions.ts`).
-- **Novo** `src/components/radar/GovernanceTelemetry.tsx` — componente que consome via `useServerFn` + `useQuery` (refetch 60s, igual ao dashboard snapshot).
-- **Editado** `src/routes/index.tsx` — substituir o conteúdo do Card "Governança" pelo novo componente. Label do card vira `Telemetria`. Os 4 selos legais (LGPD/Auditoria/Acesso/Coleta) viram um rodapé inline compacto (chips), não somem.
+- **Novo** `src/lib/feed.functions.ts` — server fn `getTerritorialFeed` com `supabaseAdmin`.
+- **Novo** `src/components/radar/TerritorialFeed.tsx` — componente com `useServerFn` + `useQuery` (30s refetch), formatação de hora em BRT, mapeamento de tipos.
+- **Editado** `src/routes/index.tsx` — insere o card no grid. Localização sugerida: substituir/integrar ao `AlertFeed` atual (se for mock) ou adicionar como card adjacente ao de Governança.
+
+## Decisão pendente sobre layout
+
+Olhando o grid do dashboard, preciso confirmar onde encaixar:
+- **A**: substituir o `AlertFeed` atual (se ele ainda for mock estático).
+- **B**: criar um card novo em slot adjacente — pode exigir rearranjo do grid.
+
+Vou inspecionar `src/routes/index.tsx` + `AlertFeed.tsx` no início da build e seguir a opção que preserve melhor a hierarquia visual atual (Telemetria + Feed lado a lado funciona bem narrativamente: "o que o motor fez" + "o que a cidade emitiu").
 
 ## O que NÃO entra agora
 
-- Feed territorial vivo ("[06:02] Novo alvará…") — fica como próximo passo natural, conforme você indicou.
-- Histórico/sparkline de runs — só faz sentido depois de acumular dias de execução; placeholder visual seria desonesto.
-- Métricas de cobertura urbana, latência média móvel — mesma razão.
+- Filtro por bairro/tipo (vira interação futura).
+- Animação de entrada/pulse (pode ser próximo polish).
+- Realtime via Supabase channels (refetch 30s é suficiente nesta fase; realtime só faz sentido quando volume justificar).
+- Link clicável por evento para detalhe (não há rota de detalhe ainda).
 
-## Critério de "pronto"
+## Critério de pronto
 
-1. Card mostra dados reais do último `ingestion_runs` (ou estado vazio honesto).
-2. Erro/parcial é exibido com ícone e mensagem, não escondido.
-3. Confiança média e revisão pendente refletem o banco em tempo real (refetch 60s).
-4. Selos LGPD/Auditoria continuam presentes (compliance narrativa preservada).
-5. Zero mudança em `radar.server.ts`, zero mock.
-
-Depois disso, próximo movimento sugerido: **Feed territorial vivo** lendo `urban_events` em ordem cronológica com tipo + bairro.
+1. Card lista os últimos eventos reais do banco em ordem cronológica reversa.
+2. Hora em BRT, tipo em PT-BR, bairro do `bairro_label`.
+3. Estado vazio honesto quando não há eventos validados.
+4. Refetch 30s, sem mock.
+5. Eventos `needs_review = true` NÃO aparecem aqui (separação clara: feed = sinal limpo, `/operador` = fila bruta).
