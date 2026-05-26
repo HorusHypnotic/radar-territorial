@@ -1,103 +1,70 @@
 
-# Pipeline real de ingestão — MVP em 1 leva
+# Governança Operacional — telemetria viva do pipeline
 
-Objetivo: um sinal real do Diário Oficial de Goiânia, todo dia, navegando do crawler até virar `urban_event` geocodificado no mapa — passando por uma fila de validação humana. Esse é o "Hello World" do motor que falta.
+Transformar o card "Conformidade & trilha" (hoje estático, 4 bullets LGPD/Auditoria/Acesso/Coleta) em um painel de **saúde sistêmica** alimentado por `ingestion_runs` + `urban_events`, sem esconder falhas.
 
----
+## O que muda visualmente
 
-## Escopo desta entrega
-
-**Dentro:**
-- Crawler diário do Diário Oficial do Município de Goiânia
-- Extração estruturada (alvarás, habite-se, licitações, embargos) via Lovable AI
-- Fila de revisão no `/operador` (eventos com `needs_review = true`)
-- Geocoding automático + persistência em `urban_events` / `urban_entities`
-- Dashboard lendo **só** dados reais (sem fallback decorativo)
-- Trilha completa em `governance_logs` (toda extração, edição, aprovação)
-
-**Fora (próximas levas):**
-- CREA-GO / ARTs — exige login + captcha; tratado como **ingestão assistida** (operador cola ART manualmente, parser estrutura). Crawler automático fica para depois.
-- Licitações estaduais / outras prefeituras.
-- Motor de regras (Fase 3) e IA preditiva (Fase 4).
-
----
-
-## Arquitetura
+Mesmo card (col-span-5, 2 row-span), nova hierarquia:
 
 ```text
-pg_cron (06:00 diário)
-    │
-    ▼
-POST /api/public/cron/ingest-diario-goiania     (server route, apikey header)
-    │
-    ├─► Firecrawl scrape do PDF/HTML do dia
-    │
-    ├─► Lovable AI (gemini-2.5-flash) → extrai array tipado:
-    │     [{ tipo, titulo, endereco, empresa, rt, valor?, processo? }]
-    │
-    ├─► Para cada item:
-    │     • dedupe (hash do trecho + data)
-    │     • normaliza bairro (dicionário + fuzzy)
-    │     • geocode (Nominatim) → urban_entities
-    │     • insert urban_events (needs_review = confidence < 0.85)
-    │     • governance_logs (action=auto_extracted)
-    │
-    └─► Retorna { ingested, queued_for_review, errors }
+┌─ Governança Operacional ─────────── Governança ┐
+│                                                │
+│ Última ingestão                                │
+│ 06:00 BRT · Diário Oficial Goiânia             │
+│ ✔ processado · 1.4s                            │
+│                                                │
+│ ── grid 2x2 ──                                 │
+│ Sinais detectados      Confiança média         │
+│ 14                     92%                     │
+│                                                │
+│ Revisão humana         Duplicidades            │
+│ 3 pendentes            0 críticas              │
+│                                                │
+│ ── rodapé ──                                   │
+│ LGPD · Auditoria · Trilha · APIs públicas      │
+│            [ver execuções →]                   │
+└────────────────────────────────────────────────┘
 ```
 
-Fila humana: `/operador` ganha aba **Revisão** listando `urban_events.needs_review = true`. Operador aprova/edita/descarta → cada ação grava em `governance_logs`.
+Quando o último run falhou ou foi parcial, o topo vira:
+- `⚠ Extração parcial · 2 eventos requerem validação manual`
+- `✕ Falha · Firecrawl timeout às 06:00` (com timestamp)
 
----
+Honestidade sistêmica é regra: nunca mascarar erro, nunca mostrar "OK" falso quando `status != 'success'`.
 
-## Detalhes técnicos
+## Como os números são calculados
 
-**Banco (migration):**
-- `data_sources`: seed `diario-oficial-goiania` (kind=`gazette`, reliability=0.9)
-- `urban_events`: adicionar `dedupe_hash text unique` + `raw_excerpt text` + índice em `(occurred_at desc, needs_review)`
-- `ingestion_runs` (nova): `id, source_id, started_at, finished_at, items_found, items_inserted, items_queued, errors jsonb, status` — visível no card Governança
+Tudo via uma server function nova, sem tocar em `radar.server.ts` (mantém separação):
 
-**Server routes / functions:**
-- `src/routes/api/public/cron/ingest-diario-goiania.ts` — handler do cron, valida `apikey`, dispara o pipeline
-- `src/lib/ingestion/diario-goiania.server.ts` — fetch + parse via Firecrawl
-- `src/lib/ingestion/extract.server.ts` — chamada Lovable AI com schema Zod (formato JSON estruturado)
-- `src/lib/ingestion/normalize.server.ts` — bairro fuzzy match, dedupe hash
-- `src/lib/review.functions.ts` — `listReviewQueue`, `approveEvent`, `rejectEvent`, `editEvent`
+`src/lib/governance.functions.ts` → `getGovernanceTelemetry()`
+- **Última run**: `ingestion_runs` ordenado por `started_at desc limit 1`, join com `data_sources` para o nome.
+- **Sinais detectados**: `items_inserted` do último run.
+- **Confiança média**: `avg(confidence)` em `urban_events` criados durante a janela `[started_at, finished_at]` do último run.
+- **Revisão humana**: `count(*)` de `urban_events where needs_review = true`.
+- **Duplicidades**: `errors` jsonb do último run filtrado por `type = 'duplicate'` (já gravamos isso no orquestrador) — fallback `0` se ainda não houver chave.
+- **Latência**: `finished_at - started_at`.
 
-**Cron (via `supabase--insert`, não migration):**
-```sql
-select cron.schedule(
-  'ingest-diario-goiania-daily', '0 9 * * *', -- 06:00 BRT
-  $$ select net.http_post(
-    url := 'https://project--d732a045-12c3-48cd-8a51-33ac2f52784e.lovable.app/api/public/cron/ingest-diario-goiania',
-    headers := '{"Content-Type":"application/json","apikey":"<ANON>"}'::jsonb,
-    body := '{}'::jsonb) $$
-);
-```
+Se não houver nenhuma run ainda → estado honesto "aguardando primeira execução · próxima 06:00 BRT".
 
-**Dependências externas:**
-- **Firecrawl** (connector já suportado) — necessário porque o Diário sai como PDF/HTML pesado, com anti-bot. `fetch()` puro do Worker não dá conta.
-- **Lovable AI Gateway** (já habilitado, `LOVABLE_API_KEY` presente) — `google/gemini-2.5-flash` para extração JSON estruturada.
-- **Nominatim** (já em uso, gratuito).
+## Arquivos
 
-**Frontend:**
-- `/operador` → nova aba `Fila de Revisão` (tabela com trecho original + campos extraídos editáveis + ações)
-- Dashboard `index.tsx` → remove qualquer fallback mockado; estado vazio honesto quando sem dados ("aguardando primeira execução do crawler — próxima às 06:00")
-- Card Governança passa a mostrar última `ingestion_run` (sucesso/erro/itens)
+- **Novo** `src/lib/governance.functions.ts` — server fn `getGovernanceTelemetry` com `supabaseAdmin` (snapshot agregado, sem PII, segue padrão de `radar.functions.ts`).
+- **Novo** `src/components/radar/GovernanceTelemetry.tsx` — componente que consome via `useServerFn` + `useQuery` (refetch 60s, igual ao dashboard snapshot).
+- **Editado** `src/routes/index.tsx` — substituir o conteúdo do Card "Governança" pelo novo componente. Label do card vira `Telemetria`. Os 4 selos legais (LGPD/Auditoria/Acesso/Coleta) viram um rodapé inline compacto (chips), não somem.
 
----
+## O que NÃO entra agora
+
+- Feed territorial vivo ("[06:02] Novo alvará…") — fica como próximo passo natural, conforme você indicou.
+- Histórico/sparkline de runs — só faz sentido depois de acumular dias de execução; placeholder visual seria desonesto.
+- Métricas de cobertura urbana, latência média móvel — mesma razão.
 
 ## Critério de "pronto"
 
-1. `pg_cron` rodou e há ≥ 1 registro em `ingestion_runs` com `status=success`
-2. ≥ 1 `urban_events` real (não-seed) no banco, geocodificado, com pin visível no mapa
-3. Fila de revisão funcional: operador consegue aprovar/editar/descartar
-4. Trilha em `governance_logs` para cada ação (auto + humana)
-5. Dashboard exibe contadores reais subindo após cada run
+1. Card mostra dados reais do último `ingestion_runs` (ou estado vazio honesto).
+2. Erro/parcial é exibido com ícone e mensagem, não escondido.
+3. Confiança média e revisão pendente refletem o banco em tempo real (refetch 60s).
+4. Selos LGPD/Auditoria continuam presentes (compliance narrativa preservada).
+5. Zero mudança em `radar.server.ts`, zero mock.
 
----
-
-## O que preciso confirmar antes de implementar
-
-1. **Conectar o Firecrawl** (Connectors → Firecrawl). É bloqueante para o crawler real do Diário. Sem ele, alternativa é cair para upload manual do PDF pelo operador (perde o "automático" do MVP).
-2. **URL do Diário**: posso usar `https://www.goiania.go.gov.br/diariooficial/`? Se você tiver uma URL canônica preferida (estadual, ou um agregador), me diga.
-3. **CREA/ART confirmado fora**: você ok em deixar ARTs para uma leva seguinte com modo assistido (paste do conteúdo), já que o portal CREA-GO exige login?
+Depois disso, próximo movimento sugerido: **Feed territorial vivo** lendo `urban_events` em ordem cronológica com tipo + bairro.
