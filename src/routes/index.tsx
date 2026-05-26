@@ -160,29 +160,10 @@ function Dashboard() {
           </Card>
 
           {/* Compliance card */}
-          <Card span="col-span-12 lg:col-span-5 lg:row-span-2 min-h-[260px]" label="Governança">
-            <div className="flex h-full flex-col">
-              <h3 className="font-display text-2xl">Conformidade & trilha</h3>
-              <p className="mt-1 text-xs text-muted-foreground">
-                Apenas dados públicos, observáveis e legalmente coletáveis.
-              </p>
-              <ul className="mt-4 space-y-2.5 text-sm">
-                {[
-                  ["LGPD", "Sem perfilamento pessoal · sem dados sensíveis"],
-                  ["Auditoria", "Logs append-only · origem rastreável por evento"],
-                  ["Acesso", "RBAC · MFA · separação de ambientes"],
-                  ["Coleta", "APIs públicas · diários oficiais · transparência"],
-                ].map(([k, v]) => (
-                  <li key={k} className="flex items-start gap-3 border-t border-border/60 pt-2.5 first:border-0 first:pt-0">
-                    <span className="mt-0.5 inline-flex w-20 shrink-0 font-mono text-[10px] uppercase tracking-wider text-ember">
-                      {k}
-                    </span>
-                    <span className="text-muted-foreground">{v}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+          <Card span="col-span-12 lg:col-span-5 lg:row-span-2 min-h-[260px]" label="Telemetria">
+            <GovernanceTelemetry />
           </Card>
+
         </div>
 
         {/* Modules strip */}
