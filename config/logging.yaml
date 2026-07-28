@@ -1,0 +1,15 @@
+version: 1
+formatters:
+  detailed:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+handlers:
+  console:
+    class: logging.StreamHandler
+    formatter: detailed
+  file:
+    class: logging.FileHandler
+    filename: logs/pipeline.log
+    formatter: detailed
+root:
+  level: INFO
+  handlers: [console, file]

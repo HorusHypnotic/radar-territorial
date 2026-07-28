@@ -1,0 +1,52 @@
+[
+  {
+    "timestamp": "2026-07-28T15:31:35",
+    "evento": "pipeline_transformacao",
+    "detalhes": {
+      "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-5\\test_transform_creates_staging0\\radar_staging.parquet",
+      "registros": 1
+    }
+  },
+  {
+    "timestamp": "2026-07-28T15:33:18",
+    "evento": "pipeline_transformacao",
+    "detalhes": {
+      "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-6\\test_transform_creates_staging0\\radar_staging.parquet",
+      "registros": 1,
+      "snapshot": "20260728_153318"
+    }
+  },
+  {
+    "timestamp": "2026-07-28T15:35:27",
+    "evento": "pipeline_transformacao",
+    "detalhes": {
+      "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-7\\test_transform_creates_staging0\\radar_staging.parquet",
+      "registros": 1,
+      "snapshot": "20260728_153525"
+    }
+  },
+  {
+    "timestamp": "2026-07-28T15:38:34",
+    "evento": "pipeline_transformacao",
+    "detalhes": {
+      "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-8\\test_transform_creates_staging0\\radar_staging.parquet",
+      "registros": 1
+    }
+  },
+  {
+    "timestamp": "2026-07-28T15:41:58",
+    "evento": "pipeline_transformacao",
+    "detalhes": {
+      "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-9\\test_transform_creates_staging0\\radar_staging.parquet",
+      "registros": 1
+    }
+  },
+  {
+    "timestamp": "2026-07-28T15:43:39",
+    "evento": "pipeline_transformacao",
+    "detalhes": {
+      "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-10\\test_transform_creates_staging0\\radar_staging.parquet",
+      "registros": 1
+    }
+  }
+]

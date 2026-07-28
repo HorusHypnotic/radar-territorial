@@ -1,0 +1,12 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Preview Dashboard",
+      "type": "pwa-chrome",
+      "request": "launch",
+      "url": "http://localhost:8000/dashboard.html",
+      "webRoot": "${workspaceFolder}"
+    }
+  ]
+}

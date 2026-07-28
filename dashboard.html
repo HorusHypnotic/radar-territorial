@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OPERA Territorial · Radar</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    :root {
+      --bg: #08131f; --bg2: #0d1c2f; --bg3: #10253b; --surf: #16324e; --bdr: #23496c; --acc: #1e90ff;
+      --gold: #f4a829; --grn: #27ae60; --red: #e74c3c; --pur: #8e44ad; --cyn: #00bcd4; --mut: #6d8aa8; --txt: #e5f1fb; --wht: #ffffff;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--txt); font-family: 'Space Grotesk', sans-serif; overflow: hidden; }
+    #app { display: flex; flex-direction: column; height: 100vh; }
+    header { flex-shrink: 0; height: 56px; background: var(--bg2); border-bottom: 1px solid var(--bdr); display: flex; align-items: center; gap: 10px; padding: 0 16px; }
+    .brand { display: flex; align-items: center; gap: 10px; }
+    .hex { width: 26px; height: 26px; background: var(--acc); clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: white; }
+    .title { font-weight: 700; font-size: 14px; color: var(--wht); }
+    .subtitle { font-size: 11px; color: var(--mut); }
+    .spacer { flex: 1; }
+    .pill { padding: 4px 9px; border-radius: 999px; border: 1px solid var(--bdr); background: rgba(255,255,255,0.04); font-size: 11px; color: var(--txt); }
+    .pill.green { color: var(--grn); border-color: rgba(39,174,96,.35); background: rgba(39,174,96,.12); }
+    .pill.blue { color: var(--acc); border-color: rgba(30,144,255,.35); background: rgba(30,144,255,.12); }
+    main { display: grid; grid-template-columns: 280px 1fr; flex: 1; min-height: 0; }
+    aside { background: var(--bg2); border-right: 1px solid var(--bdr); padding: 14px; overflow: auto; }
+    .panel { background: var(--bg3); border: 1px solid var(--bdr); border-radius: 10px; padding: 12px; margin-bottom: 12px; }
+    .panel h3 { font-size: 10px; text-transform: uppercase; letter-spacing: 0.7px; color: var(--mut); margin-bottom: 8px; }
+    .stat { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.06); font-size: 12px; }
+    .stat:last-child { border-bottom: none; }
+    .value { font-family: 'Space Mono', monospace; font-weight: 700; color: var(--wht); }
+    .list { display: flex; flex-direction: column; gap: 6px; }
+    .item { display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.06); padding: 7px 8px; border-radius: 7px; font-size: 12px; }
+    .dot { width: 8px; height: 8px; border-radius: 50%; margin-right: 6px; display: inline-block; }
+    .content { padding: 16px; overflow: auto; background: linear-gradient(180deg, rgba(8,19,31,.96), rgba(6,13,23,.98)); }
+    .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin-bottom: 12px; }
+    .card { background: var(--bg2); border: 1px solid var(--bdr); border-radius: 10px; padding: 12px; }
+    .card .label { font-size: 10px; color: var(--mut); text-transform: uppercase; letter-spacing: 0.6px; }
+    .card .big { font-family: 'Space Mono', monospace; font-size: 24px; font-weight: 700; color: var(--wht); margin-top: 6px; }
+    .map { background: var(--bg2); border: 1px solid var(--bdr); border-radius: 12px; padding: 12px; min-height: 360px; }
+    .filtros { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 10px; }
+    .filtro-btn { padding: 6px 10px; border-radius: 999px; border: 1px solid var(--bdr); background: rgba(255,255,255,0.04); color: var(--txt); cursor: pointer; font-size: 11px; }
+    .filtro-btn.active { border-color: var(--acc); background: rgba(30,144,255,.16); }
+    .filtro-btn.alto.active { border-color: #e74c3c; background: rgba(231,76,60,.16); }
+    .filtro-btn.medio.active { border-color: #f4a829; background: rgba(244,168,41,.16); }
+    .filtro-btn.baixo.active { border-color: #27ae60; background: rgba(39,174,96,.16); }
+    #map-wrap { width: 100%; height: 100%; min-height: 320px; border-radius: 8px; overflow: hidden; }
+    .leaflet-container { background: #08131f; }
+    .leaflet-control-attribution { font-size: 9px; }
+    .footer { margin-top: 12px; font-size: 11px; color: var(--mut); }
+    @media (max-width: 900px) { main { grid-template-columns: 1fr; } aside { border-right: none; border-bottom: 1px solid var(--bdr); max-height: 40vh; } }
+  </style>
+</head>
+<body>
+  <div id="app">
+    <header>
+      <div class="brand">
+        <div class="hex">⬡</div>
+        <div>
+          <div class="title">OPERA Territorial</div>
+          <div class="subtitle">Painel de geointeligência · Redenção-PA</div>
+        </div>
+      </div>
+      <div class="spacer"></div>
+      <div class="pill green">● Dados ativos</div>
+      <div class="pill blue">Supabase → QGIS → Dashboard</div>
+    </header>
+    <main>
+      <aside>
+        <div class="panel">
+          <h3>Resumo</h3>
+          <div class="stat"><span>Setores</span><span class="value" id="k-setores">0</span></div>
+          <div class="stat"><span>Obras</span><span class="value" id="k-obras">0</span></div>
+          <div class="stat"><span>Fornecedores</span><span class="value" id="k-fornecedores">0</span></div>
+          <div class="stat"><span>Prioridade média</span><span class="value" id="k-prioridade">0</span></div>
+        </div>
+        <div class="panel">
+          <h3>Regiões</h3>
+          <div class="list" id="lista-zonas"></div>
+        </div>
+      </aside>
+      <section class="content">
+        <div class="cards">
+          <div class="card"><div class="label">Cobertura</div><div class="big" id="c-cobertura">0%</div></div>
+          <div class="card"><div class="label">Risco</div><div class="big" id="c-risco">0</div></div>
+          <div class="card"><div class="label">Densidade</div><div class="big" id="c-densidade">0</div></div>
+          <div class="card"><div class="label">Última atualização</div><div class="big" id="c-data">—</div></div>
+        </div>
+        <div class="map">
+          <div class="filtros">
+            <button class="filtro-btn active" onclick="filtrarMapa('todos')">Todos</button>
+            <button class="filtro-btn alto" onclick="filtrarMapa('Alto')">Alto</button>
+            <button class="filtro-btn medio" onclick="filtrarMapa('Médio')">Médio</button>
+            <button class="filtro-btn baixo" onclick="filtrarMapa('Baixo')">Baixo</button>
+          </div>
+          <div id="map-wrap"></div>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Auditoria local</h3>
+          <div id="auditoria-lista" style="font-size:12px; color:var(--txt);"></div>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Histórico de snapshots</h3>
+          <div id="snapshots-lista" style="font-size:12px; color:var(--txt);"></div>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Comparação entre versões</h3>
+          <div id="comparacao-lista" style="font-size:12px; color:var(--txt);"></div>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Restauração de snapshot</h3>
+          <select id="select-snapshot" style="width:100%; padding:8px; border-radius:8px; border:1px solid var(--bdr); background:var(--bg2); color:var(--txt); margin-bottom:8px;"></select>
+          <button onclick="restaurarSnapshotSelecionado()" style="padding:8px 10px; border:none; border-radius:8px; background:var(--acc); color:white; cursor:pointer;">Restaurar versão</button>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Integridade criptográfica</h3>
+          <div id="integridade-lista" style="font-size:12px; color:var(--txt);"></div>
+        </div>
+        <div class="panel" style="margin-top:12px;">
+          <h3>Contexto semântico</h3>
+          <div id="contexto-lista" style="font-size:12px; color:var(--txt);"></div>
+        </div>
+        <div class="footer">Este painel pode consumir dados do pipeline Python, registrar auditoria e preservar versões históricas.</div>
+      </section>
+    </main>
+  </div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    let map;
+    let geoLayer;
+    let camadaPontos;
+    let filtroAtual = 'todos';
+
+    const DEFAULT_DATA = {
+      setores: 3,
+      obras: 2,
+      fornecedores: 3,
+      prioridade: 0.55,
+      zonas: [
+        { nome: 'Zona Norte', indicador: 0.82, categoria: 'Alto' },
+        { nome: 'Zona Sul', indicador: 0.54, categoria: 'Médio' },
+        { nome: 'Zona Leste', indicador: 0.27, categoria: 'Baixo' }
+      ]
+    };
+
+    async function carregarDados() {
+      try {
+        const response = await fetch('data/output/dashboard_data.json');
+        if (!response.ok) throw new Error('Arquivo não encontrado');
+        const dados = await response.json();
+        atualizarDashboard(dados);
+      } catch (error) {
+        console.log('⚠️ Dados não encontrados. Usando dados de exemplo.');
+        renderDashboard(DEFAULT_DATA);
+      }
+    }
+
+    function atualizarDashboard(dados) {
+      const elementos = {
+        '#sk-s': dados.setores ?? '—',
+        '#sk-o': dados.obras ?? '—',
+        '#sk-f': dados.fornecedores ?? '—',
+        '#sk-p': dados.prioridade ? dados.prioridade.toFixed(1) : '—'
+      };
+
+      Object.entries(elementos).forEach(([selector, value]) => {
+        const node = document.querySelector(selector);
+        if (node) node.textContent = value;
+      });
+
+      renderDashboard(dados);
+    }
+
+    function renderDashboard(data) {
+      const dados = data || DEFAULT_DATA;
+      const setores = document.getElementById('k-setores');
+      const obras = document.getElementById('k-obras');
+      const fornecedores = document.getElementById('k-fornecedores');
+      const prioridade = document.getElementById('k-prioridade');
+      const cobertura = document.getElementById('c-cobertura');
+      const risco = document.getElementById('c-risco');
+      const densidade = document.getElementById('c-densidade');
+      const dataAtual = document.getElementById('c-data');
+
+      if (setores) setores.textContent = dados.setores ?? 0;
+      if (obras) obras.textContent = dados.obras ?? 0;
+      if (fornecedores) fornecedores.textContent = dados.fornecedores ?? 0;
+      if (prioridade) prioridade.textContent = Number(dados.prioridade ?? 0).toFixed(2);
+      if (cobertura) cobertura.textContent = `${Math.round(((dados.prioridade ?? 0) * 100))}%`;
+      if (risco) risco.textContent = `${Math.round(((dados.prioridade ?? 0) * 100) / 2)}`;
+      if (densidade) densidade.textContent = `${Number(dados.prioridade ?? 0).toFixed(2)}`;
+      if (dataAtual) dataAtual.textContent = new Date().toLocaleDateString('pt-BR');
+
+      const list = document.getElementById('lista-zonas');
+      if (list) {
+        list.innerHTML = '';
+        (dados.zonas || []).forEach((zona) => {
+          const row = document.createElement('div');
+          row.className = 'item';
+          row.innerHTML = `<span><span class="dot" style="background:${zona.categoria === 'Alto' ? '#e74c3c' : zona.categoria === 'Médio' ? '#f4a829' : '#27ae60'}"></span>${zona.nome}</span><strong>${Number(zona.indicador || 0).toFixed(2)}</strong>`;
+          list.appendChild(row);
+        });
+      }
+
+      const auditoria = document.getElementById('auditoria-lista');
+      if (auditoria) {
+        const eventos = dados.auditoria || [];
+        auditoria.innerHTML = eventos.length
+          ? eventos.slice(-5).reverse().map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.evento}</strong><br><span style="color:var(--mut)">${item.timestamp}</span>${item.detalhes && Object.keys(item.detalhes).length ? `<br>${JSON.stringify(item.detalhes)}` : ''}</div>`).join('')
+          : '<span style="color:var(--mut)">Nenhum evento registrado ainda.</span>';
+      }
+
+      const snapshots = document.getElementById('snapshots-lista');
+      if (snapshots) {
+        const lista = dados.snapshots || [];
+        snapshots.innerHTML = lista.length
+          ? lista.slice(-5).reverse().map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.timestamp}</strong><br><span style="color:var(--mut)">${item.total_registros} registros</span>${item.indicadores && Object.keys(item.indicadores).length ? `<br>média ${item.indicadores.media?.toFixed(2) ?? '—'} · max ${item.indicadores.max?.toFixed(2) ?? '—'}` : ''}</div>`).join('')
+          : '<span style="color:var(--mut)">Nenhum snapshot ainda.</span>';
+      }
+
+      const comparacao = document.getElementById('comparacao-lista');
+      if (comparacao) {
+        const diff = dados.comparacao || {};
+        if (diff.erro) {
+          comparacao.innerHTML = `<span style="color:var(--mut)">${diff.erro}</span>`;
+        } else if (diff.snapshot_a && diff.snapshot_b) {
+          comparacao.innerHTML = `
+            <div style="margin-bottom:8px;"><strong>${diff.snapshot_a}</strong> → <strong>${diff.snapshot_b}</strong></div>
+            <div>Registros A: ${diff.total_a}</div>
+            <div>Registros B: ${diff.total_b}</div>
+            <div>Alterados: ${diff.alterados}</div>
+          `;
+        } else {
+          comparacao.innerHTML = '<span style="color:var(--mut)">Ainda não há comparação suficiente para exibir.</span>';
+        }
+      }
+
+      const integridade = document.getElementById('integridade-lista');
+      if (integridade) {
+        const checks = dados.integridade || [];
+        integridade.innerHTML = checks.length
+          ? checks.map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.timestamp}</strong><br><span style="color:${item.integridade === 'ok' ? 'var(--grn)' : 'var(--red)'}">${item.integridade === 'ok' ? 'Integridade OK' : 'Integridade comprometida'}</span></div>`).join('')
+          : '<span style="color:var(--mut)">Nenhuma verificação disponível.</span>';
+      }
+
+      const contexto = document.getElementById('contexto-lista');
+      if (contexto) {
+        const relacoes = dados.contexto || [];
+        contexto.innerHTML = relacoes.length
+          ? relacoes.map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.origem}</strong> → <strong>${item.destino}</strong><br><span style="color:var(--mut)">${item.tipo}</span></div>`).join('')
+          : '<span style="color:var(--mut)">Nenhum relacionamento registrado ainda.</span>';
+      }
+
+      popularSelectSnapshots(dados);
+    }
+
+    function initMap() {
+      if (map) return;
+      map = L.map('map-wrap').setView([-8.0, -50.0], 6);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+    }
+
+    function filtrarMapa(categoria) {
+      filtroAtual = categoria;
+      document.querySelectorAll('.filtro-btn').forEach((btn) => btn.classList.remove('active'));
+      const btnSelecionado = Array.from(document.querySelectorAll('.filtro-btn')).find((btn) => btn.textContent.toLowerCase() === categoria.toLowerCase() || (categoria === 'todos' && btn.textContent === 'Todos'));
+      if (btnSelecionado) {
+        btnSelecionado.classList.add('active');
+      }
+      if (!camadaPontos) return;
+      camadaPontos.eachLayer((layer) => {
+        const cat = layer.feature?.properties?.categoria;
+        const visivel = categoria === 'todos' || cat === categoria;
+        layer.setStyle({ opacity: visivel ? 1 : 0.1, fillOpacity: visivel ? 0.9 : 0.12 });
+      });
+    }
+
+    function popularSelectSnapshots(dados) {
+      const select = document.getElementById('select-snapshot');
+      if (!select) return;
+      select.innerHTML = '';
+      (dados.snapshots || []).forEach((item) => {
+        const option = document.createElement('option');
+        option.value = item.timestamp;
+        option.textContent = item.timestamp;
+        select.appendChild(option);
+      });
+    }
+
+    async function restaurarSnapshotSelecionado() {
+      const select = document.getElementById('select-snapshot');
+      if (!select || !select.value) return;
+      const response = await fetch(`http://127.0.0.1:8001/api/restore?timestamp=${encodeURIComponent(select.value)}`);
+      if (response.ok) {
+        alert(`Snapshot ${select.value} restaurado com sucesso.`);
+        carregarDados();
+        carregarGeojson();
+      } else {
+        alert('Não foi possível restaurar o snapshot.');
+      }
+    }
+
+    function carregarGeojson() {
+      fetch('data/output/radar_geojson.geojson')
+        .then((response) => response.json())
+        .then((data) => {
+          if (geoLayer) {
+            map.removeLayer(geoLayer);
+          }
+          geoLayer = L.geoJSON(data, {
+            pointToLayer: (feature, latlng) => {
+              const categoria = feature.properties.categoria || 'Médio';
+              const cor = categoria === 'Alto' ? '#E74C3C' : categoria === 'Médio' ? '#F4A829' : '#27AE60';
+              const marker = L.circleMarker(latlng, {
+                radius: 8,
+                fillColor: cor,
+                color: '#ffffff',
+                weight: 1,
+                opacity: 1,
+                fillOpacity: 0.9
+              }).bindPopup(`<b>${feature.properties.nome || 'Ponto'}</b><br>Indicador: ${feature.properties.indicador_ajustado || '—'}`);
+              return marker;
+            }
+          }).addTo(map);
+          camadaPontos = geoLayer;
+          filtrarMapa(filtroAtual);
+        })
+        .catch(() => {
+          console.log('⚠️ GeoJSON ainda não disponível.');
+        });
+    }
+
+    window.addEventListener('load', () => {
+      initMap();
+      carregarDados();
+      carregarGeojson();
+    });
+  </script>
+</body>
+</html>

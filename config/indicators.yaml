@@ -1,0 +1,10 @@
+indicators:
+  densidade:
+    description: Indicador de densidade territorial
+    enabled: true
+  risco:
+    description: Indicador de risco
+    enabled: true
+  cobertura:
+    description: Indicador de cobertura
+    enabled: true

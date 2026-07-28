@@ -1,0 +1,36 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "🔄 Pipeline Radar",
+      "type": "shell",
+      "command": "python",
+      "args": ["python/pipeline.py"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build",
+      "problemMatcher": []
+    },
+    {
+      "label": "📊 Atualizar Dashboard",
+      "type": "shell",
+      "command": "python",
+      "args": ["python/export/dashboard_data.py"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "build"
+    },
+    {
+      "label": "🧪 Testes",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "pytest", "tests", "-v"],
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
+      "group": "test"
+    }
+  ]
+}

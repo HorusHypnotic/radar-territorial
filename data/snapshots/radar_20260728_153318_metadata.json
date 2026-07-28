@@ -1,0 +1,15 @@
+{
+  "timestamp": "20260728_153318",
+  "total_registros": 1,
+  "arquivos": {
+    "parquet": "D:\\Radar Territorial\\data\\snapshots\\radar_20260728_153318.parquet"
+  },
+  "indicadores": {
+    "media": 1.2,
+    "max": 1.2,
+    "min": 1.2
+  },
+  "extra": {
+    "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-6\\test_transform_creates_staging0\\radar_staging.parquet"
+  }
+}
