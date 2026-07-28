@@ -3,7 +3,7 @@ name: Publicar Dashboard
 on:
   push:
     branches:
-      - main
+      - master
     paths:
       - 'dashboard.html'
       - 'data/**'
