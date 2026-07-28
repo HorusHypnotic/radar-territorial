@@ -128,134 +128,156 @@
 
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script>
+    // ============================================================
+    // DADOS DE EXEMPLO EMBUTIDOS (funciona sem arquivos externos)
+    // ============================================================
+    const DADOS_EXEMPLO = {
+      setores: 12,
+      obras: 5,
+      fornecedores: 8,
+      prioridade: 0.67,
+      zonas: [
+        { nome: 'Zona Norte', indicador: 0.82, categoria: 'Alto' },
+        { nome: 'Zona Sul', indicador: 0.54, categoria: 'Médio' },
+        { nome: 'Zona Leste', indicador: 0.27, categoria: 'Baixo' },
+        { nome: 'Zona Oeste', indicador: 0.73, categoria: 'Alto' },
+        { nome: 'Centro', indicador: 0.91, categoria: 'Alto' }
+      ],
+      auditoria: [
+        { evento: 'Inicialização', timestamp: new Date().toISOString() }
+      ],
+      snapshots: [],
+      integridade: [],
+      contexto: []
+    };
+
+    // GeoJSON de exemplo (pontos em Redenção-PA)
+    const GEOJSON_EXEMPLO = {
+      "type": "FeatureCollection",
+      "features": [
+        {
+          "type": "Feature",
+          "properties": { "nome": "Ponto A", "categoria": "Alto", "indicador_ajustado": 0.82 },
+          "geometry": { "type": "Point", "coordinates": [-50.0, -8.0] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "nome": "Ponto B", "categoria": "Médio", "indicador_ajustado": 0.54 },
+          "geometry": { "type": "Point", "coordinates": [-49.95, -8.05] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "nome": "Ponto C", "categoria": "Baixo", "indicador_ajustado": 0.27 },
+          "geometry": { "type": "Point", "coordinates": [-49.9, -7.95] }
+        },
+        {
+          "type": "Feature",
+          "properties": { "nome": "Ponto D", "categoria": "Alto", "indicador_ajustado": 0.73 },
+          "geometry": { "type": "Point", "coordinates": [-49.85, -8.02] }
+        }
+      ]
+    };
+
+    // ============================================================
+    // LÓGICA DO DASHBOARD
+    // ============================================================
     let map;
     let geoLayer;
     let camadaPontos;
     let filtroAtual = 'todos';
 
-    const DEFAULT_DATA = {
-      setores: 3,
-      obras: 2,
-      fornecedores: 3,
-      prioridade: 0.55,
-      zonas: [
-        { nome: 'Zona Norte', indicador: 0.82, categoria: 'Alto' },
-        { nome: 'Zona Sul', indicador: 0.54, categoria: 'Médio' },
-        { nome: 'Zona Leste', indicador: 0.27, categoria: 'Baixo' }
-      ]
-    };
-
-    async function carregarDados() {
-      try {
-        const response = await fetch('data/output/dashboard_data.json');
-        if (!response.ok) throw new Error('Arquivo não encontrado');
-        const dados = await response.json();
-        atualizarDashboard(dados);
-      } catch (error) {
-        console.log('⚠️ Dados não encontrados. Usando dados de exemplo.');
-        renderDashboard(DEFAULT_DATA);
-      }
+    function carregarDados() {
+      // Usa sempre os dados de exemplo
+      atualizarDashboard(DADOS_EXEMPLO);
     }
 
     function atualizarDashboard(dados) {
       const elementos = {
-        '#sk-s': dados.setores ?? '—',
-        '#sk-o': dados.obras ?? '—',
-        '#sk-f': dados.fornecedores ?? '—',
-        '#sk-p': dados.prioridade ? dados.prioridade.toFixed(1) : '—'
+        '#k-setores': dados.setores ?? '—',
+        '#k-obras': dados.obras ?? '—',
+        '#k-fornecedores': dados.fornecedores ?? '—',
+        '#k-prioridade': dados.prioridade ? dados.prioridade.toFixed(1) : '—'
       };
-
       Object.entries(elementos).forEach(([selector, value]) => {
         const node = document.querySelector(selector);
         if (node) node.textContent = value;
       });
-
       renderDashboard(dados);
     }
 
     function renderDashboard(data) {
-      const dados = data || DEFAULT_DATA;
-      const setores = document.getElementById('k-setores');
-      const obras = document.getElementById('k-obras');
-      const fornecedores = document.getElementById('k-fornecedores');
-      const prioridade = document.getElementById('k-prioridade');
-      const cobertura = document.getElementById('c-cobertura');
-      const risco = document.getElementById('c-risco');
-      const densidade = document.getElementById('c-densidade');
-      const dataAtual = document.getElementById('c-data');
-
-      if (setores) setores.textContent = dados.setores ?? 0;
-      if (obras) obras.textContent = dados.obras ?? 0;
-      if (fornecedores) fornecedores.textContent = dados.fornecedores ?? 0;
-      if (prioridade) prioridade.textContent = Number(dados.prioridade ?? 0).toFixed(2);
-      if (cobertura) cobertura.textContent = `${Math.round(((dados.prioridade ?? 0) * 100))}%`;
-      if (risco) risco.textContent = `${Math.round(((dados.prioridade ?? 0) * 100) / 2)}`;
-      if (densidade) densidade.textContent = `${Number(dados.prioridade ?? 0).toFixed(2)}`;
-      if (dataAtual) dataAtual.textContent = new Date().toLocaleDateString('pt-BR');
+      const dados = data || DADOS_EXEMPLO;
+      document.getElementById('k-setores').textContent = dados.setores ?? 0;
+      document.getElementById('k-obras').textContent = dados.obras ?? 0;
+      document.getElementById('k-fornecedores').textContent = dados.fornecedores ?? 0;
+      document.getElementById('k-prioridade').textContent = Number(dados.prioridade ?? 0).toFixed(2);
+      document.getElementById('c-cobertura').textContent = `${Math.round(((dados.prioridade ?? 0) * 100))}%`;
+      document.getElementById('c-risco').textContent = `${Math.round(((dados.prioridade ?? 0) * 100) / 2)}`;
+      document.getElementById('c-densidade').textContent = `${Number(dados.prioridade ?? 0).toFixed(2)}`;
+      document.getElementById('c-data').textContent = new Date().toLocaleDateString('pt-BR');
 
       const list = document.getElementById('lista-zonas');
-      if (list) {
-        list.innerHTML = '';
-        (dados.zonas || []).forEach((zona) => {
-          const row = document.createElement('div');
-          row.className = 'item';
-          row.innerHTML = `<span><span class="dot" style="background:${zona.categoria === 'Alto' ? '#e74c3c' : zona.categoria === 'Médio' ? '#f4a829' : '#27ae60'}"></span>${zona.nome}</span><strong>${Number(zona.indicador || 0).toFixed(2)}</strong>`;
-          list.appendChild(row);
-        });
-      }
+      list.innerHTML = '';
+      (dados.zonas || []).forEach((zona) => {
+        const row = document.createElement('div');
+        row.className = 'item';
+        const cor = zona.categoria === 'Alto' ? '#e74c3c' : zona.categoria === 'Médio' ? '#f4a829' : '#27ae60';
+        row.innerHTML = `<span><span class="dot" style="background:${cor}"></span>${zona.nome}</span><strong>${Number(zona.indicador || 0).toFixed(2)}</strong>`;
+        list.appendChild(row);
+      });
 
+      // Auditoria
       const auditoria = document.getElementById('auditoria-lista');
-      if (auditoria) {
-        const eventos = dados.auditoria || [];
-        auditoria.innerHTML = eventos.length
-          ? eventos.slice(-5).reverse().map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.evento}</strong><br><span style="color:var(--mut)">${item.timestamp}</span>${item.detalhes && Object.keys(item.detalhes).length ? `<br>${JSON.stringify(item.detalhes)}` : ''}</div>`).join('')
-          : '<span style="color:var(--mut)">Nenhum evento registrado ainda.</span>';
-      }
+      const eventos = dados.auditoria || [];
+      auditoria.innerHTML = eventos.length
+        ? eventos.slice(-5).reverse().map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.evento}</strong><br><span style="color:var(--mut)">${item.timestamp}</span></div>`).join('')
+        : '<span style="color:var(--mut)">Nenhum evento registrado ainda.</span>';
 
+      // Snapshots
       const snapshots = document.getElementById('snapshots-lista');
-      if (snapshots) {
-        const lista = dados.snapshots || [];
-        snapshots.innerHTML = lista.length
-          ? lista.slice(-5).reverse().map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.timestamp}</strong><br><span style="color:var(--mut)">${item.total_registros} registros</span>${item.indicadores && Object.keys(item.indicadores).length ? `<br>média ${item.indicadores.media?.toFixed(2) ?? '—'} · max ${item.indicadores.max?.toFixed(2) ?? '—'}` : ''}</div>`).join('')
-          : '<span style="color:var(--mut)">Nenhum snapshot ainda.</span>';
-      }
+      const lista = dados.snapshots || [];
+      snapshots.innerHTML = lista.length
+        ? lista.slice(-5).reverse().map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.timestamp}</strong><br><span style="color:var(--mut)">${item.total_registros} registros</span></div>`).join('')
+        : '<span style="color:var(--mut)">Nenhum snapshot ainda.</span>';
 
+      // Comparação
       const comparacao = document.getElementById('comparacao-lista');
-      if (comparacao) {
-        const diff = dados.comparacao || {};
-        if (diff.erro) {
-          comparacao.innerHTML = `<span style="color:var(--mut)">${diff.erro}</span>`;
-        } else if (diff.snapshot_a && diff.snapshot_b) {
-          comparacao.innerHTML = `
-            <div style="margin-bottom:8px;"><strong>${diff.snapshot_a}</strong> → <strong>${diff.snapshot_b}</strong></div>
-            <div>Registros A: ${diff.total_a}</div>
-            <div>Registros B: ${diff.total_b}</div>
-            <div>Alterados: ${diff.alterados}</div>
-          `;
-        } else {
-          comparacao.innerHTML = '<span style="color:var(--mut)">Ainda não há comparação suficiente para exibir.</span>';
-        }
+      const diff = dados.comparacao || {};
+      if (diff.erro) {
+        comparacao.innerHTML = `<span style="color:var(--mut)">${diff.erro}</span>`;
+      } else if (diff.snapshot_a && diff.snapshot_b) {
+        comparacao.innerHTML = `
+          <div><strong>${diff.snapshot_a}</strong> → <strong>${diff.snapshot_b}</strong></div>
+          <div>Registros A: ${diff.total_a}</div>
+          <div>Registros B: ${diff.total_b}</div>
+          <div>Alterados: ${diff.alterados}</div>
+        `;
+      } else {
+        comparacao.innerHTML = '<span style="color:var(--mut)">Ainda não há comparação suficiente para exibir.</span>';
       }
 
+      // Integridade
       const integridade = document.getElementById('integridade-lista');
-      if (integridade) {
-        const checks = dados.integridade || [];
-        integridade.innerHTML = checks.length
-          ? checks.map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.timestamp}</strong><br><span style="color:${item.integridade === 'ok' ? 'var(--grn)' : 'var(--red)'}">${item.integridade === 'ok' ? 'Integridade OK' : 'Integridade comprometida'}</span></div>`).join('')
-          : '<span style="color:var(--mut)">Nenhuma verificação disponível.</span>';
-      }
+      const checks = dados.integridade || [];
+      integridade.innerHTML = checks.length
+        ? checks.map((item) => `<div style="margin-bottom:8px;"><strong>${item.timestamp}</strong><br><span style="color:${item.integridade === 'ok' ? 'var(--grn)' : 'var(--red)'}">${item.integridade === 'ok' ? '✅ Integridade OK' : '❌ Integridade comprometida'}</span></div>`).join('')
+        : '<span style="color:var(--mut)">Nenhuma verificação disponível.</span>';
 
+      // Contexto
       const contexto = document.getElementById('contexto-lista');
-      if (contexto) {
-        const relacoes = dados.contexto || [];
-        contexto.innerHTML = relacoes.length
-          ? relacoes.map((item) => `<div style="margin-bottom:8px; padding-bottom:6px; border-bottom:1px solid rgba(255,255,255,0.08)"><strong>${item.origem}</strong> → <strong>${item.destino}</strong><br><span style="color:var(--mut)">${item.tipo}</span></div>`).join('')
-          : '<span style="color:var(--mut)">Nenhum relacionamento registrado ainda.</span>';
-      }
+      const relacoes = dados.contexto || [];
+      contexto.innerHTML = relacoes.length
+        ? relacoes.map((item) => `<div style="margin-bottom:8px;"><strong>${item.origem}</strong> → <strong>${item.destino}</strong><br><span style="color:var(--mut)">${item.tipo}</span></div>`).join('')
+        : '<span style="color:var(--mut)">Nenhum relacionamento registrado ainda.</span>';
 
-      popularSelectSnapshots(dados);
+      // Popular select de snapshots (vazio)
+      const select = document.getElementById('select-snapshot');
+      select.innerHTML = '<option value="">Nenhum snapshot disponível</option>';
     }
 
+    // ============================================================
+    // MAPA
+    // ============================================================
     function initMap() {
       if (map) return;
       map = L.map('map-wrap').setView([-8.0, -50.0], 6);
@@ -264,13 +286,34 @@
       }).addTo(map);
     }
 
+    function carregarGeojson() {
+      // Usa o GeoJSON de exemplo
+      if (geoLayer) map.removeLayer(geoLayer);
+      geoLayer = L.geoJSON(GEOJSON_EXEMPLO, {
+        pointToLayer: (feature, latlng) => {
+          const categoria = feature.properties.categoria || 'Médio';
+          const cor = categoria === 'Alto' ? '#E74C3C' : categoria === 'Médio' ? '#F4A829' : '#27AE60';
+          return L.circleMarker(latlng, {
+            radius: 8,
+            fillColor: cor,
+            color: '#ffffff',
+            weight: 1,
+            opacity: 1,
+            fillOpacity: 0.9
+          }).bindPopup(`<b>${feature.properties.nome || 'Ponto'}</b><br>Indicador: ${feature.properties.indicador_ajustado || '—'}`);
+        }
+      }).addTo(map);
+      camadaPontos = geoLayer;
+      filtrarMapa('todos');
+    }
+
     function filtrarMapa(categoria) {
       filtroAtual = categoria;
       document.querySelectorAll('.filtro-btn').forEach((btn) => btn.classList.remove('active'));
-      const btnSelecionado = Array.from(document.querySelectorAll('.filtro-btn')).find((btn) => btn.textContent.toLowerCase() === categoria.toLowerCase() || (categoria === 'todos' && btn.textContent === 'Todos'));
-      if (btnSelecionado) {
-        btnSelecionado.classList.add('active');
-      }
+      const btnMap = { 'todos': 'Todos', 'Alto': 'Alto', 'Médio': 'Médio', 'Baixo': 'Baixo' };
+      const btn = Array.from(document.querySelectorAll('.filtro-btn')).find(b => b.textContent === btnMap[categoria]);
+      if (btn) btn.classList.add('active');
+
       if (!camadaPontos) return;
       camadaPontos.eachLayer((layer) => {
         const cat = layer.feature?.properties?.categoria;
@@ -279,61 +322,16 @@
       });
     }
 
-    function popularSelectSnapshots(dados) {
-      const select = document.getElementById('select-snapshot');
-      if (!select) return;
-      select.innerHTML = '';
-      (dados.snapshots || []).forEach((item) => {
-        const option = document.createElement('option');
-        option.value = item.timestamp;
-        option.textContent = item.timestamp;
-        select.appendChild(option);
-      });
-    }
-
+    // ============================================================
+    // RESTAURAÇÃO (simulada, sem servidor)
+    // ============================================================
     async function restaurarSnapshotSelecionado() {
-      const select = document.getElementById('select-snapshot');
-      if (!select || !select.value) return;
-      const response = await fetch(`http://127.0.0.1:8001/api/restore?timestamp=${encodeURIComponent(select.value)}`);
-      if (response.ok) {
-        alert(`Snapshot ${select.value} restaurado com sucesso.`);
-        carregarDados();
-        carregarGeojson();
-      } else {
-        alert('Não foi possível restaurar o snapshot.');
-      }
+      alert('Função de restauração disponível apenas com servidor local.\nUse o pipeline Python para dados reais.');
     }
 
-    function carregarGeojson() {
-      fetch('data/output/radar_geojson.geojson')
-        .then((response) => response.json())
-        .then((data) => {
-          if (geoLayer) {
-            map.removeLayer(geoLayer);
-          }
-          geoLayer = L.geoJSON(data, {
-            pointToLayer: (feature, latlng) => {
-              const categoria = feature.properties.categoria || 'Médio';
-              const cor = categoria === 'Alto' ? '#E74C3C' : categoria === 'Médio' ? '#F4A829' : '#27AE60';
-              const marker = L.circleMarker(latlng, {
-                radius: 8,
-                fillColor: cor,
-                color: '#ffffff',
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.9
-              }).bindPopup(`<b>${feature.properties.nome || 'Ponto'}</b><br>Indicador: ${feature.properties.indicador_ajustado || '—'}`);
-              return marker;
-            }
-          }).addTo(map);
-          camadaPontos = geoLayer;
-          filtrarMapa(filtroAtual);
-        })
-        .catch(() => {
-          console.log('⚠️ GeoJSON ainda não disponível.');
-        });
-    }
-
+    // ============================================================
+    // INICIALIZAÇÃO
+    // ============================================================
     window.addEventListener('load', () => {
       initMap();
       carregarDados();
