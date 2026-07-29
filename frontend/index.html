@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OPERA Territorial — Radar de Redenção</title>
+  <meta name="description" content="Dashboard territorial com polígonos, KPIs dinâmicos, auditoria APMO e hash chain. Baseado na Teoria da Persistência da Coordenação.">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <!-- NAV -->
+  <nav class="nav-bar">
+    <div class="logo">
+      <span class="logo-text">OPERA</span><span class="logo-sub">.Territorial</span>
+    </div>
+    <div class="nav-links">
+      <a href="#mapa" class="nav-link">Mapa</a>
+      <a href="#kpis" class="nav-link">KPIs</a>
+      <a href="#apmo" class="nav-link">APMO</a>
+      <a href="#tabela" class="nav-link">Zonas</a>
+    </div>
+    <span class="nav-badge">v2.0</span>
+  </nav>
+
+  <!-- MAIN GRID -->
+  <main class="main-grid">
+
+    <!-- MAPA -->
+    <section id="mapa" class="card map-card">
+      <div class="card-header">
+        <h2>Zonas de Redenção</h2>
+        <span class="card-badge">SVG Interativo</span>
+      </div>
+      <div class="map-container">
+        <svg viewBox="0 0 800 600" id="svgMap">
+          <!-- Zonas de polígono -->
+          <polygon id="poly-zum-1" points="100,100 200,80 300,120 280,220 150,250 80,200" class="zone-polygon" data-zona="ZUM-1" />
+          <polygon id="poly-zeis-1" points="350,90 480,70 520,180 400,220 320,180" class="zone-polygon" data-zona="ZEIS-1" />
+          <polygon id="poly-zcor-1" points="120,300 250,280 280,420 150,450 80,380" class="zone-polygon" data-zona="ZCOR-1" />
+          <polygon id="poly-zup-1" points="400,280 550,260 600,400 480,450 350,380" class="zone-polygon" data-zona="ZUP-1" />
+          <!-- Labels -->
+          <text x="150" y="160" class="zone-label">ZUM-1</text>
+          <text x="400" y="140" class="zone-label">ZEIS-1</text>
+          <text x="150" y="400" class="zone-label">ZCOR-1</text>
+          <text x="450" y="380" class="zone-label">ZUP-1</text>
+        </svg>
+      </div>
+      <div class="map-legend">
+        <span class="legend-item"><span class="legend-color" style="background:#2d6a4f"></span>ZUM (Uso Misto)</span>
+        <span class="legend-item"><span class="legend-color" style="background:#e76f51"></span>ZEIS (Interesse Social)</span>
+        <span class="legend-color" style="background:#457b9d"></span>ZCOR (Corredor)</span>
+        <span class="legend-item"><span class="legend-color" style="background:#9b5de5"></span>ZUP (Industrial)</span>
+      </div>
+    </section>
+
+    <!-- PAINEL DIREITO -->
+    <aside class="panel-right">
+
+      <!-- KPIs -->
+      <section id="kpis" class="card">
+        <div class="card-header">
+          <h2>Radar Operacional</h2>
+          <span class="card-badge">8 KPIs</span>
+        </div>
+        <div class="kpi-grid" id="kpisContainer"></div>
+      </section>
+
+      <!-- GRÁFICO CANVAS -->
+      <section class="card">
+        <div class="card-header">
+          <h2>ICO por Zona</h2>
+          <span class="card-badge">Canvas Nativo</span>
+        </div>
+        <canvas id="icoChart" width="320" height="200"></canvas>
+      </section>
+
+      <!-- TABELA -->
+      <section id="tabela" class="card">
+        <div class="card-header">
+          <h2>Zonas Detalhadas</h2>
+        </div>
+        <input id="buscaZona" type="text" placeholder="Buscar zona..." class="search-input">
+        <div class="table-container" id="tabelaContainer">
+          <table>
+            <thead>
+              <tr>
+                <th>Zona</th>
+                <th>TO</th>
+                <th>CA</th>
+                <th>ICO</th>
+              </tr>
+            </thead>
+            <tbody id="tabelaBody"></tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- APMO -->
+      <section id="apmo" class="card apmo-card">
+        <div class="card-header">
+          <h2>APMO / Hash Chain</h2>
+          <span class="card-badge">Auditoria</span>
+        </div>
+        <div class="apmo-content">
+          <div class="hash-display">
+            <span class="hash-label">Último hash:</span>
+            <span class="hash-value" id="hashDisplay">Carregando...</span>
+          </div>
+          <div class="hash-display">
+            <span class="hash-label">Snapshot:</span>
+            <span class="hash-value" id="snapshotDisplay">—</span>
+          </div>
+          <div class="hash-display">
+            <span class="hash-label">IPMO Global:</span>
+            <span class="hash-value" id="ipmoDisplay">—</span>
+          </div>
+          <button id="btnAudit" class="btn-secondary">Ver auditoria</button>
+          <button id="btnSnapshots" class="btn-secondary">Listar snapshots</button>
+          <button id="btnIntegrity" class="btn-secondary">Verificar integridade</button>
+        </div>
+      </section>
+
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>OPERA Territorial v2.0 — Pesquisa de campo: 03/09/2026</p>
+    <p class="footer-small">Teoria da Persistência da Coordenação · github.com/HorusHypnotic</p>
+  </footer>
+
+  <script src="js/data.js"></script>
+  <script src="js/chart.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
