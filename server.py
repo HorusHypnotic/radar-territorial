@@ -91,19 +91,14 @@ def get_snapshots():
 
 @app.route('/api/integrity', methods=['GET'])
 def check_integrity():
-    """Verifica a cadeia de hash da tabela zonas."""
+    """Verifica a cadeia de hash usando verify_chain() centralizado."""
     try:
-        result = supabase.table('audit_log').select('curr_hash, prev_hash, new_row, at').eq('table_name', 'zonas').order('at', asc=True).execute()
+        result = supabase.table('audit_log').select('curr_hash, prev_hash, new_row, at, actor_id').order('at', asc=True).execute()
         if not result.data:
             return jsonify({"status": "no_data", "message": "Nenhum registro encontrado"})
-        prev = None
-        for rec in result.data:
-            payload = rec.get('new_row', {})
-            expected = generate_hash(prev, payload, rec['at'])
-            if rec['curr_hash'] != expected:
-                return jsonify({"status": "broken", "failed_at": rec['at'], "expected": expected, "found": rec['curr_hash']})
-            prev = rec['curr_hash']
-        return jsonify({"status": "intact", "last_hash": prev, "total_records": len(result.data)})
+        # Usa a função centralizada verify_chain que bate com o trigger SQL
+        chain_result = verify_chain(result.data)
+        return jsonify(chain_result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

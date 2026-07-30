@@ -257,6 +257,7 @@ CREATE TABLE checklists (
 ALTER TABLE zonas ENABLE ROW LEVEL SECURITY;
 ALTER TABLE obras ENABLE ROW LEVEL SECURITY;
 ALTER TABLE fornecedores ENABLE ROW LEVEL SECURITY;
+-- audit_log: RLS habilitado apenas para service_role (dashboard consulta via service key)
 ALTER TABLE audit_log ENABLE ROW LEVEL SECURITY;
 ALTER TABLE atividades ENABLE ROW LEVEL SECURITY;
 ALTER TABLE ecos ENABLE ROW LEVEL SECURITY;
@@ -265,3 +266,7 @@ ALTER TABLE snapshot_operacional ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Leitura pública para zonas" ON zonas FOR SELECT USING (true);
 CREATE POLICY "Leitura pública para obras" ON obras FOR SELECT USING (true);
 CREATE POLICY "Leitura pública para fornecedores" ON fornecedores FOR SELECT USING (true);
+CREATE POLICY "Leitura pública para atividades" ON atividades FOR SELECT USING (true);
+CREATE POLICY "Leitura pública para ecos" ON ecos FOR SELECT USING (true);
+CREATE POLICY "Leitura pública para snapshots" ON snapshot_operacional FOR SELECT USING (true);
+CREATE POLICY "Service role full access audit" ON audit_log FOR ALL USING (auth.jwt() ->> 'role' = 'service_role');
