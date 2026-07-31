@@ -20,4 +20,10 @@ Antes do merge, execute `python scripts/validate_deploy.py`. O comando monta `_s
 
 Depois do deploy, execute `python scripts/validate_production.py`. O comando consulta o endereço público e falha se um asset essencial, marcador da interface ou GeoJSON válido não estiver disponível. Use `--json` para obter uma saída adequada a automações.
 
+## Conexão Supabase
+
+Copie `.env.example` para `.env.local`, preencha as credenciais reais e execute `python scripts/check_supabase.py`. O verificador faz somente uma consulta de leitura e nunca imprime a chave. Arquivos `.env.local`, `.env.codex` e `.env.production` são ignorados pelo Git.
+
+As migrations devem ser aplicadas, em ordem, pelo SQL Editor do Supabase ou por uma conexão PostgreSQL administrativa controlada. O projeto não cria uma função RPC genérica `exec_sql`, pois isso ampliaria desnecessariamente a superfície privilegiada. Antes de aplicar `005_entidades_apmo.sql`, confirme os pré-requisitos descritos no próprio arquivo.
+
 O utilitário `scripts/extract_polygons.py` aceita SVG/HTML com elementos `polygon`. Por segurança cartográfica, o CRS padrão é `LOCAL:SVG`; um EPSG só pode ser informado junto de uma transformação explícita. Pixels de um desenho nunca são tratados como coordenadas UTM automaticamente.

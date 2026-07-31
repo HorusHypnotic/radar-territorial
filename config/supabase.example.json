@@ -1,0 +1,19 @@
+{
+  "project": {
+    "name": "OPERA Territorial",
+    "region": "sa-east-1"
+  },
+  "database": {
+    "schema": "public",
+    "migrations": [
+      "001_audit_log.sql",
+      "002_audit_trigger.sql",
+      "003_versioning.sql",
+      "004_snapshot_eov.sql",
+      "005_entidades_apmo.sql"
+    ]
+  },
+  "storage": {
+    "buckets": ["evidencias", "documentos"]
+  }
+}
