@@ -50,7 +50,7 @@ O pipeline extrai do Supabase, transforma indicadores, grava staging em Parquet,
 
 ## Deploy
 
-O workflow de GitHub Pages publica o site a cada push em `master` ou `main`. Consulte [`docs/DEPLOY.md`](docs/DEPLOY.md).
+O workflow de GitHub Pages publica o site a cada push em `master` ou `main`. Consulte [`docs/DEPLOY.md`](docs/DEPLOY.md) e o [`estado de produção`](docs/STATUS_PRODUCAO.md), que separa recursos publicados de dependências ainda não ativadas.
 
 ## Roadmap
 
