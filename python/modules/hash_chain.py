@@ -98,6 +98,11 @@ class HashChain:
                 digest.update(chunk)
         return digest.hexdigest()
 
+    @staticmethod
+    def hash_file_content(content: bytes) -> str:
+        """Calcula SHA-256 de conteúdo já carregado em memória."""
+        return hashlib.sha256(content).hexdigest()
+
     def hash_evidence(self, content: bytes, metadata: Mapping[str, Any]) -> str:
         """Vincula o hash do arquivo aos metadados canônicos da evidência."""
         data = {"content_sha256": hashlib.sha256(content).hexdigest()}

@@ -16,3 +16,10 @@
 - Concorrência otimista por `expected_version` e vínculo opcional a `import_jobs`.
 - Hash chain Python determinística para arquivos e evidências.
 - Job de backend para geração diária de EOV sem chamada HTTP privilegiada.
+- Migration 005 com nove entidades operacionais APMO, índices, RLS e auditoria.
+- Modelos validados de atividade, ICO, evidência e ECO.
+- APIs de atividades, ICO, ECOs e evidências com retificação versionada.
+- Tema escuro aprimorado, conformidade visual e fallback de dados embutido.
+- Mapa híbrido: Leaflet em telas amplas e SVG com pan/zoom em dispositivos móveis.
+- Cache offline versionado e validação automatizada do artefato público.
+- Extrator SVG seguro, sem atribuição fictícia de CRS geográfico.

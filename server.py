@@ -3,6 +3,8 @@
 from __future__ import annotations
 
 import hashlib
+import base64
+import binascii
 import json
 import mimetypes
 import os
@@ -23,6 +25,8 @@ STAGING_DIR = BASE_DIR / "data" / "staging"
 SNAPSHOTS_DIR = BASE_DIR / "data" / "snapshots"
 SERVER_VERSION = "2.1.0"
 MAX_IMPORT_BYTES = 5 * 1024 * 1024
+MAX_EVIDENCE_BYTES = 10 * 1024 * 1024
+EVIDENCE_DIR = BASE_DIR / "data" / "evidencias"
 SAFE_TIMESTAMP = re.compile(r"^[0-9]{8}_[0-9]{6}$")
 mimetypes.add_type("application/geo+json", ".geojson")
 MUTABLE_ENTITIES = {"zonas", "obras", "fornecedores", "atividades", "cronograma", "materiais", "equipes", "ocorrencias", "ecos"}
@@ -177,6 +181,59 @@ class Handler(BaseHTTPRequestHandler):
             self.send_file(file_routes[parsed.path])
         elif parsed.path == "/api/kpis":
             self.send_json(calculate_kpis(data))
+        elif parsed.path.startswith("/api/obras/") and parsed.path.endswith("/atividades"):
+            try:
+                obra_id = valid_uuid(unquote(parsed.path.split("/")[3]), "obra_id")
+                query = create_supabase_client().table("atividades").select("*").eq("obra_id", obra_id).is_("deleted_at", "null")
+                status = params.get("status", [""])[0]
+                if status:
+                    if status not in {"planejada", "em_andamento", "concluida", "paralisada"}:
+                        raise ValueError("status de atividade inválido")
+                    query = query.eq("status", status)
+                response = query.order("prioridade", desc=True).execute()
+                self.send_json({"atividades": response.data or [], "total": len(response.data or [])})
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                self.send_json({"error": "falha ao consultar atividades"}, 502)
+        elif parsed.path.startswith("/api/obras/") and parsed.path.endswith("/ico"):
+            try:
+                obra_id = valid_uuid(unquote(parsed.path.split("/")[3]), "obra_id")
+                query = create_supabase_client().table("ico_registros").select("*").eq("obra_id", obra_id).order("data_referencia", desc=True)
+                start_date, end_date = params.get("start_date", [""])[0], params.get("end_date", [""])[0]
+                if start_date:
+                    date.fromisoformat(start_date)
+                    query = query.gte("data_referencia", start_date)
+                if end_date:
+                    date.fromisoformat(end_date)
+                    query = query.lte("data_referencia", end_date)
+                response = query.limit(100).execute()
+                self.send_json({"registros": response.data or [], "total": len(response.data or [])})
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                self.send_json({"error": "falha ao consultar ICO"}, 502)
+        elif parsed.path.startswith("/api/obras/") and parsed.path.endswith("/ecos"):
+            try:
+                obra_id = valid_uuid(unquote(parsed.path.split("/")[3]), "obra_id")
+                query = create_supabase_client().table("ecos").select("*").eq("obra_id", obra_id)
+                status = params.get("status", [""])[0]
+                if status:
+                    if status not in {"pendente", "aprovado", "rejeitado", "cancelado"}:
+                        raise ValueError("status de ECO inválido")
+                    query = query.eq("status", status)
+                response = query.order("criado_at", desc=True).execute()
+                self.send_json({"ecos": response.data or [], "total": len(response.data or [])})
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                self.send_json({"error": "falha ao consultar ECOs"}, 502)
         elif parsed.path == "/api/zonas":
             self.send_json({"zonas": data["zonas"], "total": len(data["zonas"])})
         elif parsed.path.startswith("/api/zonas/"):
@@ -236,10 +293,10 @@ class Handler(BaseHTTPRequestHandler):
         else:
             self.send_error(404)
 
-    def read_json_body(self) -> Any:
+    def read_json_body(self, max_bytes: int = MAX_IMPORT_BYTES) -> Any:
         length = int(self.headers.get("Content-Length", "0"))
-        if length <= 0 or length > MAX_IMPORT_BYTES:
-            raise ValueError("corpo vazio ou acima do limite de 5 MB")
+        if length <= 0 or length > max_bytes:
+            raise ValueError(f"corpo vazio ou acima do limite de {max_bytes // (1024 * 1024)} MB")
         return json.loads(self.rfile.read(length).decode("utf-8"))
 
     def do_POST(self) -> None:  # noqa: N802
@@ -275,6 +332,110 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json({"success": True, "message": f"{len(records)} registros recebidos", "import_id": timestamp, "sha256": digest}, 201)
             except (ValueError, json.JSONDecodeError, UnicodeDecodeError) as exc:
                 self.send_json({"success": False, "error": str(exc)}, 400)
+            return
+        if parsed.path.startswith("/api/obras/") and parsed.path.endswith("/atividades"):
+            try:
+                from python.models.apmo_entities import Atividade
+
+                obra_id = valid_uuid(unquote(parsed.path.split("/")[3]), "obra_id")
+                payload = self.read_json_body()
+                if not isinstance(payload, dict):
+                    raise ValueError("atividade deve ser um objeto")
+                payload = {**payload, "obra_id": obra_id}
+                payload.pop("id", None)
+                for field in ("inicio_previsto", "fim_previsto", "inicio_real", "fim_real"):
+                    if payload.get(field):
+                        payload[field] = date.fromisoformat(str(payload[field]))
+                record = Atividade(**payload).to_dict()
+                response = create_supabase_client().table("atividades").insert(record).execute()
+                self.send_json({"atividade": (response.data or [None])[0]}, 201)
+            except (ValueError, TypeError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                self.send_json({"error": "falha ao criar atividade"}, 502)
+            return
+        if parsed.path.startswith("/api/obras/") and parsed.path.endswith("/ico"):
+            try:
+                from python.models.apmo_entities import ICORegistro
+
+                obra_id = valid_uuid(unquote(parsed.path.split("/")[3]), "obra_id")
+                payload = self.read_json_body()
+                if not isinstance(payload, dict):
+                    raise ValueError("registro ICO deve ser um objeto")
+                payload = {**payload, "obra_id": obra_id}
+                payload.pop("id", None)
+                payload["data_referencia"] = date.fromisoformat(str(payload.get("data_referencia") or date.today().isoformat()))
+                record = ICORegistro(**payload).to_dict()
+                response = create_supabase_client().table("ico_registros").insert(record).execute()
+                self.send_json({"registro": (response.data or [None])[0]}, 201)
+            except (ValueError, TypeError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                self.send_json({"error": "falha ao registrar ICO"}, 502)
+            return
+        if parsed.path.startswith("/api/obras/") and parsed.path.endswith("/ecos"):
+            try:
+                from python.models.apmo_entities import ECO
+
+                obra_id = valid_uuid(unquote(parsed.path.split("/")[3]), "obra_id")
+                payload = self.read_json_body()
+                if not isinstance(payload, dict):
+                    raise ValueError("ECO deve ser um objeto")
+                payload = {**payload, "obra_id": obra_id}
+                payload.pop("id", None)
+                response = create_supabase_client().table("ecos").insert(ECO(**payload).to_dict()).execute()
+                self.send_json({"eco": (response.data or [None])[0]}, 201)
+            except (ValueError, TypeError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                self.send_json({"error": "falha ao criar ECO"}, 502)
+            return
+        if parsed.path == "/api/evidencias/upload":
+            local_path = None
+            try:
+                from python.models.apmo_entities import Evidencia
+                from python.modules.hash_chain import HashChain
+
+                payload = self.read_json_body(max_bytes=MAX_EVIDENCE_BYTES * 2)
+                if not isinstance(payload, dict):
+                    raise ValueError("evidência deve ser um objeto")
+                obra_id = valid_uuid(payload.get("obra_id"), "obra_id") if payload.get("obra_id") else None
+                atividade_id = valid_uuid(payload.get("atividade_id"), "atividade_id") if payload.get("atividade_id") else None
+                try:
+                    content = base64.b64decode(str(payload.get("content_base64", "")), validate=True)
+                except (binascii.Error, ValueError) as exc:
+                    raise ValueError("content_base64 inválido") from exc
+                if not content or len(content) > MAX_EVIDENCE_BYTES:
+                    raise ValueError("evidência vazia ou acima do limite de 10 MB")
+                filename = re.sub(r"[^a-zA-Z0-9._-]", "_", Path(str(payload.get("filename", "evidencia.bin"))).name)[:120]
+                if not filename:
+                    raise ValueError("filename inválido")
+                owner = obra_id or atividade_id
+                relative_path = Path("evidencias") / str(owner) / f"{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')}_{filename}"
+                local_path = EVIDENCE_DIR / str(owner) / relative_path.name
+                local_path.parent.mkdir(parents=True, exist_ok=True)
+                local_path.write_bytes(content)
+                record = Evidencia(tipo=str(payload.get("tipo", "")), storage_path=relative_path.as_posix(), hash_sha256=HashChain.hash_file_content(content), tamanho_bytes=len(content), mime_type=str(payload.get("mime_type") or "application/octet-stream"), obra_id=obra_id, atividade_id=atividade_id, descricao=payload.get("descricao"), tags=payload.get("tags") or [], gps_lat=payload.get("gps_lat"), gps_lng=payload.get("gps_lng"), device=payload.get("device")).to_dict()
+                response = create_supabase_client().table("evidencias").insert(record).execute()
+                self.send_json({"success": True, "evidencia": (response.data or [None])[0], "hash_sha256": record["hash_sha256"]}, 201)
+            except (ValueError, TypeError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+                if local_path and local_path.is_file():
+                    local_path.unlink()
+                self.send_json({"error": str(exc)}, 400)
+            except RuntimeError as exc:
+                if local_path and local_path.is_file():
+                    local_path.unlink()
+                self.send_json({"error": str(exc)}, 503)
+            except Exception:
+                if local_path and local_path.is_file():
+                    local_path.unlink()
+                self.send_json({"error": "falha ao armazenar evidência"}, 502)
             return
         if parsed.path.startswith("/api/retify/"):
             parts = [unquote(part) for part in parsed.path.removeprefix("/api/retify/").split("/")]
@@ -347,6 +508,34 @@ class Handler(BaseHTTPRequestHandler):
                 self.send_json({"error": "falha ao restaurar snapshot no banco"}, 502)
             return
         self.send_error(404)
+
+    def do_PUT(self) -> None:  # noqa: N802
+        parsed = urlparse(self.path)
+        if not parsed.path.startswith("/api/atividades/"):
+            self.send_error(404)
+            return
+        try:
+            atividade_id = valid_uuid(unquote(parsed.path.removeprefix("/api/atividades/")), "atividade_id")
+            payload = self.read_json_body()
+            updates = payload.get("updates") if isinstance(payload, dict) else None
+            reason = str(payload.get("reason", "")).strip() if isinstance(payload, dict) else ""
+            expected_version = payload.get("expected_version") if isinstance(payload, dict) else None
+            edited_by = payload.get("edited_by") if isinstance(payload, dict) else None
+            if not isinstance(updates, dict) or not updates:
+                raise ValueError("updates deve ser um objeto não vazio")
+            if len(reason) < 20:
+                raise ValueError("motivo deve ter pelo menos 20 caracteres")
+            if not isinstance(expected_version, int) or isinstance(expected_version, bool) or expected_version < 1:
+                raise ValueError("expected_version deve ser um inteiro positivo")
+            edited_by = valid_uuid(edited_by, "edited_by") if edited_by else None
+            version_id = rpc_data(create_supabase_client(), "retify_entity", {"p_entity_type": "atividades", "p_entity_id": atividade_id, "p_updates": updates, "p_reason": reason, "p_edited_by": edited_by, "p_expected_version": expected_version})
+            self.send_json({"success": True, "version_id": version_id})
+        except (ValueError, json.JSONDecodeError, UnicodeDecodeError) as exc:
+            self.send_json({"error": str(exc)}, 400)
+        except RuntimeError as exc:
+            self.send_json({"error": str(exc)}, 503)
+        except Exception:
+            self.send_json({"error": "falha ao retificar atividade"}, 502)
 
     def log_message(self, format: str, *args: Any) -> None:
         return
