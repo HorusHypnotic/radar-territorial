@@ -24,6 +24,8 @@ Depois do deploy, execute `python scripts/validate_production.py`. O comando con
 
 Copie `.env.example` para `.env.local`, preencha as credenciais reais e execute `python scripts/check_supabase.py`. O verificador faz somente uma consulta de leitura e nunca imprime a chave. Arquivos `.env.local`, `.env.codex` e `.env.production` são ignorados pelo Git.
 
-As migrations devem ser aplicadas, em ordem, pelo SQL Editor do Supabase ou por uma conexão PostgreSQL administrativa controlada. O projeto não cria uma função RPC genérica `exec_sql`, pois isso ampliaria desnecessariamente a superfície privilegiada. Antes de aplicar `005_entidades_apmo.sql`, confirme os pré-requisitos descritos no próprio arquivo.
+As migrations devem ser aplicadas, em ordem, pelo SQL Editor do Supabase ou por uma conexão PostgreSQL administrativa controlada. O projeto não cria uma função RPC genérica `exec_sql`, pois isso ampliaria desnecessariamente a superfície privilegiada. A migration `000_core_schema.sql` cria os pré-requisitos; as migrations `001`–`005` adicionam auditoria, versionamento, snapshots e APMO.
+
+Para gerar um único arquivo pronto para o SQL Editor, execute `python scripts/build_migration_bundle.py --output opera_full_migration.sql`. Revise o arquivo gerado e execute-o no projeto correto. Todo o lote roda em uma transação: um erro provoca rollback, evitando schema parcialmente aplicado.
 
 O utilitário `scripts/extract_polygons.py` aceita SVG/HTML com elementos `polygon`. Por segurança cartográfica, o CRS padrão é `LOCAL:SVG`; um EPSG só pode ser informado junto de uma transformação explícita. Pixels de um desenho nunca são tratados como coordenadas UTM automaticamente.
