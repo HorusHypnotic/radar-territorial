@@ -3,6 +3,10 @@ __pycache__/
 *.log
 .env
 .venv/
+_site/
 logs/
-data/raw/*.csv
+data/raw/**
+!data/raw/.gitkeep
 !data/raw/sample_data.csv
+data/staging/**
+!data/staging/.gitkeep

@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Obra","type":"object","required":["id","nome"],"properties":{"id":{"type":"string","format":"uuid"},"nome":{"type":"string","minLength":1},"status":{"type":"string"},"version":{"type":"integer","minimum":1}}}

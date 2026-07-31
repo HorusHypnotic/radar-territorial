@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="OPERA Territorial — inteligência territorial, obras e memória operacional.">
+  <title>OPERA Territorial</title>
+  <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div id="app">
+    <header class="app-header">
+      <button id="sidebar-toggle" class="icon-button" aria-label="Alternar menu" aria-expanded="true">☰</button>
+      <div class="brand"><span class="brand-mark">OT</span><div><strong>OPERA Territorial</strong><small>Radar · Control · Atlas</small></div></div>
+      <span id="connection-status" class="status">Verificando API…</span>
+    </header>
+    <main>
+      <aside id="sidebar" class="sidebar">
+        <section class="panel"><h2>Indicadores</h2><div id="kpi-container" class="kpi-grid" aria-live="polite"></div><div id="ico-container"></div></section>
+        <section class="panel"><h2>Mapa e camadas</h2><input id="zone-search" type="search" placeholder="Buscar zona…" aria-label="Buscar zona"><div id="zone-filters" class="chips"></div><label><input id="layer-zonas" type="checkbox" checked> Zoneamento</label><label><input id="layer-pontos" type="checkbox" checked> Pontos operacionais</label></section>
+        <section id="card-zona" class="panel"><h2>Zona selecionada</h2><div id="zone-card" class="empty-state">Selecione uma zona no mapa.</div></section>
+      </aside>
+      <section class="workspace">
+        <nav class="tabs" aria-label="Visões"><button class="tab active" data-view="territorio">Território</button><button class="tab" data-view="dados">Dados</button><button class="tab" data-view="importar">Importar</button><button class="tab" data-view="memoria">Memória</button></nav>
+        <section id="view-territorio" class="view active">
+          <div class="map-shell"><div id="map" role="application" aria-label="Mapa territorial"></div><div class="map-actions"><button id="zoom-in" aria-label="Aproximar">+</button><button id="zoom-out" aria-label="Afastar">−</button></div><span id="map-coordinates" class="coordinates">—</span></div>
+          <div class="charts-grid"><article class="panel"><h2>Zonas por tipo</h2><canvas id="chart-zonas" width="420" height="190"></canvas></article><article class="panel"><h2>Obras por status</h2><canvas id="chart-obras" width="420" height="190"></canvas></article><article class="panel"><h2>Demandas</h2><canvas id="chart-demandas" width="420" height="190"></canvas></article><article class="panel"><h2>Fornecedores</h2><canvas id="chart-fornecedores" width="420" height="190"></canvas></article></div>
+        </section>
+        <section id="view-dados" class="view"><article class="panel"><div class="panel-title"><h2>Dados territoriais</h2><div class="table-tools"><input id="table-search" type="search" placeholder="Buscar…"><select id="table-zone"><option value="">Todas as zonas</option></select><button id="export-csv">Exportar CSV</button></div></div><div id="data-table"></div><div id="table-pagination" class="pagination"></div></article></section>
+        <section id="view-importar" class="view"><article class="panel"><h2>Importar CSV</h2><div id="upload-dropzone" tabindex="0" role="button"><input id="upload-input" type="file" accept=".csv,text/csv" hidden><strong>Arraste um CSV ou clique para selecionar</strong><span>UTF-8 ou Latin-1 · vírgula ou ponto e vírgula · até 5 MB</span></div><div id="upload-feedback" aria-live="polite"></div><div id="upload-preview"></div><button id="upload-submit" disabled>Enviar para staging</button></article></section>
+        <section id="view-memoria" class="view"><div class="memory-grid"><article class="panel"><h2>Trilha de auditoria</h2><div id="audit-log"></div></article><article class="panel"><h2>Snapshots</h2><div id="snapshot-list"></div></article><article class="panel"><h2>Integridade</h2><div id="integrity-status"></div></article><article class="panel"><h2>Comparação</h2><div id="snapshot-compare"></div></article></div></section>
+      </section>
+    </main>
+  </div>
+  <script src="vendor/leaflet/leaflet.js"></script>
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>

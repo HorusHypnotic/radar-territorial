@@ -17,6 +17,7 @@ def test_project_structure_exists():
 
 def test_transform_creates_staging_file(tmp_path, monkeypatch):
     monkeypatch.setattr("python.pipeline.STAGING_DIR", tmp_path)
+    monkeypatch.setattr("python.pipeline.registrar_evento", lambda *args, **kwargs: None)
     pipeline = PipelineRadar.__new__(PipelineRadar)
     df = pd.DataFrame(
         [{"id": 1, "nome": "A", "indicador": 1.0, "data_coleta": "2026-01-01", "latitude": -15.0, "longitude": -47.0}]

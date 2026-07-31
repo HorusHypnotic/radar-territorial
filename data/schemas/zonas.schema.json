@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Zona territorial","type":"object","required":["id","sigla","nome"],"properties":{"id":{"type":"string","format":"uuid"},"sigla":{"type":"string","minLength":1},"nome":{"type":"string","minLength":1},"macrozona":{"type":"string"},"version":{"type":"integer","minimum":1}}}

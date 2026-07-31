@@ -1,0 +1,18 @@
+{
+  "metadata": {"status": "demonstrativo", "aviso": "Substituir por dados oficiais antes de uso decisório."},
+  "zonas": [
+    {"id":"demo-zum-centro","sigla":"ZUM","nome":"Zona de Uso Misto — Centro (demonstração)","tipo":"ZUM","categoria":"Médio","EducacaoInfantil":"Prioritário","Saude":"Médio"},
+    {"id":"demo-zeis-norte","sigla":"ZEIS","nome":"ZEIS Norte (demonstração)","tipo":"ZEIS","categoria":"Alto","EducacaoInfantil":"Prioritário","Saude":"Prioritário"},
+    {"id":"demo-zr-sul","sigla":"ZR","nome":"Zona Residencial Sul (demonstração)","tipo":"ZR","categoria":"Baixo","EducacaoInfantil":"Adequado","Saude":"Adequado"},
+    {"id":"demo-zpa-leste","sigla":"ZPA","nome":"Zona de Proteção Ambiental Leste (demonstração)","tipo":"ZPA","categoria":"Alto","EducacaoInfantil":"N/A","Saude":"N/A"}
+  ],
+  "obras": [
+    {"id":"obra-demo-1","nome":"Unidade de Saúde (demonstração)","zona":"ZEIS","status":"andamento","ico":78},
+    {"id":"obra-demo-2","nome":"Praça Central (demonstração)","zona":"ZUM","status":"andamento","ico":88},
+    {"id":"obra-demo-3","nome":"Drenagem Sul (demonstração)","zona":"ZR","status":"planejada","ico":61}
+  ],
+  "fornecedores": [
+    {"id":"forn-demo-1","nome":"Fornecedor A (demonstração)","zona":"ZUM","ativo":true},
+    {"id":"forn-demo-2","nome":"Fornecedor B (demonstração)","zona":"ZEIS","ativo":true}
+  ]
+}
