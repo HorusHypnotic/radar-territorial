@@ -16,3 +16,6 @@
 - Concorrência otimista por `expected_version` e vínculo opcional a `import_jobs`.
 - Hash chain Python determinística para arquivos e evidências.
 - Job de backend para geração diária de EOV sem chamada HTTP privilegiada.
+- Migration 005 com nove entidades operacionais APMO, índices, RLS e auditoria.
+- Modelos validados de atividade, ICO, evidência e ECO.
+- APIs de atividades, ICO, ECOs e evidências com retificação versionada.

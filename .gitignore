@@ -10,3 +10,5 @@ data/raw/**
 !data/raw/sample_data.csv
 data/staging/**
 !data/staging/.gitkeep
+data/evidencias/**
+!data/evidencias/.gitkeep
