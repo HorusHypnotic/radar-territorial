@@ -11,6 +11,7 @@ from scripts.export_qgis_to_opera import (
     require_shapefile_components,
     source_digest,
     validate_bounds,
+    validate_export,
     validate_properties,
     write_documents,
 )
@@ -61,6 +62,17 @@ def test_candidate_and_official_metadata_and_safe_replace(tmp_path):
         write_documents(tmp_path, candidate, dashboard)
     write_documents(tmp_path, official, dashboard, replace=True)
     assert json.loads((tmp_path / "zonas_poligonos.geojson").read_text(encoding="utf-8"))["metadata"]["status"] == "oficial"
+    assert (tmp_path / "import_manifest.json").is_file()
+
+
+def test_export_validator_checks_output_hashes(tmp_path):
+    feature = {"type": "Feature", "properties": {"id": "id-1", "sigla": "Z", "nome": "Zona"}, "geometry": {"type": "Polygon", "coordinates": [[[-50, -8], [-49.9, -8], [-49.9, -7.9], [-50, -8]]]}}
+    geojson, dashboard = build_documents([feature], [], [], {"source_sha256": "a" * 64}, None, None)
+    write_documents(tmp_path, geojson, dashboard)
+    assert validate_export(tmp_path)["valid"] is True
+    (tmp_path / "dashboard_data.json").write_text("{}", encoding="utf-8")
+    with pytest.raises(ValueError):
+        validate_export(tmp_path)
 
 
 def test_real_shapefile_reprojects_polygon_and_multipolygon(tmp_path):

@@ -28,6 +28,14 @@ python scripts/export_qgis_to_opera.py `
 
 O resultado recebe `metadata.status = "candidato"` e não substitui produção. Confira no QGIS, valide atributos e obtenha aceite formal.
 
+Valide o pacote e os hashes gerados:
+
+```powershell
+python scripts/export_qgis_to_opera.py --validate data\candidate
+```
+
+Cada exportação contém `import_manifest.json` com o SHA-256 do GeoJSON e do dashboard, além do digest dos componentes de origem.
+
 ## Publicar após aprovação
 
 ```powershell

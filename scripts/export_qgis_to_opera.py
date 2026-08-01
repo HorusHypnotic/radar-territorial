@@ -151,20 +151,61 @@ def build_documents(features: list[dict[str, Any]], obras: list[dict[str, Any]],
 def write_documents(output: Path, geojson: Mapping[str, Any], dashboard: Mapping[str, Any], replace: bool = False) -> None:
     output.mkdir(parents=True, exist_ok=True)
     targets = {"zonas_poligonos.geojson": geojson, "dashboard_data.json": dashboard}
-    existing = [name for name in targets if (output / name).exists()]
+    output_names = (*targets, "import_manifest.json")
+    existing = [name for name in output_names if (output / name).exists()]
     if existing and not replace: raise FileExistsError(f"saída já existe ({', '.join(existing)}); revise e use --replace conscientemente")
     with tempfile.TemporaryDirectory(prefix="opera-export-", dir=output.parent) as temp_name:
         temporary = Path(temp_name)
         for name, document in targets.items(): (temporary / name).write_text(json.dumps(document, ensure_ascii=False, indent=2), encoding="utf-8")
-        for name in targets: os.replace(temporary / name, output / name)
+        manifest = {
+            "schema": "opera-qgis-import/1.0",
+            "status": geojson.get("metadata", {}).get("status"),
+            "generated_at": geojson.get("metadata", {}).get("generated_at"),
+            "source_sha256": geojson.get("metadata", {}).get("source_sha256"),
+            "files": {name: hashlib.sha256((temporary / name).read_bytes()).hexdigest() for name in targets},
+        }
+        (temporary / "import_manifest.json").write_text(json.dumps(manifest, ensure_ascii=False, indent=2), encoding="utf-8")
+        for name in output_names: os.replace(temporary / name, output / name)
+
+
+def validate_export(path: Path) -> dict[str, Any]:
+    from shapely.geometry import shape
+
+    directory = path if path.is_dir() else path.parent
+    paths = {name: directory / name for name in ("zonas_poligonos.geojson", "dashboard_data.json", "import_manifest.json")}
+    missing = [name for name, candidate in paths.items() if not candidate.is_file()]
+    if missing: raise ValueError(f"arquivos da exportação ausentes: {', '.join(missing)}")
+    geojson = json.loads(paths["zonas_poligonos.geojson"].read_text(encoding="utf-8"))
+    dashboard = json.loads(paths["dashboard_data.json"].read_text(encoding="utf-8"))
+    manifest = json.loads(paths["import_manifest.json"].read_text(encoding="utf-8"))
+    if geojson.get("type") != "FeatureCollection" or not isinstance(geojson.get("features"), list) or not geojson["features"]: raise ValueError("GeoJSON vazio ou inválido")
+    if not all(isinstance(dashboard.get(key), list) for key in ("zonas", "obras", "fornecedores")): raise ValueError("dashboard não atende ao contrato")
+    metadata = geojson.get("metadata") or {}
+    if metadata.get("crs") != "EPSG:4326": raise ValueError("saída deve declarar EPSG:4326")
+    if metadata.get("status") not in {"candidato", "oficial"}: raise ValueError("status de publicação inválido")
+    if metadata.get("status") == "oficial" and (not metadata.get("authority") or not metadata.get("legal_reference")): raise ValueError("saída oficial sem autoridade/referência legal")
+    if len(str(metadata.get("source_sha256") or "")) != 64: raise ValueError("SHA-256 da origem ausente")
+    ids = set()
+    for position, feature in enumerate(geojson["features"], start=1):
+        properties = feature.get("properties") or {}; validate_properties(properties, position)
+        if not properties.get("id") or properties["id"] in ids: raise ValueError(f"registro {position}: id ausente ou duplicado")
+        ids.add(properties["id"])
+        geometry = shape(feature.get("geometry"));
+        if geometry.geom_type not in {"Polygon", "MultiPolygon"} or geometry.is_empty or not geometry.is_valid: raise ValueError(f"registro {position}: geometria inválida")
+    if len(dashboard["zonas"]) != len(geojson["features"]): raise ValueError("quantidade de zonas diverge entre GeoJSON e dashboard")
+    for name in ("zonas_poligonos.geojson", "dashboard_data.json"):
+        actual = hashlib.sha256(paths[name].read_bytes()).hexdigest()
+        if manifest.get("files", {}).get(name) != actual: raise ValueError(f"hash de saída divergente: {name}")
+    return {"valid": True, "status": metadata["status"], "zonas": len(geojson["features"]), "obras": len(dashboard["obras"]), "fornecedores": len(dashboard["fornecedores"]), "source_sha256": metadata["source_sha256"]}
 
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--shapefile", required=True, type=Path)
-    parser.add_argument("--field-map", type=Path, help="JSON campo_do_shapefile -> campo_OPERA")
-    parser.add_argument("--obras", type=Path, help="CSV/XLSX opcional")
-    parser.add_argument("--fornecedores", type=Path, help="CSV/XLSX opcional")
+    parser.add_argument("--shapefile", type=Path)
+    parser.add_argument("--validate", type=Path, help="valida um diretório exportado e não converte dados")
+    parser.add_argument("--field-map", "--map", dest="field_map", type=Path, help="JSON campo_do_shapefile -> campo_OPERA")
+    parser.add_argument("--obras", "--planilha-obras", dest="obras", type=Path, help="CSV/XLSX opcional")
+    parser.add_argument("--fornecedores", "--planilha-fornecedores", dest="fornecedores", type=Path, help="CSV/XLSX opcional")
     parser.add_argument("--output", type=Path, default=Path("data/candidate"))
     parser.add_argument("--simplify-meters", type=float, default=0)
     parser.add_argument("--expected-bounds", type=float, nargs=4, metavar=("WEST", "SOUTH", "EAST", "NORTH"))
@@ -172,7 +213,11 @@ def main() -> int:
     parser.add_argument("--legal-reference", help="lei/decreto/processo de origem")
     parser.add_argument("--replace", action="store_true")
     parser.add_argument("--publish", action="store_true", help="exige autoridade, referência legal e saída data/output")
+    parser.add_argument("--verbose", action="store_true", help="reservado para compatibilidade; erros continuam explícitos")
     args = parser.parse_args()
+    if args.validate:
+        print(json.dumps(validate_export(args.validate), ensure_ascii=False)); return 0
+    if not args.shapefile: parser.error("--shapefile é obrigatório fora do modo --validate")
     if bool(args.authority) != bool(args.legal_reference): raise ValueError("--authority e --legal-reference devem ser informados juntos")
     if args.publish:
         if not args.authority or not args.legal_reference: raise ValueError("--publish exige autoridade e referência legal")
