@@ -79,7 +79,18 @@ def test_frontend_files_and_geojson(api):
 def test_executive_header_and_demo_disclosure_are_present():
     html = (Path(__file__).resolve().parents[1] / "frontend" / "index.html").read_text(encoding="utf-8")
     assert all(marker in html for marker in ("header-zonas", "header-obras", "header-fornecedores"))
+    assert all(marker in html for marker in ("executive-zonas", "executive-obras", "executive-conformidade", "executive-atualizacao"))
     assert "Dados demonstrativos" in html
+
+
+def test_visual_dashboard_uses_data_and_respects_reduced_motion():
+    frontend = Path(__file__).resolve().parents[1] / "frontend"
+    main = (frontend / "js" / "main.js").read_text(encoding="utf-8")
+    theme = (frontend / "css" / "theme-dark.css").read_text(encoding="utf-8")
+    table = (frontend / "js" / "tabela.js").read_text(encoding="utf-8")
+    assert "conformityValues" in main and "updatedAt" in main
+    assert "prefers-reduced-motion" in theme and ".executive-dashboard" in theme
+    assert "status-badge" in table
 
 
 def test_static_fallback_validates_contracts_and_sorts_snapshots():

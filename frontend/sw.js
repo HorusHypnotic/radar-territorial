@@ -1,4 +1,4 @@
-const CACHE_NAME = "opera-territorial-v4";
+const CACHE_NAME = "opera-territorial-v5";
 const CORE = ["./", "./index.html", "./manifest.webmanifest", "./icons/icon-192.png", "./icons/icon-512.png", "./css/main.css", "./css/theme-dark.css", "./js/main.js", "./js/mapa.js", "./js/kpis.js", "./js/graficos.js", "./js/tabela.js", "./js/upload.js", "./js/apmo.js", "./js/data/sample.js", "./vendor/leaflet/leaflet.css", "./vendor/leaflet/leaflet.js", "../data/output/dashboard_data.json", "../data/output/zonas_poligonos.geojson", "../data/output/livro_razao.json"];
 
 self.addEventListener("install", (event) => { event.waitUntil(caches.open(CACHE_NAME).then((cache) => cache.addAll(CORE)).then(() => self.skipWaiting())); });
