@@ -60,6 +60,8 @@ A implementação e os limites criptográficos da Fase 4 estão documentados em 
 
 O estado demonstrativo, os bloqueios e o roteiro executável para dados reais estão em [`docs/PRODUCAO_REAL.md`](docs/PRODUCAO_REAL.md).
 
+A conversão conservadora de shapefile/QGIS para os contratos do site está em [`docs/IMPORTACAO_QGIS.md`](docs/IMPORTACAO_QGIS.md).
+
 ## Licença
 
 Nenhuma licença foi definida ainda. Até sua inclusão, todos os direitos permanecem reservados aos autores.

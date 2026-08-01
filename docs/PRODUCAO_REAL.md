@@ -63,7 +63,7 @@ Não crie manualmente um segundo bucket `evidencias`: a migration `007` já o cr
 
 ## Dados oficiais
 
-O repositório ainda não contém um carregador denominado `load_official_data.py`, nem um arquivo cartográfico oficial autorizado. A entrada de dados reais requer primeiro um contrato de importação, validação geométrica, identificação da fonte legal e aceite do responsável pelo Plano Diretor. Os polígonos atuais não devem orientar decisões urbanísticas.
+O repositório contém `scripts/export_qgis_to_opera.py` para gerar candidatos rastreáveis e, após aprovação explícita, os contratos estáticos. Consulte `docs/IMPORTACAO_QGIS.md`. Ainda não existe arquivo cartográfico oficial autorizado no workspace. A entrada de dados reais requer validação geométrica, identificação da fonte legal e aceite do responsável pelo Plano Diretor. Os polígonos atuais não devem orientar decisões urbanísticas.
 
 ## Critério de conclusão
 

@@ -1,0 +1,12 @@
+{
+  "SIGLA": "sigla",
+  "NOME_ZONA": "nome",
+  "TIPO": "tipo",
+  "MACROZONA": "macrozona",
+  "AREA_M2": "area_m2",
+  "TO_MAX": "to_max",
+  "CA_BAS": "ca_basico",
+  "CA_MAX": "ca_maximo",
+  "PERM_MIN": "permeabilidade",
+  "ALT_MAX": "altura_max"
+}
