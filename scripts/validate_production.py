@@ -30,6 +30,7 @@ def inspect_payload(path: str, body: bytes) -> str | None:
         "frontend/js/data/sample.js": ("SAMPLE_DATA",),
         "frontend/js/mapa.js": ("TerritorialMap",),
         "frontend/sw.js": ("CACHE_NAME",),
+        "frontend/manifest.webmanifest": ('"display": "standalone"', '"start_url": "./"'),
     }
     for marker in markers.get(path, ()):
         if marker not in text:
@@ -52,7 +53,11 @@ def validate(base_url: str = DEFAULT_BASE_URL, timeout: float = 15) -> list[Resu
         "frontend/js/data/sample.js",
         "frontend/js/mapa.js",
         "frontend/sw.js",
+        "frontend/manifest.webmanifest",
+        "frontend/icons/icon-192.png",
+        "frontend/icons/icon-512.png",
         "data/output/zonas_poligonos.geojson",
+        "data/output/livro_razao.json",
     )
     results: list[Result] = []
     base_url = base_url.rstrip("/") + "/"

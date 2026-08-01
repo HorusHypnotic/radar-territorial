@@ -1,5 +1,13 @@
 # Changelog
 
+## Fase 4 — Preservação verificável e PWA
+
+- Bucket privado e schema de provas externas para evidências.
+- Verificações de integridade append-only e consolidadas por obra.
+- Livro-razão operacional JSON encadeado por SHA-256.
+- PWA instalável com manifest, ícones e cache offline escopado.
+- Exportação do livro-razão na visão Memória.
+
 ## [Unreleased]
 
 - Estrutura modular inicial do frontend.

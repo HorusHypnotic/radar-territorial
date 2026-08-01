@@ -18,8 +18,9 @@ Validação executada em **31/07/2026** sobre o commit `11859f4` (`Fase 3: entid
 | Mapa territorial | Disponível | Leaflet local em telas maiores e SVG em telas móveis |
 | Entidades APMO | Implementadas no código | CRUD depende do backend Python e do Supabase; não é ativado pelo Pages estático |
 | Exportação CSV | Disponível | Executada no navegador |
+| Livro-razão JSON | Disponível | Cadeia SHA-256 verificável; sem assinatura/timestamp externo enquanto não configurados |
 | Exportação PDF | Não implementada | Item de roadmap |
-| Offline | Parcial | Service worker presente; não há manifesto de aplicação instalável |
+| PWA e offline | Disponível | Manifest, ícones e service worker; cache cobre shell e dados demonstrativos essenciais |
 | Dados oficiais | Pendente | GeoJSON e registros publicados são demonstrativos |
 | Supabase | Pendente de ativação | Credenciais reais e aplicação das migrations `001`–`005` não foram comprovadas |
 

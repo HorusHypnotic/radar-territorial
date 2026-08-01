@@ -14,7 +14,7 @@ from python.modules.build_static_site import BASE_DIR, build
 
 def validate(output: Path = BASE_DIR / "_site") -> list[str]:
     root = build(output)
-    required = ("index.html","frontend/index.html","frontend/sw.js","frontend/js/main.js","frontend/js/data/sample.js","frontend/css/theme-dark.css","frontend/vendor/leaflet/leaflet.js","data/output/dashboard_data.json","data/output/zonas_poligonos.geojson")
+    required = ("index.html","frontend/index.html","frontend/manifest.webmanifest","frontend/icons/icon-192.png","frontend/icons/icon-512.png","frontend/sw.js","frontend/js/main.js","frontend/js/data/sample.js","frontend/css/theme-dark.css","frontend/vendor/leaflet/leaflet.js","data/output/dashboard_data.json","data/output/zonas_poligonos.geojson","data/output/livro_razao.json")
     errors = [f"ausente: {name}" for name in required if not (root / name).is_file()]
     html = (root / "frontend" / "index.html").read_text(encoding="utf-8")
     if re.search(r'<(?:script|link)[^>]+https?://', html, re.IGNORECASE):

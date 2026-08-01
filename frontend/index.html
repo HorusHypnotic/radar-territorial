@@ -4,7 +4,11 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="OPERA Territorial — inteligência territorial, obras e memória operacional.">
+  <meta name="theme-color" content="#09192b">
+  <meta name="apple-mobile-web-app-capable" content="yes">
   <title>OPERA Territorial</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon-192.png" type="image/png">
   <link rel="stylesheet" href="vendor/leaflet/leaflet.css">
   <link rel="stylesheet" href="css/main.css">
   <link rel="stylesheet" href="css/theme-dark.css">
@@ -37,7 +41,7 @@
         </section>
         <section id="view-dados" class="view"><article class="panel"><div class="panel-title"><h2>Dados territoriais</h2><div class="table-tools"><input id="table-search" type="search" placeholder="Buscar…"><select id="table-zone"><option value="">Todas as zonas</option></select><button id="export-csv">Exportar CSV</button></div></div><div id="data-table"></div><div id="table-pagination" class="pagination"></div></article></section>
         <section id="view-importar" class="view"><article class="panel"><h2>Importar CSV</h2><div id="upload-dropzone" tabindex="0" role="button"><input id="upload-input" type="file" accept=".csv,text/csv" hidden><strong>Arraste um CSV ou clique para selecionar</strong><span>UTF-8 ou Latin-1 · vírgula ou ponto e vírgula · até 5 MB</span></div><div id="upload-feedback" aria-live="polite"></div><div id="upload-preview"></div><button id="upload-submit" disabled>Enviar para staging</button></article></section>
-        <section id="view-memoria" class="view"><div class="memory-grid"><article class="panel"><h2>Trilha de auditoria</h2><div id="audit-log"></div></article><article class="panel"><h2>Snapshots</h2><div id="snapshot-list"></div></article><article class="panel"><h2>Integridade</h2><div id="integrity-status"></div></article><article class="panel"><h2>Comparação</h2><div id="snapshot-compare"></div></article></div></section>
+        <section id="view-memoria" class="view"><div class="memory-grid"><article class="panel"><h2>Trilha de auditoria</h2><div id="audit-log"></div></article><article class="panel"><h2>Snapshots</h2><div id="snapshot-list"></div></article><article class="panel"><h2>Integridade</h2><div id="integrity-status"></div><button id="export-ledger" class="ledger-button">Exportar livro-razão</button><small id="ledger-status" class="empty-state"></small></article><article class="panel"><h2>Comparação</h2><div id="snapshot-compare"></div></article></div></section>
       </section>
     </main>
   </div>

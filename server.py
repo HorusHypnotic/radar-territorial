@@ -273,6 +273,14 @@ class Handler(BaseHTTPRequestHandler):
             snapshots = list_snapshots()
             valid = all(item.get("hashes") for item in snapshots)
             self.send_json({"valid": valid, "checked": len(snapshots), "message": "Cadeia íntegra" if valid else "Snapshots sem hash detectados"})
+        elif parsed.path == "/api/ledger":
+            from python.export.operational_ledger import build_ledger, repository_records
+            obra_id = params.get("obra_id", [""])[0] or None
+            try:
+                if obra_id: obra_id = valid_uuid(obra_id, "obra_id")
+                self.send_json(build_ledger(repository_records(BASE_DIR, obra_id)))
+            except ValueError as exc:
+                self.send_json({"error": str(exc)}, 400)
         elif parsed.path == "/api/ico":
             works = data["obras"]
             work_id = params.get("obra_id", [""])[0]
@@ -398,6 +406,8 @@ class Handler(BaseHTTPRequestHandler):
             return
         if parsed.path == "/api/evidencias/upload":
             local_path = None
+            storage_path = None
+            storage_bucket = None
             try:
                 from python.models.apmo_entities import Evidencia
                 from python.modules.hash_chain import HashChain
@@ -417,24 +427,37 @@ class Handler(BaseHTTPRequestHandler):
                 if not filename:
                     raise ValueError("filename inválido")
                 owner = obra_id or atividade_id
-                relative_path = Path("evidencias") / str(owner) / f"{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')}_{filename}"
+                relative_path = Path(str(owner)) / f"{datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S_%f')}_{filename}"
                 local_path = EVIDENCE_DIR / str(owner) / relative_path.name
                 local_path.parent.mkdir(parents=True, exist_ok=True)
                 local_path.write_bytes(content)
                 record = Evidencia(tipo=str(payload.get("tipo", "")), storage_path=relative_path.as_posix(), hash_sha256=HashChain.hash_file_content(content), tamanho_bytes=len(content), mime_type=str(payload.get("mime_type") or "application/octet-stream"), obra_id=obra_id, atividade_id=atividade_id, descricao=payload.get("descricao"), tags=payload.get("tags") or [], gps_lat=payload.get("gps_lat"), gps_lng=payload.get("gps_lng"), device=payload.get("device")).to_dict()
-                response = create_supabase_client().table("evidencias").insert(record).execute()
+                client = create_supabase_client()
+                storage_bucket = client.storage.from_("evidencias")
+                storage_path = relative_path.as_posix()
+                storage_bucket.upload(storage_path, content, {"content-type": record["mime_type"], "upsert": "false"})
+                response = client.table("evidencias").insert(record).execute()
                 self.send_json({"success": True, "evidencia": (response.data or [None])[0], "hash_sha256": record["hash_sha256"]}, 201)
             except (ValueError, TypeError, json.JSONDecodeError, UnicodeDecodeError) as exc:
                 if local_path and local_path.is_file():
                     local_path.unlink()
+                if storage_bucket and storage_path:
+                    try: storage_bucket.remove([storage_path])
+                    except Exception: pass
                 self.send_json({"error": str(exc)}, 400)
             except RuntimeError as exc:
                 if local_path and local_path.is_file():
                     local_path.unlink()
+                if storage_bucket and storage_path:
+                    try: storage_bucket.remove([storage_path])
+                    except Exception: pass
                 self.send_json({"error": str(exc)}, 503)
             except Exception:
                 if local_path and local_path.is_file():
                     local_path.unlink()
+                if storage_bucket and storage_path:
+                    try: storage_bucket.remove([storage_path])
+                    except Exception: pass
                 self.send_json({"error": "falha ao armazenar evidência"}, 502)
             return
         if parsed.path.startswith("/api/retify/"):

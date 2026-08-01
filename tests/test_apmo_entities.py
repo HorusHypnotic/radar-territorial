@@ -44,8 +44,19 @@ class QueryMock:
         return Result([])
 
 
+class StorageBucketMock:
+    def __init__(self, calls): self.calls = calls
+    def upload(self, path, content, options): self.calls.append(("storage", "upload", {"path": path, "size": len(content), "options": options})); return {"path": path}
+    def remove(self, paths): self.calls.append(("storage", "remove", paths))
+
+
+class StorageMock:
+    def __init__(self, calls): self.calls = calls
+    def from_(self, name): self.calls.append(("storage", "bucket", name)); return StorageBucketMock(self.calls)
+
+
 class ClientMock:
-    def __init__(self): self.calls = []
+    def __init__(self): self.calls = []; self.storage = StorageMock(self.calls)
     def table(self, name): return QueryMock(name, self.calls)
     def rpc(self, name, params): self.calls.append(("rpc", name, params)); return RpcMock()
 
@@ -123,6 +134,7 @@ def test_evidence_upload_hashes_and_uses_isolated_storage(apmo_api):
     stored = list((tmp_path / "evidencias" / OBRA_ID).glob("*_laudo.pdf"))
     assert len(stored) == 1 and stored[0].read_bytes() == content
     assert any(call[0] == "evidencias" for call in client.calls)
+    assert any(call[:2] == ("storage", "upload") for call in client.calls)
 
 
 def test_migration_005_uses_current_audit_trigger():

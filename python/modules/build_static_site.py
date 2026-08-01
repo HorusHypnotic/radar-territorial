@@ -14,6 +14,7 @@ PUBLIC_OUTPUT_FILES = (
     "radar_geojson.geojson",
     "zonas_poligonos.geojson",
     "auditoria.json",
+    "livro_razao.json",
 )
 
 

@@ -28,6 +28,14 @@ Base padrão: `http://127.0.0.1:8001`.
 
 A retificação exige `updates`, `reason` com pelo menos 20 caracteres e `expected_version` positivo. Conflitos de versão são rejeitados no PostgreSQL. As rotas Supabase exigem `SUPABASE_URL` e `SUPABASE_SERVICE_KEY` somente no processo backend.
 
+## Preservação verificável
+
+- `GET /api/ledger`: exporta o livro-razão operacional JSON com entradas encadeadas por SHA-256; aceita `obra_id` opcional.
+- `GET /api/integrity/{obra_id}`: verifica cadeias de auditoria, versões e snapshots no banco.
+- `POST /api/evidencias/upload`: calcula SHA-256 antes de persistir os metadados da evidência.
+
+O manifesto do livro-razão informa explicitamente `external_timestamp: null` e `signature: null` enquanto não houver uma autoridade RFC 3161/OpenTimestamps e uma identidade de assinatura configuradas. Hash local comprova integridade comparativa, mas não substitui prova externa de existência em determinada data.
+
 ## Entidades APMO — Fase 3
 
 | Método | Rota | Finalidade |

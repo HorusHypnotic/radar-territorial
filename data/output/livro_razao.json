@@ -1,0 +1,151 @@
+{
+  "manifest": {
+    "schema": "opera-ledger/1.0",
+    "generated_at": "2026-08-01T00:19:15.730189+00:00",
+    "algorithm": "SHA-256",
+    "entries": 8,
+    "first_hash": "a274f13676f5b6524c8905b48762125ffb920d532bb7ce9df2198af53fe915e8",
+    "root_hash": "1358d3bcd8f85992330ebf6d1e013b69190b01e4a1275a49b8adbb1ef8c19a85",
+    "entries_hash": "aeb0b30f9e520adbb4b1dfd02adb2415868f45946d78dabb87bdb1d2ad936d37",
+    "external_timestamp": null,
+    "signature": null
+  },
+  "entries": [
+    {
+      "sequence": 1,
+      "kind": "audit",
+      "timestamp": "2026-07-28T15:31:35",
+      "payload": {
+        "timestamp": "2026-07-28T15:31:35",
+        "evento": "pipeline_transformacao",
+        "detalhes": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-5\\test_transform_creates_staging0\\radar_staging.parquet",
+          "registros": 1
+        }
+      },
+      "prev_hash": null,
+      "curr_hash": "a274f13676f5b6524c8905b48762125ffb920d532bb7ce9df2198af53fe915e8"
+    },
+    {
+      "sequence": 2,
+      "kind": "audit",
+      "timestamp": "2026-07-28T15:33:18",
+      "payload": {
+        "timestamp": "2026-07-28T15:33:18",
+        "evento": "pipeline_transformacao",
+        "detalhes": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-6\\test_transform_creates_staging0\\radar_staging.parquet",
+          "registros": 1,
+          "snapshot": "20260728_153318"
+        }
+      },
+      "prev_hash": "a274f13676f5b6524c8905b48762125ffb920d532bb7ce9df2198af53fe915e8",
+      "curr_hash": "595666509775bd134d067e9bc0108af7cbb8470da3f053a975b941eadecd9cef"
+    },
+    {
+      "sequence": 3,
+      "kind": "audit",
+      "timestamp": "2026-07-28T15:35:27",
+      "payload": {
+        "timestamp": "2026-07-28T15:35:27",
+        "evento": "pipeline_transformacao",
+        "detalhes": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-7\\test_transform_creates_staging0\\radar_staging.parquet",
+          "registros": 1,
+          "snapshot": "20260728_153525"
+        }
+      },
+      "prev_hash": "595666509775bd134d067e9bc0108af7cbb8470da3f053a975b941eadecd9cef",
+      "curr_hash": "81df2238f98a2e1de7ca7e141359fbf1347af369ec05eb21c59c60ff766a245a"
+    },
+    {
+      "sequence": 4,
+      "kind": "audit",
+      "timestamp": "2026-07-28T15:38:34",
+      "payload": {
+        "timestamp": "2026-07-28T15:38:34",
+        "evento": "pipeline_transformacao",
+        "detalhes": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-8\\test_transform_creates_staging0\\radar_staging.parquet",
+          "registros": 1
+        }
+      },
+      "prev_hash": "81df2238f98a2e1de7ca7e141359fbf1347af369ec05eb21c59c60ff766a245a",
+      "curr_hash": "d1b3ea8f58a093d519b628ae48f37461ee158d8c6f3773ceab01b76ba940b3fd"
+    },
+    {
+      "sequence": 5,
+      "kind": "audit",
+      "timestamp": "2026-07-28T15:41:58",
+      "payload": {
+        "timestamp": "2026-07-28T15:41:58",
+        "evento": "pipeline_transformacao",
+        "detalhes": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-9\\test_transform_creates_staging0\\radar_staging.parquet",
+          "registros": 1
+        }
+      },
+      "prev_hash": "d1b3ea8f58a093d519b628ae48f37461ee158d8c6f3773ceab01b76ba940b3fd",
+      "curr_hash": "24b7d2ed0d7db6af8e2e266195cd28e3f8d0f7c53c991b1d7ad869b9fddfbed2"
+    },
+    {
+      "sequence": 6,
+      "kind": "audit",
+      "timestamp": "2026-07-28T15:43:39",
+      "payload": {
+        "timestamp": "2026-07-28T15:43:39",
+        "evento": "pipeline_transformacao",
+        "detalhes": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-10\\test_transform_creates_staging0\\radar_staging.parquet",
+          "registros": 1
+        }
+      },
+      "prev_hash": "24b7d2ed0d7db6af8e2e266195cd28e3f8d0f7c53c991b1d7ad869b9fddfbed2",
+      "curr_hash": "29b3decd6cee73b3cc98b36a585905220c3f5af62061bb9706a1eb3a5b4ed9de"
+    },
+    {
+      "sequence": 7,
+      "kind": "snapshot",
+      "timestamp": "20260728_153318",
+      "payload": {
+        "timestamp": "20260728_153318",
+        "total_registros": 1,
+        "arquivos": {
+          "parquet": "D:\\Radar Territorial\\data\\snapshots\\radar_20260728_153318.parquet"
+        },
+        "indicadores": {
+          "media": 1.2,
+          "max": 1.2,
+          "min": 1.2
+        },
+        "extra": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-6\\test_transform_creates_staging0\\radar_staging.parquet"
+        }
+      },
+      "prev_hash": "29b3decd6cee73b3cc98b36a585905220c3f5af62061bb9706a1eb3a5b4ed9de",
+      "curr_hash": "bb653a838e51fb14f75490139fa3dea66b8584a841a680cf14a356f467e551ee"
+    },
+    {
+      "sequence": 8,
+      "kind": "snapshot",
+      "timestamp": "20260728_153525",
+      "payload": {
+        "timestamp": "20260728_153525",
+        "total_registros": 1,
+        "arquivos": {
+          "parquet": "D:\\Radar Territorial\\data\\snapshots\\radar_20260728_153525.parquet"
+        },
+        "indicadores": {
+          "media": 1.2,
+          "max": 1.2,
+          "min": 1.2
+        },
+        "extra": {
+          "staging_path": "C:\\Users\\DIRCEU_SANTOS_SILVA\\AppData\\Local\\Temp\\pytest-of-DIRCEU_SANTOS_SILVA\\pytest-7\\test_transform_creates_staging0\\radar_staging.parquet"
+        }
+      },
+      "prev_hash": "bb653a838e51fb14f75490139fa3dea66b8584a841a680cf14a356f467e551ee",
+      "curr_hash": "1358d3bcd8f85992330ebf6d1e013b69190b01e4a1275a49b8adbb1ef8c19a85"
+    }
+  ]
+}

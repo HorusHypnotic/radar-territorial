@@ -56,6 +56,8 @@ O workflow de GitHub Pages publica o site a cada push em `master` ou `main`. Con
 
 O plano auditável e os GAPs de memória operacional estão em [`APMO-OPERA-v1.md`](APMO-OPERA-v1.md) e [`OPERA_TERRITORIAL_ESCOPO.md`](OPERA_TERRITORIAL_ESCOPO.md).
 
+A implementação e os limites criptográficos da Fase 4 estão documentados em [`docs/FASE4_PRESERVACAO.md`](docs/FASE4_PRESERVACAO.md).
+
 ## Licença
 
 Nenhuma licença foi definida ainda. Até sua inclusão, todos os direitos permanecem reservados aos autores.
