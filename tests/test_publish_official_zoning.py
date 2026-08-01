@@ -4,7 +4,7 @@ from pathlib import Path
 
 import pytest
 
-from scripts.publish_official_zoning import EXPECTED_IDS, publish, validate
+from scripts.publish_official_zoning import EXPECTED_IDS, apply_legal_exclusions, publish, validate
 
 
 def fixture_document():
@@ -38,3 +38,14 @@ def test_validation_rejects_open_ring():
     document["features"][0]["geometry"]["coordinates"][0][-1] = [-49, -7]
     with pytest.raises(ValueError, match="anel inválido"):
         validate(document)
+
+
+def test_legal_exclusions_remove_zir_and_zor_from_zum():
+    document = fixture_document()
+    by_id = {feature["properties"]["id"]: feature for feature in document["features"]}
+    by_id["zum-01"]["properties"]["sigla"] = "ZUM"
+    by_id["zir-pli"]["properties"]["sigla"] = "ZIR"
+    result = apply_legal_exclusions(document)
+    clipped = next(feature for feature in result["features"] if feature["properties"]["id"] == "zum-01")
+    assert clipped["properties"]["geometry_operation"].startswith("difference")
+    assert result["metadata"]["legal_exclusions"]["features"]

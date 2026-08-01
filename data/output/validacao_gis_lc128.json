@@ -1,0 +1,79 @@
+{
+  "metadata": {
+    "generated_at": "2026-08-01T14:57:06.962685+00:00",
+    "engine": "Shapely/GEOS + PyProj",
+    "pyqgis_available": false,
+    "source_crs": "EPSG:4326",
+    "measurement_crs": "EPSG:31983",
+    "source_sha256": "ff19fbb252b0cc59ea78f22b9f2252b8e56f059e0aeee5202d0427bd73dabbce",
+    "note": "Sobreposições são reportadas e não corrigidas automaticamente; devem ser interpretadas conforme os memoriais e exclusões legais."
+  },
+  "summary": {
+    "features": 8,
+    "valid": 8,
+    "invalid": 0,
+    "vertices": 376,
+    "overlaps": 0,
+    "errors": 0
+  },
+  "features": [
+    {
+      "id": "zum-01",
+      "valid": true,
+      "vertices": 140,
+      "area_m2": 92118326.112,
+      "area_km2": 92.118326
+    },
+    {
+      "id": "zum-02",
+      "valid": true,
+      "vertices": 7,
+      "area_m2": 594247.547,
+      "area_km2": 0.594248
+    },
+    {
+      "id": "zum-03",
+      "valid": true,
+      "vertices": 4,
+      "area_m2": 155518.535,
+      "area_km2": 0.155519
+    },
+    {
+      "id": "zir-pli",
+      "valid": true,
+      "vertices": 11,
+      "area_m2": 615921.525,
+      "area_km2": 0.615922
+    },
+    {
+      "id": "zir-mil-01",
+      "valid": true,
+      "vertices": 78,
+      "area_m2": 15546703.433,
+      "area_km2": 15.546703
+    },
+    {
+      "id": "zir-mil-02",
+      "valid": true,
+      "vertices": 5,
+      "area_m2": 261680.036,
+      "area_km2": 0.26168
+    },
+    {
+      "id": "zor-zacr",
+      "valid": true,
+      "vertices": 57,
+      "area_m2": 3125646.236,
+      "area_km2": 3.125646
+    },
+    {
+      "id": "zor-zpa",
+      "valid": true,
+      "vertices": 74,
+      "area_m2": 38823212.595,
+      "area_km2": 38.823213
+    }
+  ],
+  "overlaps": [],
+  "errors": []
+}

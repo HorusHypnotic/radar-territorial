@@ -68,7 +68,7 @@ def test_import_rejects_empty_records(api):
 
 def test_frontend_files_and_geojson(api):
     frontend = Path(__file__).resolve().parents[1] / "frontend"
-    for relative in ("index.html", "css/main.css", "js/main.js", "js/mapa.js", "js/kpis.js", "js/graficos.js", "js/tabela.js", "js/upload.js", "js/apmo.js", "vendor/leaflet/leaflet.js", "vendor/leaflet/leaflet.css"):
+    for relative in ("index.html", "css/main.css", "js/main.js", "js/mapa.js", "js/consulta-territorial.js", "data/modelo_legal_lc128.json", "js/kpis.js", "js/graficos.js", "js/tabela.js", "js/upload.js", "js/apmo.js", "vendor/leaflet/leaflet.js", "vendor/leaflet/leaflet.css"):
         assert (frontend / relative).stat().st_size > 0
     status, geojson = request_json(api, "/api/geojson/zonas")
     assert status == 200
@@ -83,6 +83,7 @@ def test_executive_header_and_demo_disclosure_are_present():
     assert "data-source-badge" in html
     assert "Lei Complementar nº 128/2022" in html
     assert "noopener noreferrer" in html
+    assert all(marker in html for marker in ("cnae-input", "viabilidade-scope", "territorial-hierarchy"))
 
 
 def test_visual_dashboard_uses_data_and_respects_reduced_motion():

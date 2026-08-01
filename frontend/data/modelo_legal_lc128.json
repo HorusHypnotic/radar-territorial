@@ -1,0 +1,3949 @@
+{
+  "metadata": {
+    "status": "derivado_validado",
+    "source": "Lei Complementar nº 128/2022",
+    "source_url": "https://redencao.pa.gov.br/publicacoes/legislacoes/lei/4165/lei-complementar-no-1282022",
+    "architecture": "DIM/FATO",
+    "activity_count": 297,
+    "notice": "Consulta informativa. CNAE listado no Anexo VI não substitui certidão municipal, análise de impacto ou licenciamento."
+  },
+  "dim_zoneamento": {
+    "ZUM-N1": {
+      "to_max": 70,
+      "ca_basico": 1.0,
+      "ca_maximo": 2.5,
+      "permeabilidade": 20,
+      "artigo": 51
+    },
+    "ZUM-N2": {
+      "to_max": 70,
+      "ca_basico": 1.0,
+      "ca_maximo": 2.5,
+      "permeabilidade": 20,
+      "artigo": 51
+    },
+    "ZUM-N3": {
+      "to_max": 65,
+      "ca_basico": 1.0,
+      "ca_maximo": 5.0,
+      "permeabilidade": 20,
+      "artigo": 52
+    },
+    "ZUM-N4": {
+      "to_max": 65,
+      "ca_basico": 1.0,
+      "ca_maximo": 5.0,
+      "permeabilidade": 20,
+      "artigo": 53
+    },
+    "ZUM-N5": {
+      "to_max": 70,
+      "ca_basico": 1.0,
+      "ca_maximo": 2.5,
+      "permeabilidade": 20,
+      "artigo": 54
+    },
+    "ZUM-N6": {
+      "to_max": 60,
+      "ca_basico": 1.0,
+      "ca_maximo": 2.0,
+      "permeabilidade": 30,
+      "artigo": 55
+    },
+    "ZOR": {
+      "to_max": 20,
+      "ca_basico": 0.4,
+      "ca_maximo": null,
+      "permeabilidade": 50,
+      "artigo": 57
+    },
+    "ZIR": {
+      "to_max": 60,
+      "ca_basico": 1.0,
+      "ca_maximo": 2.0,
+      "permeabilidade": 30,
+      "artigo": 58
+    }
+  },
+  "dim_atividades": [
+    {
+      "cnae": "47.12-1",
+      "nome": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - minimercados, mercearias e armazéns",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.21-1",
+      "nome": "Comércio varejista de produtos de padaria, laticinio, doces, balas e semelhantes",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.22-9",
+      "nome": "Comércio varejista de cames e pescados - açougues e peixarias",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.55-5",
+      "nome": "Comércio varejista especializado de tecidos e artigos de cama, mesa e banho",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.61-0",
+      "nome": "Comércio varejista de livros, jomais, revistas e papelaria",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.62-8",
+      "nome": "Comércio varejista de discos, CDs, DVDs e fitas",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.71-7",
+      "nome": "Comércio varejista de produtos farmacêuticos para uso humano e veterinário",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.72-5",
+      "nome": "Comércio varejista de cosméticos, produtos de perfumaria e de higiene pessoal",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.89-0",
+      "nome": "Comércio varejista de outros produtos novos não especificados anteriormente",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.22-5",
+      "nome": "Aluguel de fitas de vídeo, DVDs e similares",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "18.2",
+      "nome": "Serviços de pré-impressão e acabamentos gráficos",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "69.11-7",
+      "nome": "Atividades jurídicas, exceto cartórios",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "69.2",
+      "nome": "Atividades de contabilidade, consultoria e auditoria contábil e tributária",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "71.1",
+      "nome": "Serviços de arquitetura e engenharia e atividades técnicas relacionadas",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "74.1",
+      "nome": "Design e decoração de interiores",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "74.20-0",
+      "nome": "Atividades fotográficas e similares",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "74.90-1",
+      "nome": "Atividades profissionais, científicas e técnicas não especificadas anteriormente",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "79.1",
+      "nome": "Agências de viagens e operadores turísticos",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.30-5",
+      "nome": "Atividades de atenção ambulatorial executadas por médicos e odontólogos",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.5",
+      "nome": "Atividades de profissionais da área de saúde, exceto médicos e odontólogos",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.9",
+      "nome": "Atividades de atenção à saúde humana não especificadas anteriormente",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "87.11-5",
+      "nome": "Atividades de assistência a idosos, deficientes físicos, imunodeprimidos e convalescentes prestadas em residências coletivas e particulares",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "95.11-8",
+      "nome": "Reparação e manutenção de computadores e de equipamentos periféricos",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "95.12-6",
+      "nome": "Reparação e manutenção de equipamentos de comunicação",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "95.21-5",
+      "nome": "Reparação e manutenção de equipamentos eletroeletrônicos de uso pessoal e doméstico",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "95.29-1",
+      "nome": "Reparação e manutenção de objetos e equipamentos pessoais e domésticos não especificados anteriormente",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "96.01-7",
+      "nome": "Lavanderias, tinturarias e toalheiros",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "96.02-5",
+      "nome": "Cabeleireiros e outras atividades de tratamento de beleza",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "96.09-2",
+      "nome": "Atividades de serviços pessoais não especificadas anteriormente",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "58.1",
+      "nome": "Edição de livros, jornais, revistas e outras atividades de edição EEE AAA AEE eee",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.13-0",
+      "nome": "Comércio varejista de mercadorias em geral, sem predominância de produtos alimentícios",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.23-7",
+      "nome": "Comércio varejista de bebidas",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.29-6",
+      "nome": "Comércio varejista de produtos alimentícios em geral ou especializado em produtos alimentícios não especificados anteriormente; produtos do fumo",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.59-8",
+      "nome": "Comércio varejista de artigos de uso doméstico não especificados anteriormente",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.81-4",
+      "nome": "Comércio varejista de artigos do vestuário e acessórios",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.82-2",
+      "nome": "Comércio varejista de calçados e artigos de viagem",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.83-1",
+      "nome": "Comércio varejista de joias e relógios",
+      "escopo": "ZUM-N1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "18.3",
+      "nome": "Reprodução de materiais gravados em qualquer suporte",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "32.11-6",
+      "nome": "Lapidação de gemas e fabricação de artefatos de ourivesaria e joalheria",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "32.12-4",
+      "nome": "Fabricação de bijuterias e artefatos semelhantes",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "33.12-1",
+      "nome": "Manutenção e reparação de equipamentos eletrônicos e ópticos",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "33.13-9",
+      "nome": "Manutenção e reparação de máquinas e equipamentos elétricos",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "73.11-4",
+      "nome": "Agências de publicidade",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "73.12-2",
+      "nome": "Agenciamento de espaços para publicidade, exceto em veículos de comunicação",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "73.19-0",
+      "nome": "Atividades de publicidade não especificadas anteriormente",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "73.2",
+      "nome": "Pesquisas de mercado e de opinião pública",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.23-3",
+      "nome": "Aluguel de objetos do vestuário, joias e acessórios",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "81.1",
+      "nome": "Serviços combinados para apoio a edifícios",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "81.21-4",
+      "nome": "Limpeza em prédios e em domicílios",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "81.3",
+      "nome": "Atividades paisagísticas",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "82.1",
+      "nome": "Serviços de escritório e apoio administrativo",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.1",
+      "nome": "Educação infantil e ensino fundamental",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.2",
+      "nome": "Ensino médio",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.91-1",
+      "nome": "Ensino de esportes",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.92-9",
+      "nome": "Ensino de arte e cultura",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.93-7",
+      "nome": "Ensino de idiomas",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.99-6",
+      "nome": "Atividades de ensino não especificadas anteriormente",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "82.30-0",
+      "nome": "Atividades de organização de eventos, exceto culturais e esportivos",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "94.12-0",
+      "nome": "Atividades de organizações associativas profissionais",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "94.20-1",
+      "nome": "Atividades de organizações sindicais",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "94.91-0",
+      "nome": "Atividades de organizações religiosas",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "94.92-8",
+      "nome": "Atividades de organizações políticas",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "94.3",
+      "nome": "Atividades de associações de defesa de direitos sociais Isolada/ Geminada/ Seriada (ver fração ideal) Multifamiliar",
+      "escopo": "ZUM-N2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "41.1",
+      "nome": "Incorporação de empreendimentos imobiliários",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.4",
+      "nome": "Atividades de serviços de complementação diagnóstica e terapêutica",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.11-7",
+      "nome": "Representantes comerciais e agentes do comércio de matérias-primas agrícolas e animais vivos",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.12-5",
+      "nome": "Representantes comerciais e agentes do comércio de combustíveis, minerais, produtos siderúrgicos e químicos",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.13-3",
+      "nome": "Representantes comerciais e agentes do comércio de madeira, material de construção e ferragens",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.14-1",
+      "nome": "Representantes comerciais e agentes do comércio de máquinas, equipamentos, embarcações e aeronaves",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.15-0",
+      "nome": "Representantes comerciais e agentes do comércio de eletrodomésticos, móveis e artigos de uso doméstico",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.16-8",
+      "nome": "Representantes comerciais e agentes do comércio de têxteis, vestuário, PS aaa a a a] calçados e artigos de viagem",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.17-6",
+      "nome": "Representantes comerciais e agentes do comércio de produtos alimentícios, bebidas e fumo",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.18-4",
+      "nome": "Representantes comerciais e agentes do comércio especializado em produtos não especificados anteriormente",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.19-2",
+      "nome": "Representantes comerciais e agentes do comércio de mercadorias em geral não especializado",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.11-3",
+      "nome": "Comércio varejista de mercadorias em geral, com predominância de produtos alimentícios - hipermercados e supermercados",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.41-5",
+      "nome": "Comércio varejista de tintas e materiais para pintura",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.42-3",
+      "nome": "Comércio varejista de material elétrico",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.52-1",
+      "nome": "Comércio varejista especializado de equipamentos de telefonia e comunicação",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.53-9",
+      "nome": "Comércio varejista especializado de eletrodomésticos e equipamentos de áudio e vídeo",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.54-7",
+      "nome": "Comércio varejista especializado de móveis, colchoaria e artigos de iluminação",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.56-3",
+      "nome": "Comércio varejista especializado de instrumentos musicais e acessórios",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.57-1",
+      "nome": "Comércio varejista especializado de peças e acessórios para aparelhos eletroeletrônicos para uso doméstico, exceto informática e comunicação",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.63-6",
+      "nome": "Comércio varejista de artigos recreativos e esportivos",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.73-3",
+      "nome": "Comércio varejista de artigos médicos e ortopédico",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.74-1",
+      "nome": "Comércio varejista de artigos de óptica",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.85-7",
+      "nome": "Comércio varejista de artigos usados",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.51-2",
+      "nome": "Comércio varejista especializado de equipamentos e suprimentos de informática",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "18.11-3",
+      "nome": "Impressão de jornais, livros, revistas e outras publicações periódicas",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "18.12-1",
+      "nome": "Impressão de material de segurança",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "18.13-0",
+      "nome": "Impressão de materiais para outros usos",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.3",
+      "nome": "Comércio varejista de combustíveis para veículos automotores",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "52.29-0",
+      "nome": "Atividades auxiliares dos transportes terrestres não especificadas anteriormente",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "55.10-8",
+      "nome": "Hotéis e similares",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "55.90-6",
+      "nome": "Outros tipos de alojamento não especificados anteriormente",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "56.11-2",
+      "nome": "Restaurantes e outros estabelecimentos de serviços de alimentação e bebidas",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "56.20-1",
+      "nome": "Serviços de catering, bufê e outros serviços de comida preparada",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "58.2",
+      "nome": "Edição integrada à impressão de livros, jornais, revistas e outras publicações",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "59.11-1",
+      "nome": "Atividades de produção cinematográfica, de vídeos e de programas de televisão",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "59.12-0",
+      "nome": "Atividades de pós-produção cinematográfica, de vídeos e de programas de televisão",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "59.13-8",
+      "nome": "Distribuição cinematográfica, de vídeo e de programas de televisão",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "59.14-6",
+      "nome": "Atividades de exibição cinematográfica",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "59.20-1",
+      "nome": "Atividades de gravação de som e de edição de música",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "60.10-1",
+      "nome": "Atividades de rádio",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "60.21-7",
+      "nome": "Atividades de televisão aberta",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "60.22-5",
+      "nome": "Programadoras e atividades relacionadas à televisão por assinatura",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.10-8",
+      "nome": "Telecomunicações por fio",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.20-5",
+      "nome": "Telecomunicações sem fio",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.30-2",
+      "nome": "Telecomunicações por satélite",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.41-8",
+      "nome": "Operadoras de televisão por assinatura por cabo",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.42-6",
+      "nome": "Operadoras de televisão por assinatura por micro-ondas",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.43-4",
+      "nome": "Operadoras de televisão por assinatura por satélite Outras atividades de telecomunicações",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "61.90-6",
+      "nome": "Outras atividades de telecomunicações",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.01-5",
+      "nome": "Desenvolvimento de programas de computador sob encomenda",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.02-3",
+      "nome": "Desenvolvimento e licenciamento de programas de computador customizáveis",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.03-1",
+      "nome": "Desenvolvimento e licenciamento de programas de computador não customizáveis",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.04-0",
+      "nome": "Consultoria em tecnologia da informação É———————————————",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.09-1",
+      "nome": "Suporte técnico, manutenção e outros serviços em tecnologia da informação",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "63.11-9",
+      "nome": "Tratamento de dados, provedores de serviços de aplicação e serviços de hospedagem na Internet",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "63.19-4",
+      "nome": "Portais, provedores de conteúdo e outros serviços de informação na Intemet",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "63.91-7",
+      "nome": "Agências de notícias",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "69.12-5",
+      "nome": "Cartórios",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "70.10-7",
+      "nome": "Sedes de empresas e unidades administrativas locais",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "70.20-4",
+      "nome": "Atividades de consultoria em gestão empresarial",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "78.10-8",
+      "nome": "Seleção e agenciamento de mão de obra",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "78.20-5",
+      "nome": "Locação de mão de obra temporária",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "78.30-2",
+      "nome": "Fomecimento e gestão de recursos humanos para terceiros",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "82.20-2",
+      "nome": "Atividades de teleatendimento",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "82.91-1",
+      "nome": "Atividades de cobrança e informações cadastrais",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "82.92-0",
+      "nome": "Envasamento e empacotamento sob contrato",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "82.99-7",
+      "nome": "Atividades de serviços prestados principalmente às empresas não especificadas anteriormente",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "80.11-1",
+      "nome": "Atividades de vigilância e segurança privada",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "80.12-9",
+      "nome": "Atividades de transporte de valores",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "80.20-0",
+      "nome": "Atividades de monitoramento de sistemas de segurança",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "80.30-7",
+      "nome": "Atividades de investigação particular",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.11-6",
+      "nome": "Administração pública em geral",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.12-4",
+      "nome": "Regulação das atividades de saúde, educação, serviços culturais e outros serviços sociais",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.13-2",
+      "nome": "Regulação das atividades econômicas",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.21-3",
+      "nome": "Relações exteriores",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.22-1",
+      "nome": "Defesa",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.23-0",
+      "nome": "Justiça",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.24-8",
+      "nome": "Segurança e ordem pública",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.25-6",
+      "nome": "Defesa Civil",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "84.30-2",
+      "nome": "Seguridade social obrigatória",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.3",
+      "nome": "Educação superior",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.4",
+      "nome": "Educação profissional de nível técnico e tecnológico",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.30-5",
+      "nome": "Atividades de atenção ambulatorial executadas por médicos e odontólogos (público)",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "87.20-4",
+      "nome": "Atividades de assistência psicossocial e à saúde a portadores de distúrbios psíquicos, deficiência mental e dependência química",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "87.30-1",
+      "nome": "Atividades de assistência social prestadas em residências coletivas e particulares",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "88.00-6",
+      "nome": "Serviços de assistência social sem alojamento",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "96.03-3",
+      "nome": "Atividades funerárias e serviços relacionados",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "96.09-2",
+      "nome": "Atividades de serviços pessoais não especificadas anteriormente",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "81.22-2",
+      "nome": "Imunização e controle de pragas urbanas",
+      "escopo": "ZUM-N3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "55.10-8",
+      "nome": "Hotéis e similares",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.10-1",
+      "nome": "Atividades de atendimento hospitalar ConaiTO O",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "86.21-6",
+      "nome": "Serviços móveis de atendimento a urgências",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "53.10-5",
+      "nome": "Atividades de Correio",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "53.20-2",
+      "nome": "Atividades de malote e de entrega",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.10-7",
+      "nome": "Banco Central",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.21-2",
+      "nome": "Bancos comerciais",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.22-1",
+      "nome": "Bancos múltiplos, com carteira comercial",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.23-9",
+      "nome": "Caixas econômicas",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.24-7",
+      "nome": "Crédito cooperativo EA",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.31-0",
+      "nome": "Bancos múltiplos, sem carteira comercial",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.32-8",
+      "nome": "Bancos de investimento",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.33-6",
+      "nome": "Bancos de desenvolvimento",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.34-4",
+      "nome": "Agências de fomento",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.35-2",
+      "nome": "Crédito imobiliário",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.36-1",
+      "nome": "Sociedades de crédito, financiamento e investimento - financeiras",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.37-9",
+      "nome": "Sociedades de crédito ao microempreendedor",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "64.38-7",
+      "nome": "Bancos de câmbio e outras instituições de intermediação não monetária",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "68.21-8",
+      "nome": "Intermediação na compra, venda e aluguel de imóveis",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "68.22-6",
+      "nome": "Gestão e administração da propriedade imobiliária",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.11-0",
+      "nome": "Locação de automóveis sem condutor",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.33-1",
+      "nome": "Aluguel de máquinas e equipamentos para escritório",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.32-2",
+      "nome": "Aluguel de máquinas e equipamentos para construção sem operador",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.39-0",
+      "nome": "Aluguel de máquinas e equipamentos não especificados anteriormente",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "93.29-8",
+      "nome": "Atividades de recreação e lazer não especificadas anteriormente",
+      "escopo": "ZUM-N4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "45.1",
+      "nome": "Comércio de veículos automotores",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "45.30-7",
+      "nome": "Comércio de peças e acessórios para veículos automotores",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "45.41-2",
+      "nome": "Comércio por atacado e a varejo de motocicletas, peças e acessórios",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.32-6",
+      "nome": "Comércio varejista de lubrificantes",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.43-1",
+      "nome": "Comércio varejista de vidros",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.44-0",
+      "nome": "Comércio varejista de ferragens, madeira e materiais de construção",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.2",
+      "nome": "Comércio atacadista de matérias-primas agrícolas e animais vivos mo",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.4",
+      "nome": "Comércio atacadista de produtos de consumo não alimentar )",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.5",
+      "nome": "Comércio atacadista de equipamentos e produtos de tecnologias de informação e comunicação",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.6",
+      "nome": "Comércio atacadista de máquinas, aparelhos e equipamentos, exceto de tecnologias de informação e comunicação",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.7",
+      "nome": "Comércio atacadista de madeira, ferragens, ferramentas, material elétrico e material de construção",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.8",
+      "nome": "Comércio atacadista especializado em outros produtos",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.9",
+      "nome": "Comércio atacadista não especializado",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "01.61-0",
+      "nome": "Atividades de apoio à agricultura",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "01.62-8",
+      "nome": "Atividades de apoio à pecuária",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "29.30-1",
+      "nome": "Fabricação de cabines, carrocerias e reboques para veículos automotores",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "45.20-0",
+      "nome": "Manutenção e reparação de veículos automotores",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "45.43-9",
+      "nome": "Manutenção e reparação de motocicletas",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "52.11-7",
+      "nome": "Armazenamento",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "55.10-8",
+      "nome": "Hotéis e similares",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "77.31-4",
+      "nome": "Aluguel de máquinas e equipamentos agrícolas sem operador",
+      "escopo": "ZUM-N5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.1",
+      "nome": "Abate e fabricação de produtos de carne",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.2",
+      "nome": "Preservação do pescado e fabricação de produtos do pescado",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.3",
+      "nome": "Fabricação de conservas de frutas, legumes e outros vegetais",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.4",
+      "nome": "Fabricação de óleos e gorduras vegetais e animais",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.5",
+      "nome": "Laticínios o o . no",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.6",
+      "nome": "Moagem, fabricação de produtos amiláceos e de alimentos para animais",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.7",
+      "nome": "Fabricação e refino de açúcar",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.8",
+      "nome": "Torrefação e moagem de café",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "10.9",
+      "nome": "Fabricação de outros produtos alimentícios PP STÃÃTPTMMBPBPBSs ça",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "11.1",
+      "nome": "Fabricação de bebidas alcoólicas",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "11.2",
+      "nome": "Fabricação de bebidas não alcoólicas",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "12.1",
+      "nome": "Processamento industrial do fumo",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "12.2",
+      "nome": "Fabricação de produtos do fumo",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "13.1",
+      "nome": "Preparação e fiação de fibras têxteis",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "13.2",
+      "nome": "Tecelagem, exceto malha",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "13.3",
+      "nome": "Fabricação de tecidos de malha",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "13.4",
+      "nome": "Acabamentos em fios, tecidos e artefatos têxteis",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "13.5",
+      "nome": "Fabricação de artefatos têxteis, exceto vestuário",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "14.1",
+      "nome": "Confecção de artigos do vestuário e acessórios",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "14.2",
+      "nome": "Fabricação de artigos de malharia e tricotagem",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "15.1",
+      "nome": "Curtimento e outras preparações de couro",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "15.2",
+      "nome": "Fabricação de artigos para viagem e de artefatos diversos de couro",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "15.3",
+      "nome": "Fabricação de calçados",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "15.4",
+      "nome": "Fabricação de partes para calçados, de qualquer material",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "16.1",
+      "nome": "Desdobramento de madeira",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "16.2",
+      "nome": "Fabricação de produtos de madeira, cortiça e material trançado, exceto móveis",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "17.1",
+      "nome": "Fabricação de celulose e outras pastas para a fabricação de papel",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "17.2",
+      "nome": "Fabricação de papel, cartolina e papel-cartão",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "17.3",
+      "nome": "Fabricação de embalagens de papel, cartolina, papel-cartão e papelão ondulado",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "17.4",
+      "nome": "Fabricação de produtos diversos de papel, cartolina, papel-cartão e papelão ondulado",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "19.3",
+      "nome": "Fabricação de biocombustíveis",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "20.1",
+      "nome": "Fabricação de produtos químicos inorgânicos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "20.5",
+      "nome": "Fabricação de defensivos agrícolas e desinfestantes domissanitários",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "20.6",
+      "nome": "Fabricação de sabões, detergentes, produtos de limpeza, cosméticos, produtos de perfumaria e de higiene pessoal",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "20.7",
+      "nome": "Fabricação de tintas, vernizes, esmaltes, lacas e produtos afins",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "21.1",
+      "nome": "Fabricação de produtos farmoquímicos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "22.1",
+      "nome": "Fabricação de produtos de borracha",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "22.2",
+      "nome": "Fabricação de produtos de material plástico",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "23.1",
+      "nome": "Fabricação de vidro e de produtos do vidro",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "23.3",
+      "nome": "Fabricação de artefatos de concreto, cimento, fibrocimento, gesso e materiais semelhantes",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "23.4",
+      "nome": "Fabricação de produtos cerâmicos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "23.9",
+      "nome": "Aparelhamento de pedras e fabricação de outros produtos de minerais não metálicos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "25.1",
+      "nome": "Fabricação de estruturas metálicas e obras de caldeiraria pesada",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "25.3",
+      "nome": "Forjaria, estamparia, metalurgia do pó e serviços de tratamento de metais",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "25.9",
+      "nome": "Fabricação de produtos de metal não especificados anteriormente",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.1",
+      "nome": "Fabricação de componentes eletrônicos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.2",
+      "nome": "Fabricação de equipamentos de informática e periféricos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.3",
+      "nome": "Fabricação de equipamentos de comunicação",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.4",
+      "nome": "Fabricação de aparelhos de recepção, reprodução, gravação e amplificação de áudio e vídeo",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.5",
+      "nome": "Fabricação de aparelhos e instrumentos de medida, teste e controle cronômetros e relógios",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.6",
+      "nome": "Fabricação de aparelhos eletromédicos e eletroterapêuticos e equipamentos de irradiação",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.7",
+      "nome": "Fabricação de equipamentos e instrumentos ópticos, fotográficos e cinematográficos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "26.8",
+      "nome": "Fabricação de mídias virgens, magnéticas e ópticas",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "27.1",
+      "nome": "Fabricação de geradores, transformadores e motores elétricos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "27.2",
+      "nome": "Fabricação de pilhas, baterias e acumuladores elétricos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "27.3",
+      "nome": "Fabricação de equipamentos para distribuição e controle de energia elétrica",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "27.4",
+      "nome": "Fabricação de lâmpadas e outros equipamentos de iluminação EEE STE",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "27.5",
+      "nome": "Fabricação de eletrodomésticos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "28.1",
+      "nome": "Fabricação de motores, bombas, compressores e equipamentos de transmissão",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "28.2",
+      "nome": "Fabricação de máquinas e equipamentos de uso geral",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "28.3",
+      "nome": "Fabricação de tratores e de máquinas e equipamentos para a agricultura e pecuária",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "31.0",
+      "nome": "Fabricação de móveis",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "32.2",
+      "nome": "Fabricação de instrumentos musicais",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "32.3",
+      "nome": "Fabricação de artefatos para pesca e esporte",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "32.4",
+      "nome": "Fabricação de brinquedos e jogos recreativos",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "32.9",
+      "nome": "Fabricação de produtos diversos Isolada/ Geminada/ Seriada (ver fração ideal",
+      "escopo": "ZUM-N6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "01.2",
+      "nome": "Horticultura e floricultura",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "03.22-1",
+      "nome": "Aquicultura em água doce",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "03.12-4",
+      "nome": "Pesca em água doce",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "35.11-5",
+      "nome": "Geração de energia elétrica",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "47.24-5",
+      "nome": "Comércio varejista de hortifrutigranjeiros",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "93.12-3",
+      "nome": "Clubes sociais, esportivos e similares",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "93.2",
+      "nome": "Atividades de recreação e lazer",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "96.03-3",
+      "nome": "Atividades funerárias e serviços relacionados",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "01.61-0/01",
+      "nome": "Serviço de pulverização e controle de pragas agricolas",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "33.16-3/01",
+      "nome": "Manutenção e reparação de aeronaves, exceto a manutenção na pista OCUPAÇÃO",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.69-9/99",
+      "nome": "Comércio atacadista de outras máquinas e equipamentos não RESTRITA (ZOR) especificados anteriormente; partes e peças",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "46.81-8/05",
+      "nome": "Comércio atacadista de lubrificantes",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "49.30-2/02",
+      "nome": "Transporte rodoviário de carga, exceto produtos perigosos e mudanças, intermunicipal, interestadual e internacional",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "49.30-2/03",
+      "nome": "Transporte rodoviário de produtos perigosos",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "52.40-1/99",
+      "nome": "Atividades auxiliares dos transportes aéreos, exceto operação dos AERÓDROMO aeroportos e campos de aterrissagem (ZPA)",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "5510-8/01",
+      "nome": "” Hotel/Pousada com ou sem restaurante",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "5611-2/01",
+      "nome": "Restaurante com serviço completo",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "5611-2/05",
+      "nome": "Bar com serviço completo, com entretenimento (música, apresentações de shows, entre outros)",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.01-5/01",
+      "nome": "Desenvolvimento de programas de computador sob encomenda ABASTECIMENTO",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.02-3/00",
+      "nome": "Desenvolvimento e licenciamento de programas de computador customizáveis Eniac",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.04-0/00",
+      "nome": "Consultoria em tecnologia da informação",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "62.09-1/00",
+      "nome": "Suporte técnico, manutenção e outros serviços em tecnologia da informação",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "6911-7/01",
+      "nome": "Escritório de advocacia",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "6920-6/01",
+      "nome": "Escritório de contabilidade",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "70.20-4/00",
+      "nome": "Atividades de consultoria em gestão empresarial, exceto consultoria técnica específica",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "7111-1/00",
+      "nome": "Escritório de arquitetura e urbanismo",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "7112-0/00",
+      "nome": "Escritório de engenharia",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "7490-1/03",
+      "nome": "Assistência técnica rural",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "7711-0/00",
+      "nome": "” Locadora de carros",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "8211-3/00",
+      "nome": "Serviços de escritório virtual",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "8299-7/07",
+      "nome": "Sala de acesso à intemet e apoio administrativo / lan house",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "85.99-6/04",
+      "nome": "Treinamento em desenvolvimento profissional e gerencial",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "cnae": "8299-7/99",
+      "nome": "Escritório de representação — an e Qua SERVIÇO REGIONAL MICRO",
+      "escopo": "ZOR",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    }
+  ],
+  "fato_permissoes": [
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.12-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.21-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.22-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.55-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.61-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.62-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.71-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.72-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.89-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "77.22-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "18.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "69.11-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "69.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "71.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "74.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "74.20-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "74.90-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "79.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "86.30-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "86.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "86.9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "87.11-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "95.11-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "95.12-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "95.21-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "95.29-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "96.01-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "96.02-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "96.09-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "58.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.13-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.23-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.29-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.59-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.81-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.82-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N1",
+      "cnae": "47.83-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "18.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "32.11-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "32.12-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "33.12-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "33.13-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "73.11-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "73.12-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "73.19-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "73.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "77.23-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "81.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "81.21-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "81.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "82.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "85.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "85.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "85.91-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "85.92-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "85.93-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "85.99-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "82.30-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "94.12-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "94.20-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "94.91-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "94.92-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N2",
+      "cnae": "94.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "41.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "86.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.11-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.12-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.13-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.14-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.15-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.16-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.17-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.18-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "46.19-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.11-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.41-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.42-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.52-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.53-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.54-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.56-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.57-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.63-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.73-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.74-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.85-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.51-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "18.11-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "18.12-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "18.13-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "47.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "52.29-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "55.10-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "55.90-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "56.11-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "56.20-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "58.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "59.11-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "59.12-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "59.13-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "59.14-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "59.20-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "60.10-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "60.21-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "60.22-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.10-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.20-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.30-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.41-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.42-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.43-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "61.90-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "62.01-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "62.02-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "62.03-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "62.04-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "62.09-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "63.11-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "63.19-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "63.91-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "69.12-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "70.10-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "70.20-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "78.10-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "78.20-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "78.30-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "82.20-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "82.91-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "82.92-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "82.99-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "80.11-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "80.12-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "80.20-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "80.30-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.11-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.12-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.13-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.21-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.22-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.23-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.24-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.25-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "84.30-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "85.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "85.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "86.30-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "87.20-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "87.30-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "88.00-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "96.03-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "96.09-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N3",
+      "cnae": "81.22-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "55.10-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "86.10-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "86.21-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "53.10-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "53.20-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.10-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.21-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.22-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.23-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.24-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.31-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.32-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.33-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.34-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.35-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.36-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.37-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "64.38-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "68.21-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "68.22-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "77.11-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "77.33-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "77.32-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "77.39-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N4",
+      "cnae": "93.29-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "45.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "45.30-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "45.41-2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "47.32-6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "47.43-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "47.44-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "46.9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "01.61-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "01.62-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "29.30-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "45.20-0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "45.43-9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "52.11-7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "55.10-8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N5",
+      "cnae": "77.31-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "10.9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "11.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "11.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "12.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "12.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "13.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "13.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "13.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "13.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "13.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "14.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "14.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "15.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "15.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "15.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "15.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "16.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "16.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "17.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "17.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "17.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "17.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "19.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "20.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "20.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "20.6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "20.7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "21.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "22.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "22.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "23.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "23.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "23.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "23.9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "25.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "25.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "25.9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.6",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.7",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "26.8",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "27.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "27.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "27.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "27.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "27.5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "28.1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "28.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "28.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "31.0",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "32.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "32.3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "32.4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZUM-N6",
+      "cnae": "32.9",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "01.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "03.22-1",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "03.12-4",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "35.11-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "47.24-5",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "93.12-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "93.2",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "96.03-3",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "01.61-0/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "33.16-3/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "46.69-9/99",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "46.81-8/05",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "49.30-2/02",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "49.30-2/03",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "52.40-1/99",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "5510-8/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "5611-2/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "5611-2/05",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "62.01-5/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "62.02-3/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "62.04-0/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "62.09-1/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "6911-7/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "6920-6/01",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "70.20-4/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "7111-1/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "7112-0/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "7490-1/03",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "7711-0/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "8211-3/00",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "8299-7/07",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "85.99-6/04",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    },
+    {
+      "escopo": "ZOR",
+      "cnae": "8299-7/99",
+      "status": "permitido",
+      "referencia": "LC 128/2022, Anexo VI"
+    }
+  ],
+  "dim_territorio": {
+    "municipio": "Redenção-PA",
+    "levels": [
+      "município",
+      "região de planejamento",
+      "setor",
+      "zona",
+      "quadra",
+      "lote"
+    ],
+    "available_geometry": [
+      "município",
+      "zona"
+    ],
+    "notice": "A LC 128/2022 não fornece geometrias cadastrais de quadras e lotes; esses níveis exigem base municipal própria."
+  }
+}

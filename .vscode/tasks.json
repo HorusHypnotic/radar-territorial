@@ -31,6 +31,19 @@
         "cwd": "${workspaceFolder}"
       },
       "group": "test"
+    },
+    {
+      "label": "Validar zoneamento GIS (LC 128/2022)",
+      "type": "shell",
+      "command": "${workspaceFolder}\\.venv\\Scripts\\python.exe",
+      "args": [
+        "${workspaceFolder}/scripts/validate_zoning_gis.py",
+        "--input", "${workspaceFolder}/data/output/zonas_oficiais_consolidado.geojson",
+        "--report", "${workspaceFolder}/data/output/validacao_gis_lc128.json"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "group": "test",
+      "problemMatcher": []
     }
   ]
 }

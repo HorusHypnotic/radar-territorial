@@ -5,3 +5,4 @@ pyyaml>=6.0.2
 supabase>=2.8.0
 pytest>=8.0.0
 pyproj>=3.7.0
+shapely>=2.0.0

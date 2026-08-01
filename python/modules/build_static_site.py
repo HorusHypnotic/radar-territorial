@@ -15,6 +15,7 @@ PUBLIC_OUTPUT_FILES = (
     "zonas_poligonos.geojson",
     "auditoria.json",
     "livro_razao.json",
+    "validacao_gis_lc128.json",
 )
 
 
