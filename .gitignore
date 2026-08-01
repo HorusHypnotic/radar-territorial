@@ -16,3 +16,4 @@ data/staging/**
 data/evidencias/**
 !data/evidencias/.gitkeep
 data/candidate/**
+data/test/**
