@@ -84,6 +84,12 @@ def test_executive_header_and_demo_disclosure_are_present():
     assert "Lei Complementar nº 128/2022" in html
     assert "noopener noreferrer" in html
     assert all(marker in html for marker in ("cnae-input", "viabilidade-scope", "territorial-hierarchy"))
+    assert all(disclaimer in html for disclaimer in (
+        "não é um serviço oficial da Prefeitura",
+        "Não substitui certidão municipal",
+        "não determina automaticamente “condicionado” ou “proibido”",
+        "Setor, quadra e lote dependem de base cadastral municipal",
+    ))
 
 
 def test_visual_dashboard_uses_data_and_respects_reduced_motion():

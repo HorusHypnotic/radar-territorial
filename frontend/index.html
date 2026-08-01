@@ -56,7 +56,16 @@
         <section id="view-memoria" class="view"><div class="memory-grid"><article class="panel"><h2>Trilha de auditoria</h2><div id="audit-log"></div></article><article class="panel"><h2>Snapshots</h2><div id="snapshot-list"></div></article><article class="panel"><h2>Integridade</h2><div id="integrity-status"></div><button id="export-ledger" class="ledger-button">Exportar livro-razão</button><small id="ledger-status" class="empty-state"></small></article><article class="panel"><h2>Comparação</h2><div id="snapshot-compare"></div></article></div></section>
       </section>
     </main>
-    <footer class="legal-footer"><strong>Fonte territorial:</strong> <a href="https://redencao.pa.gov.br/publicacoes/legislacoes/lei/4165/lei-complementar-no-1282022" target="_blank" rel="noopener noreferrer">Lei Complementar nº 128/2022</a> — Plano Diretor de Redenção-PA. Dados derivados, extraídos e validados em 01/08/2026. Consulta informativa; verifique a legislação vigente e a situação específica do imóvel.</footer>
+    <footer class="legal-footer" aria-label="Fonte e limitações legais">
+      <div class="footer-source"><strong>Fonte legal:</strong> <a href="https://redencao.pa.gov.br/publicacoes/legislacoes/lei/4165/lei-complementar-no-1282022" target="_blank" rel="noopener noreferrer">Lei Complementar nº 128/2022</a> — Plano Diretor de Desenvolvimento Urbano Ambiental de Redenção-PA.</div>
+      <div class="legal-disclaimer" role="note">
+        <strong>Ferramenta informativa e derivada — não é um serviço oficial da Prefeitura.</strong>
+        <span>Não substitui certidão municipal, análise do IPPUR, licenciamento urbanístico ou conferência profissional.</span>
+        <span>A consulta mostra atividades listadas como permitidas no escopo correspondente; não determina automaticamente “condicionado” ou “proibido”. A análise deve considerar o nível de incomodidade e o caso concreto.</span>
+        <span>A geometria publicada alcança o nível de zona. Setor, quadra e lote dependem de base cadastral municipal.</span>
+      </div>
+      <small>Base derivada em 01/08/2026: 8 geometrias, 376 vértices memoriais e 297 registros de atividades/CNAE.</small>
+    </footer>
   </div>
   <script src="vendor/leaflet/leaflet.js"></script>
   <script type="module" src="js/main.js"></script>
