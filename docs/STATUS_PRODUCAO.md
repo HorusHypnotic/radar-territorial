@@ -1,9 +1,9 @@
 # Estado de produção
 
-Validação executada em **31/07/2026** sobre o commit `11859f4` (`Fase 3: entidades APMO e mapa híbrido`).
+Validação original executada em **31/07/2026** sobre o commit `11859f4`; estado atualizado em **01/08/2026** após o commit `b13ca1c`.
 
 - Site: <https://horushypnotic.github.io/radar-territorial/>
-- Testes locais: 34 aprovados, nenhuma falha (execução: 8,88 s)
+- Testes locais: 48 aprovados, nenhuma falha
 - CI do commit publicado: 31 testes aprovados, nenhuma falha
 - Build: artefato estático aprovado, 214.814 bytes
 - Deploy: workflows de testes e GitHub Pages concluídos com sucesso
@@ -22,7 +22,7 @@ Validação executada em **31/07/2026** sobre o commit `11859f4` (`Fase 3: entid
 | Exportação PDF | Não implementada | Item de roadmap |
 | PWA e offline | Disponível | Manifest, ícones e service worker; cache cobre shell e dados demonstrativos essenciais |
 | Dados oficiais | Pendente | GeoJSON e registros publicados são demonstrativos |
-| Supabase | Pendente de ativação | Credenciais reais e aplicação das migrations `001`–`005` não foram comprovadas |
+| Supabase | Pendente de ativação | Chave administrativa e aplicação das migrations `000`–`007` não foram comprovadas |
 
 ## Evidências e limites
 

@@ -58,6 +58,8 @@ O plano auditável e os GAPs de memória operacional estão em [`APMO-OPERA-v1.m
 
 A implementação e os limites criptográficos da Fase 4 estão documentados em [`docs/FASE4_PRESERVACAO.md`](docs/FASE4_PRESERVACAO.md).
 
+O estado demonstrativo, os bloqueios e o roteiro executável para dados reais estão em [`docs/PRODUCAO_REAL.md`](docs/PRODUCAO_REAL.md).
+
 ## Licença
 
 Nenhuma licença foi definida ainda. Até sua inclusão, todos os direitos permanecem reservados aos autores.
