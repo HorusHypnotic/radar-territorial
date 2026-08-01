@@ -1,19 +1,29 @@
 # OPERA Territorial — Radar de Geointeligência
 
-> **Site em produção:** [https://horushypnotic.github.io/radar-territorial/](https://horushypnotic.github.io/radar-territorial/)
+> **Site demonstrativo:** [horushypnotic.github.io/radar-territorial](https://horushypnotic.github.io/radar-territorial/)
 
 [![Deploy GitHub Pages](https://github.com/HorusHypnotic/radar-territorial/actions/workflows/deploy-pages.yml/badge.svg)](https://github.com/HorusHypnotic/radar-territorial/actions/workflows/deploy-pages.yml)
+[![Testes](https://github.com/HorusHypnotic/radar-territorial/actions/workflows/pipeline-test.yml/badge.svg)](https://github.com/HorusHypnotic/radar-territorial/actions/workflows/pipeline-test.yml)
 
-Camada de inteligência territorial para consultar regras do Plano Diretor, acompanhar obras e preservar a memória operacional verificável.
+Camada de inteligência territorial para consultar regras urbanísticas, acompanhar obras e preservar memória operacional verificável. A instância pública usa dados demonstrativos; não representa o zoneamento legal de Redenção.
+
+## Recursos principais
+
+- dashboard executivo com métricas calculadas a partir da base carregada;
+- mapa interativo Leaflet, com fallback SVG para telas menores;
+- KPIs, gráficos Canvas, tabela pesquisável e exportação CSV;
+- importação CSV com validação e prévia;
+- PWA instalável, dependências locais e cache offline versionado;
+- livro-razão JSON encadeado por SHA-256 e exportável;
+- conversão conservadora de shapefile/QGIS para GeoJSON em EPSG:4326;
+- gerador determinístico de dados sintéticos para testes;
+- suíte automatizada e validação dos artefatos publicados.
 
 ## Stack
 
-Python, Supabase/PostgreSQL, HTML/CSS/JavaScript nativos, Leaflet local e GitHub Pages.
+Python 3.11+, Supabase/PostgreSQL preparado, HTML/CSS/JavaScript nativos, Leaflet local e GitHub Pages.
 
-## Pré-requisitos e instalação
-
-- Python 3.11+
-- Git
+## Instalação
 
 ```powershell
 python -m venv .venv
@@ -22,46 +32,84 @@ pip install -r requirements.txt
 Copy-Item .env.example .env
 ```
 
-Preencha o `.env` com as credenciais do seu ambiente. Nunca coloque `SUPABASE_SERVICE_KEY` no frontend ou no Git.
+Preencha `.env` somente no ambiente local. Nunca coloque `SUPABASE_SERVICE_KEY` no frontend ou no Git.
 
-## Rodando localmente
+Para o fluxo QGIS, instale também:
+
+```powershell
+pip install -r requirements-qgis.txt
+```
+
+## Execução local
 
 ```powershell
 python python/pipeline.py
 python server.py
 ```
 
-Abra `http://127.0.0.1:8001`. Para visualizar somente os arquivos estáticos, use `python -m http.server 8080` na raiz e acesse `http://127.0.0.1:8080`.
+Abra `http://127.0.0.1:8001`. Para servir apenas os arquivos estáticos, execute `python -m http.server 8080` na raiz.
 
 ## Estrutura
 
-- `frontend/`: interface modular e dependências locais
-- `python/`: pipeline, indicadores, auditoria e snapshots
-- `data/output/`: contrato JSON/GeoJSON consumido pela interface
-- `data/schemas/`: JSON Schemas e migrations Supabase
-- `docs/`: arquitetura, API, schema e deploy
-- `tests/`: testes automatizados
+```text
+frontend/          Interface PWA, módulos JavaScript e Leaflet local
+python/            Pipeline, indicadores, modelos, auditoria e snapshots
+scripts/           QGIS, dados sintéticos, validação e utilitários operacionais
+data/output/       Contrato JSON/GeoJSON demonstrativo consumido pelo site
+data/schemas/      JSON Schemas e migrations Supabase 000–007
+docs/              Arquitetura, operação, produção e fluxos especializados
+tests/             Testes automatizados
+.github/workflows/ Testes, deploy do Pages e keep-alive preparado
+```
 
-## Pipeline de dados
+## Testes e validação
 
-O pipeline extrai do Supabase, transforma indicadores, grava staging em Parquet, exporta pontos em GeoJSON e cria snapshots com hashes. Execute `pytest` para validar a base.
+```powershell
+python -m pytest -q
+python scripts/validate_deploy.py
+python scripts/validate_production.py
+```
 
-> **Dados demonstrativos:** os polígonos e registros atualmente incluídos em `data/output/` servem somente para testar a interface. Eles não representam o zoneamento legal de Redenção e devem ser substituídos por uma exportação oficial do Plano Diretor em EPSG:4326 antes de qualquer decisão.
+`validate_production.py` verifica os recursos estáticos publicados. Ele não comprova, sozinho, Supabase, RLS, backend hospedado ou persistência real.
 
-## Deploy
+## Dados sintéticos
 
-O workflow de GitHub Pages publica o site a cada push em `master` ou `main`. Consulte [`docs/DEPLOY.md`](docs/DEPLOY.md) e o [`estado de produção`](docs/STATUS_PRODUCAO.md), que separa recursos publicados de dependências ainda não ativadas.
+Para testar os contratos sem dados oficiais:
 
-## Roadmap
+```powershell
+python scripts/generate_test_data.py --zones 9 --obras 20 --fornecedores 10 --seed 42 --output data/test
+python scripts/export_qgis_to_opera.py --validate data/test
+```
 
-O plano auditável e os GAPs de memória operacional estão em [`APMO-OPERA-v1.md`](APMO-OPERA-v1.md) e [`OPERA_TERRITORIAL_ESCOPO.md`](OPERA_TERRITORIAL_ESCOPO.md).
+O pacote é marcado como candidato e sintético. O gerador bloqueia gravação direta em `data/output` e `frontend/data`. Consulte [Dados sintéticos](docs/DADOS_SINTETICOS.md).
 
-A implementação e os limites criptográficos da Fase 4 estão documentados em [`docs/FASE4_PRESERVACAO.md`](docs/FASE4_PRESERVACAO.md).
+## Importação QGIS
 
-O estado demonstrativo, os bloqueios e o roteiro executável para dados reais estão em [`docs/PRODUCAO_REAL.md`](docs/PRODUCAO_REAL.md).
+Gere primeiro um candidato, usando o mapeamento revisado dos campos reais:
 
-A conversão conservadora de shapefile/QGIS para os contratos do site está em [`docs/IMPORTACAO_QGIS.md`](docs/IMPORTACAO_QGIS.md).
+```powershell
+python scripts/export_qgis_to_opera.py `
+  --shapefile "C:\dados\zoneamento.shp" `
+  --field-map config\qgis-field-map.example.json `
+  --expected-bounds -52 -10 -48 -6 `
+  --output data\candidate
+
+python scripts/export_qgis_to_opera.py --validate data\candidate
+```
+
+A publicação exige nova conversão da fonte autorizada, autoridade verdadeira, referência legal e `--replace`. O roteiro completo e suas barreiras estão em [Importação segura do QGIS](docs/IMPORTACAO_QGIS.md).
+
+## Produção e limites
+
+O GitHub Pages publica a branch `master` ou `main`. O Supabase, o bucket privado, RLS, timestamp externo, assinatura e backend remoto estão preparados no código, mas não devem ser considerados ativos sem verificação específica.
+
+- [Estado real de produção](docs/PRODUCAO_REAL.md)
+- [Status dos recursos publicados](docs/STATUS_PRODUCAO.md)
+- [Deploy](docs/DEPLOY.md)
+- [Preservação verificável](docs/FASE4_PRESERVACAO.md)
+- [APMO e GAPs](APMO-OPERA-v1.md)
+- [Escopo territorial](OPERA_TERRITORIAL_ESCOPO.md)
 
 ## Licença
 
-Nenhuma licença foi definida ainda. Até sua inclusão, todos os direitos permanecem reservados aos autores.
+Nenhuma licença foi definida. Até sua inclusão, todos os direitos permanecem reservados aos autores.
