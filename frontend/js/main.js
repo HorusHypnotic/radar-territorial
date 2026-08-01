@@ -7,10 +7,12 @@ import { initUpload } from "./upload.js";
 import { SAMPLE_DATA, SAMPLE_ZONES_GEOJSON } from "./data/sample.js";
 
 const EMPTY_GEOJSON = { type: "FeatureCollection", features: [] };
-const fetchJson = async (paths, fallback) => { for (const path of paths) { try { const response = await fetch(path); if (response.ok) return response.json(); } catch (_error) { /* fallback seguinte */ } } return fallback; };
+const isDashboard = (value) => value && ["zonas", "obras", "fornecedores"].every((key) => Array.isArray(value[key]));
+const isGeoJson = (value) => value?.type === "FeatureCollection" && Array.isArray(value.features);
+const fetchJson = async (paths, fallback, validate = () => true) => { for (const path of paths) { try { const response = await fetch(path); if (!response.ok) continue; const value = await response.json(); if (validate(value)) return value; } catch (_error) { /* fallback seguinte */ } } return fallback; };
 
 async function boot() {
-  const [data, zones, points, health, remoteKpis] = await Promise.all([fetchJson(["/api/data", "../data/output/dashboard_data.json"], SAMPLE_DATA), fetchJson(["/api/geojson/zonas", "../data/output/zonas_poligonos.geojson", "data/zonas_redencao.geojson"], SAMPLE_ZONES_GEOJSON), fetchJson(["/api/geojson/pontos", "../data/output/radar_geojson.geojson"], EMPTY_GEOJSON), fetchJson(["/api/health"], null), fetchJson(["/api/kpis"], null)]);
+  const [data, zones, points, health, remoteKpis] = await Promise.all([fetchJson(["/api/data", "../data/output/dashboard_data.json"], SAMPLE_DATA, isDashboard), fetchJson(["/api/geojson/zonas", "../data/output/zonas_poligonos.geojson", "data/zonas_redencao.geojson"], SAMPLE_ZONES_GEOJSON, (value) => isGeoJson(value) && value.features.length > 0), fetchJson(["/api/geojson/pontos", "../data/output/radar_geojson.geojson"], EMPTY_GEOJSON, isGeoJson), fetchJson(["/api/health"], null, (value) => value?.status === "ok"), fetchJson(["/api/kpis"], null, (value) => value && typeof value === "object")]);
   const status = document.getElementById("connection-status"); status.textContent = health ? `API ${health.version}` : "Modo estático"; status.classList.toggle("offline", !health);
   document.getElementById("header-zonas").textContent = data.zonas?.length || 0; document.getElementById("header-obras").textContent = data.obras?.length || 0; document.getElementById("header-fornecedores").textContent = data.fornecedores?.length || 0;
   renderKpis(document.getElementById("kpi-container"), document.getElementById("ico-container"), data, remoteKpis); renderCharts(data);

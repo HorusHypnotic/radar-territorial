@@ -80,3 +80,12 @@ def test_executive_header_and_demo_disclosure_are_present():
     html = (Path(__file__).resolve().parents[1] / "frontend" / "index.html").read_text(encoding="utf-8")
     assert all(marker in html for marker in ("header-zonas", "header-obras", "header-fornecedores"))
     assert "Dados demonstrativos" in html
+
+
+def test_static_fallback_validates_contracts_and_sorts_snapshots():
+    frontend = Path(__file__).resolve().parents[1] / "frontend" / "js"
+    main = (frontend / "main.js").read_text(encoding="utf-8")
+    apmo = (frontend / "apmo.js").read_text(encoding="utf-8")
+    assert "isDashboard" in main and "isGeoJson" in main
+    assert "value.features.length > 0" in main
+    assert ".sort((a, b) => String(b.timestamp" in apmo
