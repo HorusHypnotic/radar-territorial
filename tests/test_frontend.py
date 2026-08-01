@@ -74,3 +74,9 @@ def test_frontend_files_and_geojson(api):
     assert status == 200
     assert geojson["type"] == "FeatureCollection"
     assert all(feature["geometry"]["type"] in {"Polygon", "MultiPolygon"} for feature in geojson["features"])
+
+
+def test_executive_header_and_demo_disclosure_are_present():
+    html = (Path(__file__).resolve().parents[1] / "frontend" / "index.html").read_text(encoding="utf-8")
+    assert all(marker in html for marker in ("header-zonas", "header-obras", "header-fornecedores"))
+    assert "Dados demonstrativos" in html
