@@ -7,13 +7,7 @@
     "official_source": "https://redencao.pa.gov.br/publicacoes/legislacoes/lei/4165/lei-complementar-no-1282022",
     "ocr_review_required": false,
     "errors": [],
-    "note": "ZUPA não é um anel único: o Memorial 14 a define por faixas ambientais de 15 a 100 m.",
-    "status": "oficial",
-    "coverage": "8/8",
-    "total_features": 8,
-    "total_vertices": 376,
-    "sha256": "938a9c1049ca9e1f3498a9d4f955ab3868f6e80ac25f75b657444120eb130d36",
-    "published_at": "2026-08-01"
+    "note": "ZUPA não é um anel único: o Memorial 14 a define por faixas ambientais de 15 a 100 m."
   },
   "features": [
     {

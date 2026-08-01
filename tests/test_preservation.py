@@ -27,7 +27,7 @@ def test_pwa_manifest_and_offline_core_are_scoped():
     assert manifest["start_url"] == manifest["scope"] == "./"
     assert {icon["sizes"] for icon in manifest["icons"]} == {"192x192", "512x512"}
     worker = (frontend / "sw.js").read_text(encoding="utf-8")
-    assert "opera-territorial-v5" in worker
+    assert "opera-territorial-v6" in worker
     assert "livro_razao.json" in worker
     assert "event.request.mode === \"navigate\"" in worker
     for size in (192, 512):

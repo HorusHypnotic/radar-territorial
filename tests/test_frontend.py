@@ -80,7 +80,9 @@ def test_executive_header_and_demo_disclosure_are_present():
     html = (Path(__file__).resolve().parents[1] / "frontend" / "index.html").read_text(encoding="utf-8")
     assert all(marker in html for marker in ("header-zonas", "header-obras", "header-fornecedores"))
     assert all(marker in html for marker in ("executive-zonas", "executive-obras", "executive-conformidade", "executive-atualizacao"))
-    assert "Dados demonstrativos" in html
+    assert "data-source-badge" in html
+    assert "Lei Complementar nº 128/2022" in html
+    assert "noopener noreferrer" in html
 
 
 def test_visual_dashboard_uses_data_and_respects_reduced_motion():

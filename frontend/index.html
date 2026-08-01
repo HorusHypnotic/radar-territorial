@@ -18,7 +18,7 @@
     <header class="app-header">
       <button id="sidebar-toggle" class="icon-button" aria-label="Alternar menu" aria-expanded="true">☰</button>
       <div class="brand"><span class="brand-mark" aria-hidden="true"><i></i></span><div><strong>OPERA <em>Territorial</em></strong><small>Redenção · PA — Radar de Geointeligência</small></div></div>
-      <span class="demo-badge">Dados demonstrativos</span>
+      <span id="data-source-badge" class="demo-badge">Verificando fonte…</span>
       <div class="header-kpis" aria-label="Resumo territorial">
         <div><strong id="header-zonas">—</strong><span>Setores</span></div>
         <div><strong id="header-obras">—</strong><span>Obras</span></div>
@@ -33,6 +33,7 @@
         <section id="card-zona" class="panel"><h2>Zona selecionada</h2><div id="zone-card" class="empty-state">Selecione uma zona no mapa.</div></section>
       </aside>
       <section class="workspace">
+        <aside id="official-source-summary" class="official-source-summary" hidden aria-live="polite"></aside>
         <section class="executive-dashboard" aria-label="Resumo executivo">
           <article class="executive-metric"><span class="metric-icon" aria-hidden="true">ZT</span><div><strong id="executive-zonas">—</strong><span>Zonas mapeadas</span></div><small>Território</small></article>
           <article class="executive-metric"><span class="metric-icon" aria-hidden="true">OB</span><div><strong id="executive-obras">—</strong><span>Obras monitoradas</span></div><small>Operação</small></article>
@@ -50,6 +51,7 @@
         <section id="view-memoria" class="view"><div class="memory-grid"><article class="panel"><h2>Trilha de auditoria</h2><div id="audit-log"></div></article><article class="panel"><h2>Snapshots</h2><div id="snapshot-list"></div></article><article class="panel"><h2>Integridade</h2><div id="integrity-status"></div><button id="export-ledger" class="ledger-button">Exportar livro-razão</button><small id="ledger-status" class="empty-state"></small></article><article class="panel"><h2>Comparação</h2><div id="snapshot-compare"></div></article></div></section>
       </section>
     </main>
+    <footer class="legal-footer"><strong>Fonte territorial:</strong> <a href="https://redencao.pa.gov.br/publicacoes/legislacoes/lei/4165/lei-complementar-no-1282022" target="_blank" rel="noopener noreferrer">Lei Complementar nº 128/2022</a> — Plano Diretor de Redenção-PA. Dados derivados, extraídos e validados em 01/08/2026. Consulta informativa; verifique a legislação vigente e a situação específica do imóvel.</footer>
   </div>
   <script src="vendor/leaflet/leaflet.js"></script>
   <script type="module" src="js/main.js"></script>
