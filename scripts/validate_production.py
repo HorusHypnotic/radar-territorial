@@ -25,7 +25,7 @@ def inspect_payload(path: str, body: bytes) -> str | None:
         return "resposta vazia"
     text = body.decode("utf-8", errors="replace")
     markers = {
-        "frontend/index.html": ("Dados demonstrativos", "theme-dark.css", "js/main.js"),
+        "frontend/index.html": ("não é um serviço oficial da Prefeitura", "theme-dark.css", "js/main.js"),
         "frontend/css/theme-dark.css": ("--shadow",),
         "frontend/js/data/sample.js": ("SAMPLE_DATA",),
         "frontend/js/mapa.js": ("TerritorialMap",),

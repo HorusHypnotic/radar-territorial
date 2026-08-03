@@ -6,8 +6,14 @@ from scripts.validate_production import inspect_payload
 def test_inspect_payload_accepts_required_markers():
     assert inspect_payload(
         "frontend/index.html",
-        b"Dados demonstrativos theme-dark.css js/main.js",
+        "não é um serviço oficial da Prefeitura theme-dark.css js/main.js".encode(),
     ) is None
+
+
+def test_inspect_payload_requires_legal_disclaimer():
+    assert inspect_payload("frontend/index.html", b"theme-dark.css js/main.js") == (
+        "marcador ausente: não é um serviço oficial da Prefeitura"
+    )
 
 
 def test_inspect_payload_rejects_missing_marker():
