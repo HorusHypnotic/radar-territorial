@@ -1,0 +1,144 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-display: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-sans: "Work Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+
+  --color-ember: var(--ember);
+  --color-ember-glow: var(--ember-glow);
+  --color-surface: var(--surface);
+  --color-surface-elevated: var(--surface-elevated);
+  --color-grid: var(--grid);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+}
+
+:root {
+  --radius: 0.375rem;
+
+  /* Charcoal & Ember — dark by default */
+  --background: oklch(0.18 0.005 60);
+  --foreground: oklch(0.96 0.005 80);
+
+  --surface: oklch(0.225 0.006 60);
+  --surface-elevated: oklch(0.27 0.007 60);
+  --grid: oklch(0.32 0.008 60);
+
+  --card: oklch(0.225 0.006 60);
+  --card-foreground: oklch(0.96 0.005 80);
+  --popover: oklch(0.225 0.006 60);
+  --popover-foreground: oklch(0.96 0.005 80);
+
+  --primary: oklch(0.66 0.18 38);
+  --primary-foreground: oklch(0.16 0.005 60);
+  --ember: oklch(0.66 0.18 38);
+  --ember-glow: oklch(0.74 0.17 45);
+
+  --secondary: oklch(0.27 0.007 60);
+  --secondary-foreground: oklch(0.94 0.005 80);
+  --muted: oklch(0.27 0.007 60);
+  --muted-foreground: oklch(0.68 0.01 70);
+  --accent: oklch(0.66 0.18 38);
+  --accent-foreground: oklch(0.16 0.005 60);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.98 0.005 80);
+
+  --border: oklch(0.32 0.008 60);
+  --input: oklch(0.32 0.008 60);
+  --ring: oklch(0.66 0.18 38);
+
+  --chart-1: oklch(0.66 0.18 38);
+  --chart-2: oklch(0.74 0.17 45);
+  --chart-3: oklch(0.55 0.04 60);
+  --chart-4: oklch(0.42 0.02 60);
+  --chart-5: oklch(0.85 0.05 50);
+
+  --gradient-ember: linear-gradient(135deg, var(--ember) 0%, var(--ember-glow) 100%);
+  --gradient-surface: linear-gradient(180deg, var(--surface-elevated) 0%, var(--surface) 100%);
+  --gradient-radar: radial-gradient(circle at 30% 20%, color-mix(in oklab, var(--ember) 25%, transparent), transparent 60%);
+  --shadow-glow: 0 0 0 1px color-mix(in oklab, var(--ember) 30%, transparent), 0 8px 32px -8px color-mix(in oklab, var(--ember) 40%, transparent);
+  --shadow-elevated: 0 1px 0 0 color-mix(in oklab, white 5%, transparent) inset, 0 12px 40px -16px oklch(0 0 0 / 0.6);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html, body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv01";
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    font-weight: 400;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer utilities {
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, var(--grid) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid) 1px, transparent 1px);
+    background-size: 48px 48px;
+  }
+  .bg-ember-gradient { background: var(--gradient-ember); }
+  .bg-radar-glow { background: var(--gradient-radar); }
+  .shadow-glow { box-shadow: var(--shadow-glow); }
+  .shadow-elevated { box-shadow: var(--shadow-elevated); }
+
+  @keyframes radar-sweep {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.4); }
+  }
+  @keyframes ping-slow {
+    0% { transform: scale(1); opacity: 0.8; }
+    100% { transform: scale(3); opacity: 0; }
+  }
+  .animate-radar-sweep { animation: radar-sweep 6s linear infinite; }
+  .animate-pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+  .animate-ping-slow { animation: ping-slow 2.4s cubic-bezier(0,0,0.2,1) infinite; }
+}
