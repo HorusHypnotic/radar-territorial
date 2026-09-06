@@ -1,9 +1,9 @@
 name: Supabase Keep-Alive
 
+# COST_GUARD 2026-09-06:
+# Scheduled keep-alive paused while GITHUB-ACTIONS-BUDGET-001 is active.
+# Latest scheduled run was failing; preserve manual dispatch for targeted verification.
 on:
-  schedule:
-    # Diariamente às 09:17 de Brasília (12:17 UTC), fora do pico da hora cheia.
-    - cron: "17 12 * * *"
   workflow_dispatch:
 
 permissions:
