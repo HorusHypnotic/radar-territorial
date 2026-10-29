@@ -1,0 +1,35 @@
+{
+  "schema_version": 1,
+  "status": "CATALOG_ONLY_NOT_INGESTED",
+  "territory": "Redenção, Pará",
+  "sources": [
+    {
+      "id": "incra-acervo",
+      "provider": "INCRA",
+      "url": "https://acervofundiario.incra.gov.br/geodownload/geodados.php",
+      "kind": "geodata-download",
+      "access": "NOT_TESTED",
+      "licence": "TO_VERIFY",
+      "layers": "TO_INVENTORY"
+    },
+    {
+      "id": "iterpa-sicarf",
+      "provider": "ITERPA",
+      "url": "https://arcgisportal.iterpa.pa.gov.br/server/rest/services/SICARF/acervoFundiarioMapserver/MapServer",
+      "kind": "arcgis-mapserver",
+      "access": "NOT_TESTED",
+      "licence": "TO_VERIFY",
+      "layers": "TO_INVENTORY"
+    },
+    {
+      "id": "ibge-malhas",
+      "provider": "IBGE",
+      "url": "https://www.ibge.gov.br/geociencias/organizacao-do-territorio/malhas-territoriais/15774-malhas.html",
+      "kind": "territorial-boundaries",
+      "access": "NOT_TESTED",
+      "licence": "TO_VERIFY",
+      "layers": "municipal-boundaries"
+    }
+  ],
+  "warning": "Geographic overlays do not prove ownership, title, registry or eligibility."
+}
