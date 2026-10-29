@@ -1,0 +1,60 @@
+{
+  "source": "https://arcgisportal.iterpa.pa.gov.br/server/rest/services/SICARF/acervoFundiarioMapserver/MapServer?f=pjson",
+  "verified_at": "2026-10-29",
+  "status": "METADATA_HTTP_VERIFIED_NO_FEATURES_QUERIED",
+  "capabilities": [
+    "Map",
+    "Query",
+    "Data"
+  ],
+  "supportedQueryFormats": [
+    "JSON",
+    "geoJSON",
+    "PBF"
+  ],
+  "nativeCRS": "EPSG:3857",
+  "maxRecordCount": 2000,
+  "priorityLayers": [
+    {
+      "id": 87,
+      "name": "Municípios (PA)",
+      "purpose": "delimitar Redenção"
+    },
+    {
+      "id": 72,
+      "name": "Glebas Estaduais",
+      "purpose": "referência territorial"
+    },
+    {
+      "id": 73,
+      "name": "Glebas Federais",
+      "purpose": "referência territorial"
+    },
+    {
+      "id": 63,
+      "name": "Assentamentos Estaduais",
+      "purpose": "contexto"
+    },
+    {
+      "id": 64,
+      "name": "Assentamentos Federais",
+      "purpose": "contexto"
+    },
+    {
+      "id": 93,
+      "name": "Requerimentos Fundiários (SICARF)",
+      "purpose": "metadados, avaliar privacidade"
+    },
+    {
+      "id": 98,
+      "name": "SIGEF Brasil (PA)",
+      "purpose": "parcelas, avaliar privacidade"
+    }
+  ],
+  "limitations": [
+    "Camadas publicadas não comprovam domínio ou título",
+    "Consultar esquema e termos antes de baixar feições",
+    "Não publicar atributos pessoais",
+    "Nenhum recorte Redenção realizado ainda"
+  ]
+}
